@@ -1,1 +1,292 @@
-Notebook[{}]
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     11175,        284]
+NotebookOptionsPosition[      8072,        230]
+NotebookOutlinePosition[      8442,        246]
+CellTagsIndexPosition[      8399,        243]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[TextData[{
+ "ExchangeLink ",
+ Cell[BoxData[
+  ButtonBox[
+   StyleBox["\<\"\[FilledRightTriangle]\"\>", "Title",
+    StripOnInput->False],
+   Appearance->"Frameless",
+   ButtonFunction:>(SelectionMove[
+      EvaluationBox[], All, Expression]; SelectionMove[
+      InputNotebook[], All, Cell]; SelectionMove[
+      InputNotebook[], All, CellGroup]; SelectionEvaluateCreateCell[
+      InputNotebook[]]; Null),
+   Evaluator->Automatic,
+   Method->"Preemptive"]],ExpressionUUID->
+  "9988faf8-60a0-4ded-abac-c17784380a91"]
+}], "Title",ExpressionUUID->"9eca8ff7-13d5-40c4-a3cc-a9f5dc8b827e"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "Init ",
+ Cell[BoxData[
+  ButtonBox[
+   StyleBox["\<\"\[FilledRightTriangle]\"\>", "Section",
+    StripOnInput->False],
+   Appearance->"Frameless",
+   ButtonFunction:>(SelectionMove[
+      EvaluationBox[], All, Expression]; SelectionMove[
+      InputNotebook[], All, Cell]; SelectionMove[
+      InputNotebook[], All, CellGroup]; SelectionEvaluateCreateCell[
+      InputNotebook[]]; Null),
+   Evaluator->Automatic,
+   Method->"Preemptive"]],ExpressionUUID->
+  "04f78537-9a99-4214-867c-a39fb933a3e4"]
+}], "Section",ExpressionUUID->"85dbaebe-6107-4b20-9130-c46c7e50e26e"],
+
+Cell["Initialization cell", "Text",ExpressionUUID->"dbacc3fb-88a9-4e2b-baad-98418b92a2e4"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"$HistoryLength", " ", "=", " ", "0"}], ";"}], " "}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"SetDirectory", "[", 
+    RowBox[{"NotebookDirectory", "[", "]"}], "]"}], ";"}], " "}], "\n", 
+ RowBox[{
+  RowBox[{"Get", "[", "\"\<ExchangeLink`\>\"", "]"}], ";"}]}], "Code",Expressi\
+onUUID->"cfcbf03f-ee8c-42bc-a3dd-feb3e7685177"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "General data ",
+ Cell[BoxData[
+  ButtonBox[
+   StyleBox["\<\"\[FilledRightTriangle]\"\>", "Section",
+    StripOnInput->False],
+   Appearance->"Frameless",
+   ButtonFunction:>(SelectionMove[
+      EvaluationBox[], All, Expression]; SelectionMove[
+      InputNotebook[], All, Cell]; SelectionMove[
+      InputNotebook[], All, CellGroup]; SelectionEvaluateCreateCell[
+      InputNotebook[]]; Null),
+   Evaluator->Automatic,
+   Method->"Preemptive"]],ExpressionUUID->
+  "3fdb2353-c552-4e18-90d9-936d54c08339"]
+}], "Section",ExpressionUUID->"19d08895-99cf-44a8-be98-356a0246821d"],
+
+Cell["General information from Binance server", "Text",ExpressionUUID->"da47335a-6c7f-411a-8322-15afd7b2f9e6"],
+
+Cell["\<\
+Check that server is available and get server time. This need if you want use \
+trade API. Server time used in the creating of e-sign.\
+\>", "Text",ExpressionUUID->"aed67ffc-dfa0-4820-a0b2-6b31a983f72f"],
+
+Cell[BoxData[{
+ RowBox[{"BinancePing", "[", "]"}], "\n", 
+ RowBox[{"BinanceTime", "[", "]"}]}], "Code",ExpressionUUID->"e18d0e66-fca2-\
+4120-8dfd-c53971823316"],
+
+Cell["\<\
+Information about order limits, precision. List of all pairs available on \
+Binance and current statuses\
+\>", "Text",ExpressionUUID->"257132ec-378a-4fcf-ba61-7ff6f5c66466"],
+
+Cell[BoxData[
+ RowBox[{"BinanceExchangeInfo", "[", "]"}]], "Code",ExpressionUUID->"d5560724-e0ea-4935-86c3-5baaf73145fe"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "Market data ",
+ Cell[BoxData[
+  ButtonBox[
+   StyleBox["\<\"\[FilledRightTriangle]\"\>", "Section",
+    StripOnInput->False],
+   Appearance->"Frameless",
+   ButtonFunction:>(SelectionMove[
+      EvaluationBox[], All, Expression]; SelectionMove[
+      InputNotebook[], All, Cell]; SelectionMove[
+      InputNotebook[], All, CellGroup]; SelectionEvaluateCreateCell[
+      InputNotebook[]]; Null),
+   Evaluator->Automatic,
+   Method->"Preemptive"]],ExpressionUUID->
+  "dd584cf2-6bad-4b1e-9446-da3ddbe62f11"]
+}], "Section",ExpressionUUID->"7de50ca5-b424-4d16-9c24-084e2a93fb72"],
+
+Cell["Current order book", "Text",ExpressionUUID->"a311d586-9708-4079-a6c4-0776847830b9"],
+
+Cell[BoxData[
+ RowBox[{"BinanceDepth", "[", "\"\<BTCUSDT\>\"", "]"}]], "Code",ExpressionUUID->"b029f3b9-072c-4deb-933c-b3817f5a2130"],
+
+Cell["Last trades for the pair - order size, time and other", "Text",ExpressionUUID->"47244977-20ba-41e8-8ff1-cbc6c84c91ae"],
+
+Cell[BoxData[
+ RowBox[{"BinanceTrades", "[", "\"\<BTCUSDT\>\"", "]"}]], "Code",ExpressionUUI\
+D->"e6ed90fb-8bfc-4b64-819e-90251de0cb1d"],
+
+Cell["Get current price of Bitcoin", "Text",ExpressionUUID->"851ea476-ea07-4edb-878c-c57626c8c10d"],
+
+Cell[BoxData[
+ RowBox[{"BinancePrice", "[", "\"\<BTCUSDT\>\"", "]"}]], "Code",ExpressionUUID->"24b606ad-2a3c-42fc-8a9f-9f70f04ad9c4"],
+
+Cell["\<\
+More information about cryptocurrency pair. Result has information about 24h \
+change, volume and last prices\
+\>", "Text",ExpressionUUID->"22a1a003-2215-4c63-8c32-ef270786eba6"],
+
+Cell[BoxData[
+ RowBox[{"BinanceTicker", "[", "\"\<BTCUSDT\>\"", "]"}]], "Code",ExpressionUUI\
+D->"b1ff0c1f-2faa-431c-81c8-38196664eb53"],
+
+Cell["And for all currency pairs", "Text",ExpressionUUID->"90011771-aa6d-4a51-a03b-2dabfb2af9c0"],
+
+Cell[BoxData[
+ RowBox[{"BinanceTicker", "[", "]"}]], "Code",ExpressionUUID->"2310e413-cc81-4a60-9de3-b41431513742"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "Chart ",
+ Cell[BoxData[
+  ButtonBox[
+   StyleBox["\<\"\[FilledRightTriangle]\"\>", "Section",
+    StripOnInput->False],
+   Appearance->"Frameless",
+   ButtonFunction:>(SelectionMove[
+      EvaluationBox[], All, Expression]; SelectionMove[
+      InputNotebook[], All, Cell]; SelectionMove[
+      InputNotebook[], All, CellGroup]; SelectionEvaluateCreateCell[
+      InputNotebook[]]; Null),
+   Evaluator->Automatic,
+   Method->"Preemptive"]],ExpressionUUID->
+  "dddcc390-27d1-41ff-93dc-a56070373690"]
+}], "Section",ExpressionUUID->"0aaa0e67-21c7-435f-9947-a7a64ab7ec67"],
+
+Cell["Get historical data from Binance", "Text",ExpressionUUID->"e38b7723-1790-4a6a-bc87-ec50edcb7c7b"],
+
+Cell[CellGroupData[{
+
+Cell["\[OpenCurlyDoubleQuote]BTCUSDT\[CloseCurlyDoubleQuote] - cryptocurrency \
+pair", "Item",ExpressionUUID->"992f0dca-f1d2-4496-b20f-7e697dd4752e"],
+
+Cell["\<\
+\[OpenCurlyDoubleQuote]15m\[CloseCurlyDoubleQuote] - time interval of the one \
+\[OpenCurlyDoubleQuote]candle\[CloseCurlyDoubleQuote]. Available intervals: \
+1m, 3m, 5m, 15m, 30m, 1h, 2h, 4h, 6h, 12h, 1d\
+\>", "Item",ExpressionUUID->"842bfae4-d1a9-4d3a-a2de-ce36db47c142"],
+
+Cell["\<\
+\[OpenCurlyDoubleQuote]limit\[CloseCurlyDoubleQuote] \[Rule] 96 - number of \
+candles. Max value is 1000, default - 500\
+\>", "Item",ExpressionUUID->"8b749f3d-a648-4dbf-88be-0c14410af40f"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"candlestick", " ", "=", " ", 
+    RowBox[{
+     RowBox[{"Query", "[", 
+      RowBox[{"All", ",", " ", 
+       RowBox[{"{", 
+        RowBox[{"1", ",", " ", 
+         RowBox[{"{", 
+          RowBox[{
+          "2", ",", " ", "3", ",", " ", "4", ",", " ", "5", ",", " ", "6"}], 
+          "}"}]}], "}"}]}], "]"}], " ", "@", " ", 
+     RowBox[{"BinanceKlines", "[", 
+      RowBox[{"\"\<BTCUSDT\>\"", ",", " ", "\"\<15m\>\"", ",", " ", 
+       RowBox[{"\"\<limit\>\"", " ", "->", " ", "96"}]}], "]"}]}]}], ";"}], 
+  " "}]], "Code",ExpressionUUID->"14ee39c5-414a-4f95-aafa-4f1c115d3ea5"],
+
+Cell["Interactive chart with different indicators", "Text",ExpressionUUID->"087a20fa-a7fe-4e97-a4ae-636a966fd567"],
+
+Cell[BoxData[
+ RowBox[{"InteractiveTradingChart", "[", 
+  RowBox[{"candlestick", ",", " ", "\n", "\t", 
+   RowBox[{"ImageSize", " ", "->", " ", "Large"}], ",", " ", 
+   RowBox[{"PlotTheme", " ", "->", " ", "\"\<Marketing\>\""}]}], 
+  "]"}]], "Code",ExpressionUUID->"d6670f0f-137b-4a1f-90ce-c53d978b3165"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{958, 988},
+WindowMargins->{{Automatic, -7}, {Automatic, 0}},
+TrackCellChangeTimes->False,
+FrontEndVersion->"12.0 for Microsoft Windows (64-bit) (April 8, 2019)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 589, 15, 100, "Title",ExpressionUUID->"9eca8ff7-13d5-40c4-a3cc-a9f5dc8b827e"],
+Cell[CellGroupData[{
+Cell[1194, 41, 585, 15, 71, "Section",ExpressionUUID->"85dbaebe-6107-4b20-9130-c46c7e50e26e"],
+Cell[1782, 58, 90, 0, 34, "Text",ExpressionUUID->"dbacc3fb-88a9-4e2b-baad-98418b92a2e4"],
+Cell[1875, 60, 372, 10, 87, "Code",ExpressionUUID->"cfcbf03f-ee8c-42bc-a3dd-feb3e7685177"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2284, 75, 593, 15, 71, "Section",ExpressionUUID->"19d08895-99cf-44a8-be98-356a0246821d"],
+Cell[2880, 92, 110, 0, 34, "Text",ExpressionUUID->"da47335a-6c7f-411a-8322-15afd7b2f9e6"],
+Cell[2993, 94, 213, 3, 34, "Text",ExpressionUUID->"aed67ffc-dfa0-4820-a0b2-6b31a983f72f"],
+Cell[3209, 99, 160, 3, 69, "Code",ExpressionUUID->"e18d0e66-fca2-4120-8dfd-c53971823316"],
+Cell[3372, 104, 183, 3, 34, "Text",ExpressionUUID->"257132ec-378a-4fcf-ba61-7ff6f5c66466"],
+Cell[3558, 109, 121, 1, 50, "Code",ExpressionUUID->"d5560724-e0ea-4935-86c3-5baaf73145fe"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3716, 115, 592, 15, 71, "Section",ExpressionUUID->"7de50ca5-b424-4d16-9c24-084e2a93fb72"],
+Cell[4311, 132, 89, 0, 34, "Text",ExpressionUUID->"a311d586-9708-4079-a6c4-0776847830b9"],
+Cell[4403, 134, 133, 1, 50, "Code",ExpressionUUID->"b029f3b9-072c-4deb-933c-b3817f5a2130"],
+Cell[4539, 137, 124, 0, 34, "Text",ExpressionUUID->"47244977-20ba-41e8-8ff1-cbc6c84c91ae"],
+Cell[4666, 139, 136, 2, 50, "Code",ExpressionUUID->"e6ed90fb-8bfc-4b64-819e-90251de0cb1d"],
+Cell[4805, 143, 99, 0, 34, "Text",ExpressionUUID->"851ea476-ea07-4edb-878c-c57626c8c10d"],
+Cell[4907, 145, 133, 1, 50, "Code",ExpressionUUID->"24b606ad-2a3c-42fc-8a9f-9f70f04ad9c4"],
+Cell[5043, 148, 188, 3, 34, "Text",ExpressionUUID->"22a1a003-2215-4c63-8c32-ef270786eba6"],
+Cell[5234, 153, 136, 2, 50, "Code",ExpressionUUID->"b1ff0c1f-2faa-431c-81c8-38196664eb53"],
+Cell[5373, 157, 97, 0, 34, "Text",ExpressionUUID->"90011771-aa6d-4a51-a03b-2dabfb2af9c0"],
+Cell[5473, 159, 115, 1, 50, "Code",ExpressionUUID->"2310e413-cc81-4a60-9de3-b41431513742"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[5625, 165, 586, 15, 71, "Section",ExpressionUUID->"0aaa0e67-21c7-435f-9947-a7a64ab7ec67"],
+Cell[6214, 182, 103, 0, 34, "Text",ExpressionUUID->"e38b7723-1790-4a6a-bc87-ec50edcb7c7b"],
+Cell[CellGroupData[{
+Cell[6342, 186, 149, 1, 31, "Item",ExpressionUUID->"992f0dca-f1d2-4496-b20f-7e697dd4752e"],
+Cell[6494, 189, 282, 4, 31, "Item",ExpressionUUID->"842bfae4-d1a9-4d3a-a2de-ce36db47c142"],
+Cell[6779, 195, 198, 3, 31, "Item",ExpressionUUID->"8b749f3d-a648-4dbf-88be-0c14410af40f"]
+}, Open  ]],
+Cell[6992, 201, 628, 16, 50, "Code",ExpressionUUID->"14ee39c5-414a-4f95-aafa-4f1c115d3ea5"],
+Cell[7623, 219, 114, 0, 34, "Text",ExpressionUUID->"087a20fa-a7fe-4e97-a4ae-636a966fd567"],
+Cell[7740, 221, 304, 5, 69, "Code",ExpressionUUID->"d6670f0f-137b-4a1f-90ce-c53d978b3165"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
