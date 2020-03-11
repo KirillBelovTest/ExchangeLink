@@ -45,8 +45,15 @@ BinanceExchangeInfo::usage =
 
 
 BinanceDepth::usage = 
-"BinanceDepth[symbol]
-Order book"
+"BinanceDepth[symbol]"
+
+
+BinancePrice::usage = 
+"BinancePrice[symbol]"
+
+
+BinanceAveragePrice::usage = 
+"BinanceAveragePrice[symbol]"
 
 
 BinanceTicker::usage = 
@@ -54,17 +61,13 @@ BinanceTicker::usage =
 BinanceTicker[symbol]"
 
 
-BinancePrice::usage = 
-"BinancePrice[]
-BinancePrice[symbol]"
+BinanceBookTicker::usage = 
+"BinanceTicker[]
+BinanceTicker[symbol]"
 
 
 BinanceTrades::usage = 
 "BinanceTrades[symbol]"
-
-
-(*BinanceHistoricalTrades::usage = 
-"BinanceHistoricalTrades[]"*)
 
 
 BinanceAggTrades::usage = 
@@ -76,16 +79,53 @@ BinanceKlines::usage =
 BinanceKlines[symbol, interval, options]"
 
 
+BinanceHistoricalTrades::usage = 
+"BinanceHistoricalTrades[symbol]"
+
+
+BinanceOrderTest::usage = 
+"BinanceOrderTest[symbol, side, type, quantity, price]"
+
+
 BinanceOrderCreate::usage = 
 "BinanceOrderCreate[symbol, side, type, quantity, price]"
+
+
+BinanceOrderGet::usage = 
+"BinanceOrderGet[symbol, orderID]"
 
 
 BinanceOrderCancel::usage = 
 "BinanceOrderCancel[symbol, orderID]"
 
 
-BinanceOrderList::usage = 
-"BinanceOrderList[symbol]"
+BinanceOrders::usage = 
+"BinanceOrders[]
+BinanceOrders[symbol]"
+
+
+BinanceOrdersAll::usage = 
+"BinanceOrdersAll[symbol]"
+
+
+BinanceOCOrderCreate::usage = 
+"BinanceOCOrderCreate[symbol, side, quantity, price, stopPrice]"
+
+
+BinanceOCOrderCancel::usage = 
+"BinanceOCOrderCancel[symbol, orderListID]"
+
+
+BinanceOCOrderGet::usage = 
+"BinanceOCOrderGet[symbol, orderListID]"
+
+
+BinanceOCOrders::usage = 
+"BinanceOCOrders[]"
+
+
+BinanceOCOrdersAll::usage = 
+"BinanceOCOrdersAll[]"
 
 
 BinanceAccountInfo::usage = 
@@ -97,18 +137,18 @@ BinanceMyTrades::usage =
 
 
 (* ::Section:: *)
-(*begin private context*)
+(*Begin private context*)
 
 
 Begin["`Private`"]
 
 
 (* ::Section:: *)
-(*internal variables and functions*)
+(*Internal variables and functions*)
 
 
 $binanceAPI = 
-	"https://api.binance.com"
+"https://api.binance.com"
 
 
 binancePublicAPI::reqerr = 
@@ -189,6 +229,10 @@ toExpr[value_String] :=
 	If[StringMatchQ[value, NumberString, IgnoreCase -> True], ToExpression[value], value]
 
 
+toParams[params: {___Rule}, opts: OptionsPattern[]] := 
+	DeleteCases[Join[params, Flatten[{opts}]], _[_, Automatic | Null | None]]
+
+
 Options[binanceTradeAPI] := 
 	{
 		"apikey" :> ExchangeLinkIniRead["Binance", "APIKey"], 
@@ -236,15 +280,51 @@ binanceTradeAPI[method_String, parameters: <|___Rule|>, OptionsPattern[]] :=
 
 
 (* ::Subsubsection:: *)
-(*general endpoints*)
+(*General endpoints*)
+
+
+(* ::Text:: *)
+(*Test connectivity*)
+
+
+BinancePing::doclnk = 
+"https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#test-connectivity"
+
+
+SyntaxInformation[BinancePing] = 
+	{"ArgumentsPattern" -> {}}
 
 
 BinancePing[] := 
 	binancePublicAPI["v1", "ping", {}]
 
 
+(* ::Text:: *)
+(*Check server time*)
+
+
+BinanceTime::doclnk = 
+"https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#check-server-time"
+
+
+SyntaxInformation[BinanceTime] = 
+	{"ArgumentsPattern" -> {}}
+
+
 BinanceTime[] := 
 	binancePublicAPI["v1", "time", {}]
+
+
+(* ::Text:: *)
+(*BinanceExchangeInfo*)
+
+
+BinanceExchangeInfo::doclnk = 
+"https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#exchange-information"
+
+
+SyntaxInformation[BinanceExchangeInfo] = 
+	{"ArgumentsPattern" -> {}}
 
 
 BinanceExchangeInfo[] := 
@@ -256,7 +336,11 @@ BinanceExchangeInfo[] :=
 
 
 (* ::Text:: *)
-(*BinanceDepth*)
+(*Order book*)
+
+
+BinanceDepth::doclnk = 
+"https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#order-book"
 
 
 Options[BinanceDepth] := 
@@ -264,7 +348,10 @@ Options[BinanceDepth] :=
 
 
 SyntaxInformation[BinanceDepth] = 
-	{"OptionNames" -> toOptionNames[BinanceDepth]}
+	{
+		"ArgumentsPattern" -> {_, OptionsPattern[]}, 
+		"OptionNames" -> toOptionNames[BinanceDepth]
+	}
 
 
 BinanceDepth[symbol_String, OptionsPattern[]] := 
@@ -272,35 +359,42 @@ BinanceDepth[symbol_String, OptionsPattern[]] :=
 
 
 (* ::Text:: *)
-(*BinanceTrades*)
+(*Recent trades list*)
+
+
+BinanceTrades::doclnk = 
+"https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#recent-trades-list"
 
 
 Options[BinanceTrades] := 
-	{"limit" -> 500}
+	{
+		"limit" -> 500
+	}
 
 
 SyntaxInformation[BinanceTrades] = 
-	{"OptionNames" -> toOptionNames[BinanceTrades]}
+	{
+		"ArgumentsPattern" -> {_, OptionsPattern[]}, 
+		"OptionNames" -> toOptionNames[BinanceTrades]
+	}
 
 
 BinanceTrades[symbol_String, options: OptionsPattern[]] := 
-	binancePublicAPI["v1", "trades", {"symbol" -> symbol} ~ Join ~ Flatten[{options}]]
-
-
-(* ::Text:: *)
-(*BinanceTicker*)
-
-
-BinanceTicker[] := 
-	binancePublicAPI["v1", "ticker", "24hr", {}]
-
-
-BinanceTicker[symbol_String] := 
-	binancePublicAPI["v1", "ticker", "24hr", {"symbol" -> symbol}]
+	binancePublicAPI["v1", "trades", toParams[{"symbol" -> symbol}, options]]
 
 
 (* ::Text:: *)
 (*BinancePrice*)
+
+
+BinancePrice::doclnk = 
+"https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#symbol-price-ticker"
+
+
+SyntaxInformation[BinancePrice] = 
+	{
+		"ArgumentsPattern" -> {_.}
+	}
 
 
 BinancePrice[] := 
@@ -312,7 +406,29 @@ BinancePrice[symbol_String] :=
 
 
 (* ::Text:: *)
+(*BinanceTicker*)
+
+
+SyntaxInformation[BinanceTicker] = 
+	{
+		"ArgumentsPattern" -> {_.}
+	}
+
+
+BinanceTicker[] := 
+	binancePublicAPI["v1", "ticker", "24hr", {}]
+
+
+BinanceTicker[symbol_String] := 
+	binancePublicAPI["v1", "ticker", "24hr", {"symbol" -> symbol}]
+
+
+(* ::Text:: *)
 (*BinanceAggTrades*)
+
+
+BinanceAggTrades::doclnk = 
+"https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#compressedaggregate-trades-list"
 
 
 Options[BinanceAggTrades] := 
