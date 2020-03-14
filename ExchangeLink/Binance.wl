@@ -287,10 +287,6 @@ binanceTradeAPI[method_String, parameters: <|___Rule|>, OptionsPattern[]] :=
 (*Test connectivity*)
 
 
-BinancePing::doclnk = 
-"https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#test-connectivity"
-
-
 SyntaxInformation[BinancePing] = 
 	{"ArgumentsPattern" -> {}}
 
@@ -303,10 +299,6 @@ BinancePing[] :=
 (*Check server time*)
 
 
-BinanceTime::doclnk = 
-"https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#check-server-time"
-
-
 SyntaxInformation[BinanceTime] = 
 	{"ArgumentsPattern" -> {}}
 
@@ -317,10 +309,6 @@ BinanceTime[] :=
 
 (* ::Text:: *)
 (*BinanceExchangeInfo*)
-
-
-BinanceExchangeInfo::doclnk = 
-"https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#exchange-information"
 
 
 SyntaxInformation[BinanceExchangeInfo] = 
@@ -337,10 +325,6 @@ BinanceExchangeInfo[] :=
 
 (* ::Text:: *)
 (*Order book*)
-
-
-BinanceDepth::doclnk = 
-"https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#order-book"
 
 
 Options[BinanceDepth] := 
@@ -362,10 +346,6 @@ BinanceDepth[symbol_String, OptionsPattern[]] :=
 (*Recent trades list*)
 
 
-BinanceTrades::doclnk = 
-"https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#recent-trades-list"
-
-
 Options[BinanceTrades] := 
 	{
 		"limit" -> 500
@@ -385,10 +365,6 @@ BinanceTrades[symbol_String, options: OptionsPattern[]] :=
 
 (* ::Text:: *)
 (*BinancePrice*)
-
-
-BinancePrice::doclnk = 
-"https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#symbol-price-ticker"
 
 
 SyntaxInformation[BinancePrice] = 
@@ -427,12 +403,13 @@ BinanceTicker[symbol_String] :=
 (*BinanceAggTrades*)
 
 
-BinanceAggTrades::doclnk = 
-"https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#compressedaggregate-trades-list"
-
-
 Options[BinanceAggTrades] := 
-	{"fromId" -> "INCLUSIVE", "startTime" -> "INCLUSIVE", "endTime" -> "INCLUSIVE", "limit" -> 500}
+	{
+		"fromId" -> "INCLUSIVE", 
+		"startTime" -> "INCLUSIVE", 
+		"endTime" -> "INCLUSIVE", 
+		"limit" -> 500
+	}
 
 
 SyntaxInformation[BinanceAggTrades] = 
@@ -477,7 +454,31 @@ BinanceAccountInfo[opts: OptionsPattern[binanceTradeAPI]] :=
 (*Current open orders (USER_DATA)*)
 
 
-BinanceOrderList[symbol_String, opts: OptionsPattern[binanceTradeAPI]] := 
+Options[BinanceMyTrades] = 
+	{
+		"limit" -> 500
+	}
+
+
+BinanceMyTrades[symbol_String, opts: OptionsPattern[{binanceTradeAPI, BinanceMyTrades}]] := 
+	binanceTradeAPI[
+		"myTrades", 
+		<|
+			"symbol" -> symbol, 
+			"limit" -> OptionValue["limit"]
+		|>, 
+		"httpmethod" -> "GET", 
+		FilterRules[{opts}, Options[binanceTradeAPI]]
+	]
+
+
+SyntaxInformation[BinanceOrders] = 
+	{
+		"ArgumentsPattern" -> {_}
+	}
+
+
+BinanceOrders[symbol_String, opts: OptionsPattern[binanceTradeAPI]] := 
 	binanceTradeAPI[
 		"openOrders", 
 		<|
@@ -487,14 +488,6 @@ BinanceOrderList[symbol_String, opts: OptionsPattern[binanceTradeAPI]] :=
 		"httpmethod" -> "GET", 
 		opts
 	]
-
-
-Options[BinanceMyTrades] = 
-	{"limit" -> 500}
-
-
-BinanceMyTrades[symbol_String, opts: OptionsPattern[{binanceTradeAPI, BinanceMyTrades}]] := 
-	binanceTradeAPI["myTrades", <|"symbol" -> symbol, "limit" -> OptionValue["limit"] |>, "httpmethod" -> "GET", FilterRules[{opts}, Options[binanceTradeAPI]]]
 
 
 BinanceOrderCreate[symbol_String, side_String, type_String, quantity: _Real | _Integer | _String, price: _Real | _Integer | _String, opts: OptionsPattern[binanceTradeAPI]] := 
@@ -509,6 +502,7 @@ BinanceOrderCreate[symbol_String, side_String, type_String, quantity: _Real | _I
 			"price" -> price, 
 			"recvWindow" -> 5000
 		|>, 
+		"httpmethod" -> "POST", 
 		opts
 	]
 
@@ -520,6 +514,68 @@ BinanceOrderCancel[symbol_String, orderID_Integer, opts: OptionsPattern[binanceT
 		"httpmethod" -> "DELETE", 
 		opts
 	]
+
+
+BinanceOrderGet[symbol_String, orderID_Integer, opts: OptionsPattern[binanceTradeAPI]] := 
+	binanceTradeAPI[
+		"order", 
+		<|"symbol" -> symbol, "orderId" -> orderID|>, 
+		"httpmethod" -> "GET", 
+		opts
+	]
+
+
+BinanceOrderTest
+
+
+BinanceOrdersAll
+
+
+BinanceOCOrderCreate[symbol_String, side_String, type_String, 
+	quantity: _Real | _Integer | _String, 
+	price: _Real | _Integer | _String, 
+	price2: _Real | _Integer | _String, 
+	opts: OptionsPattern[binanceTradeAPI]
+] := 
+	binanceTradeAPI[
+		"order/oco", 
+		<|
+			"symbol" -> symbol, 
+			"side" -> side, 
+			"type" -> type, 
+			"timeInForce" -> "GTC", 
+			"quantity" -> quantity, 
+			"price" -> price, 
+			"stopPrice" -> price2, 
+			"recvWindow" -> 5000
+		|>, 
+		"httpmethod" -> "POST", 
+		opts
+	]
+
+
+BinanceOCOrderGet[orderListID_Integer, opts: OptionsPattern[binanceTradeAPI]] := 
+	binanceTradeAPI[
+		"orderList", 
+		<|"orderListId" -> orderListID|>, 
+		"httpmethod" -> "GET", 
+		opts
+	]
+
+
+BinanceOCOrderCancel[symbol_String, orderListID_Integer, opts: OptionsPattern[binanceTradeAPI]] := 
+	binanceTradeAPI[
+		"orderList", 
+		<|"symbol" -> symbol, "orderListId" -> orderListID|>, 
+		"httpmethod" -> "DELETE", 
+		opts
+	]
+
+
+BinanceOCOrders
+
+
+BinanceOCOrdersAll
 
 
 (* ::Section:: *)
