@@ -44,6 +44,10 @@ BinanceExchangeInfo::usage =
 "BinanceExchangeInfo[]"
 
 
+$BinanceExchangeInfo::usage = 
+"BinanceExchangeInfo cash for the one day"
+
+
 BinanceDepth::usage = 
 "BinanceDepth[symbol]"
 
@@ -99,9 +103,8 @@ BinanceOrderCancel::usage =
 "BinanceOrderCancel[symbol, orderID]"
 
 
-BinanceOrders::usage = 
-"BinanceOrders[]
-BinanceOrders[symbol]"
+BinanceOrdersNow::usage = 
+"BinanceOrdersNow[symbol]"
 
 
 BinanceOrdersAll::usage = 
@@ -120,8 +123,8 @@ BinanceOCOrderGet::usage =
 "BinanceOCOrderGet[symbol, orderListID]"
 
 
-BinanceOCOrders::usage = 
-"BinanceOCOrders[]"
+BinanceOCOrdersNow::usage = 
+"BinanceOCOrdersNow[]"
 
 
 BinanceOCOrdersAll::usage = 
@@ -147,32 +150,16 @@ Begin["`Private`"]
 (*Internal variables and functions*)
 
 
-$binanceAPI = 
-"https://api.binance.com"
+(* ::Subsubsection:: *)
+(*Converters*)
 
 
-binancePublicAPI::reqerr = 
-"error during `1`\n`2`"
+toBinanceTime[time_DateObject] := 
+	ToString[1000 * UnixTime[time] + Round[1000 * FractionalPart[Last[DateList[time]]]]]
 
 
-binancePublicAPI[version: "v1" | "v3", method: _String | PatternSequence[_String, _String], parameters: {___Rule}] := 
-	Module[{
-		url, request, response, status, body, result
-	}, 
-		url = URLBuild[{$binanceAPI, "api", version, method}, parameters];
-		request = HTTPRequest[url];
-		TimeConstrained[Check[response = URLRead[request], Message[binancePublicAPI::reqerr, "getting http-response", url]; Return[Null]], 1, Message[binancePublicAPI::reqerr, "executing request", request]; Return[Null]]; 
-		status = response["StatusCode"];
-		body = response["Body"];
-		If[status =!= 200, Message[binancePublicAPI::reqerr, "checking response", body]; Return[Null]];
-		Check[result = toExpr[ImportString[body, "RawJSON"]], Message[binancePublicAPI::reqerr, "import from JSON", body]; Return[Null]]; 
-		
-		Return[result];
-	]
-
-
-toBinanceTime[time_Real] := 
-	Floor[AbsoluteTime[DatePlus[DatePlus[DateObject[time], Quantity[-70, "Years"]], Quantity[-4, "Hours"]]] * 1000]
+toBinanceTime[] := 
+	toBinanceTime[Now]
 
 
 toOptionNames[func_Symbol] := 
@@ -233,11 +220,43 @@ toParams[params: {___Rule}, opts: OptionsPattern[]] :=
 	DeleteCases[Join[params, Flatten[{opts}]], _[_, Automatic | Null | None]]
 
 
+(* ::Subsubsection:: *)
+(*Binance public API request*)
+
+
+$binanceAPI = 
+"https://api.binance.com"
+
+
+binancePublicAPI::reqerr = 
+"error during `1`\n`2`"
+
+
+binancePublicAPI[version: "v1" | "v3", method: _String | PatternSequence[_String, _String], parameters: {___Rule}] := 
+	Module[{
+		url, request, response, status, body, result
+	}, 
+		url = URLBuild[{$binanceAPI, "api", version, method}, parameters];
+		request = HTTPRequest[url];
+		TimeConstrained[Check[response = URLRead[request], Message[binancePublicAPI::reqerr, "getting http-response", url]; Return[Null]], 1, Message[binancePublicAPI::reqerr, "executing request", request]; Return[Null]]; 
+		status = response["StatusCode"];
+		body = response["Body"];
+		If[status =!= 200, Message[binancePublicAPI::reqerr, "checking response", body]; Return[Null]];
+		Check[result = toExpr[ImportString[body, "RawJSON"]], Message[binancePublicAPI::reqerr, "import from JSON", body]; Return[Null]]; 
+		
+		Return[result];
+	]
+
+
+(* ::Subsubsection:: *)
+(*Binance trade API request*)
+
+
 Options[binanceTradeAPI] := 
 	{
-		"apikey" :> ExchangeLinkIniRead["Binance", "APIKey"], 
-		"secretkey" :> ExchangeLinkIniRead["Binance", "SecretKey"], 
-		"time" :> BinanceTime[]["serverTime"](*toBinanceTime[AbsoluteTime[]]*), 
+		"apikey" :> ExchangeLink`$ExchangeLink["Binance", "APIKey"], 
+		"secretkey" :> ExchangeLink`$ExchangeLink["Binance", "SecretKey"], 
+		"time" :> toBinanceTime[], 
 		"httpmethod" -> "POST", 
 		"version" -> "v3"
 	}
@@ -319,8 +338,25 @@ BinanceExchangeInfo[] :=
 	binancePublicAPI["v1", "exchangeInfo", {}]
 
 
+BinanceExchangeInfo[date_DateObject] := 
+	Block[{info = Check[BinanceExchangeInfo[], Pause[1]; BinanceExchangeInfo[]]},
+		Unprotect[BinanceExchangeInfo];
+		If[AssociationQ[info], BinanceExchangeInfo[date] = info]; 
+		Protect[BinanceExchangeInfo];
+		info
+	]
+
+
+(* ::Text:: *)
+(*Exchange Info is constant data during one day (or more than one day)*)
+
+
+$BinanceExchangeInfo := 
+	BinanceExchangeInfo[Today];
+
+
 (* ::Subsubsection:: *)
-(*market data endpoints*)
+(*Market data endpoints*)
 
 
 (* ::Text:: *)
@@ -428,7 +464,11 @@ BinanceAggTrades[symbol_String, options: OptionsPattern[]] :=
 
 
 Options[BinanceKlines] := 
-	{"limit" -> 500, "startTime" -> Null, "endTime" -> Null}
+	{
+		"limit" -> 500, 
+		"startTime" -> Null, 
+		"endTime" -> Null
+	}
 
 
 SyntaxInformation[BinanceKlines] = 
@@ -439,11 +479,23 @@ SyntaxInformation[BinanceKlines] =
 
 
 BinanceKlines[symbol_String, interval_String, opts: OptionsPattern[]] := 
-	binancePublicAPI["v1", "klines", {"symbol" -> symbol, "interval" -> interval} ~ Join ~ DeleteCases[Flatten[{opts}], _ -> Null]]
+	binancePublicAPI["v1", "klines", {"symbol" -> symbol, "interval" -> interval} ~ Join ~ 
+		DeleteCases[Flatten[{opts}], _ -> Null]
+	]
 
 
 (* ::Subsubsection:: *)
 (*Account endpoints*)
+
+
+(* ::Text:: *)
+(*Account info*)
+
+
+SyntaxInformation[BinanceAccountInfo] = 
+	{
+		"ArgumentsPattern" -> {}
+	}
 
 
 BinanceAccountInfo[opts: OptionsPattern[binanceTradeAPI]] := 
@@ -451,12 +503,19 @@ BinanceAccountInfo[opts: OptionsPattern[binanceTradeAPI]] :=
 
 
 (* ::Text:: *)
-(*Current open orders (USER_DATA)*)
+(*All my trades (USER_DATA)*)
 
 
 Options[BinanceMyTrades] = 
 	{
 		"limit" -> 500
+	}
+
+
+SyntaxInformation[BinanceMyTrades] = 
+	{
+		"ArgumentsPattern" -> {_, OptionsPattern[]}, 
+		"OptionNames" -> toOptionNames[BinanceMyTrades]
 	}
 
 
@@ -472,25 +531,19 @@ BinanceMyTrades[symbol_String, opts: OptionsPattern[{binanceTradeAPI, BinanceMyT
 	]
 
 
-SyntaxInformation[BinanceOrders] = 
+(* ::Text:: *)
+(*New order (TRADE)*)
+
+
+SyntaxInformation[BinanceOrderCreate] = 
 	{
-		"ArgumentsPattern" -> {_}
+		"ArgumentsPattern" -> {_, _, _, _, _}
 	}
 
 
-BinanceOrders[symbol_String, opts: OptionsPattern[binanceTradeAPI]] := 
-	binanceTradeAPI[
-		"openOrders", 
-		<|
-			"symbol" -> symbol, 
-			"recvWindow" -> 5000
-		|>, 
-		"httpmethod" -> "GET", 
-		opts
-	]
-
-
-BinanceOrderCreate[symbol_String, side_String, type_String, quantity: _Real | _Integer | _String, price: _Real | _Integer | _String, opts: OptionsPattern[binanceTradeAPI]] := 
+BinanceOrderCreate[symbol_String, side_String, type_String, 
+	quantity: _Real | _Integer | _String, 
+	price: _Real | _Integer | _String, opts: OptionsPattern[binanceTradeAPI]] := 
 	binanceTradeAPI[
 		"order", 
 		<|
@@ -505,6 +558,16 @@ BinanceOrderCreate[symbol_String, side_String, type_String, quantity: _Real | _I
 		"httpmethod" -> "POST", 
 		opts
 	]
+
+
+(* ::Text:: *)
+(*Cancel order (TRADE)*)
+
+
+SyntaxInformation[BinanceOrderCancel] = 
+	{
+		"ArgumentsPattern" -> {_, _}
+	}
 
 
 BinanceOrderCancel[symbol_String, orderID_Integer, opts: OptionsPattern[binanceTradeAPI]] := 
@@ -516,6 +579,16 @@ BinanceOrderCancel[symbol_String, orderID_Integer, opts: OptionsPattern[binanceT
 	]
 
 
+(* ::Text:: *)
+(*Query order (USER_DATA)*)
+
+
+SyntaxInformation[BinanceOrderGet] = 
+	{
+		"ArgumentsPattern" -> {_, _}
+	}
+
+
 BinanceOrderGet[symbol_String, orderID_Integer, opts: OptionsPattern[binanceTradeAPI]] := 
 	binanceTradeAPI[
 		"order", 
@@ -525,16 +598,87 @@ BinanceOrderGet[symbol_String, orderID_Integer, opts: OptionsPattern[binanceTrad
 	]
 
 
-BinanceOrderTest
+(* ::Text:: *)
+(*Test new order (TRADE)*)
 
 
-BinanceOrdersAll
+BinanceOrderTest[args_Association: <||>, opts: OptionsPattern[binanceTradeAPI]] := 
+	binanceTradeAPI[
+		"order", 
+		args, 
+		"httpmethod" -> "GET", 
+		opts
+	]
+
+
+(* ::Text:: *)
+(*Current open orders (USER_DATA)*)
+
+
+SyntaxInformation[BinanceOrdersNow] = 
+	{
+		"ArgumentsPattern" -> {_}
+	}
+
+
+BinanceOrdersNow[symbol_String, opts: OptionsPattern[binanceTradeAPI]] := 
+	binanceTradeAPI[
+		"openOrders", 
+		<|
+			"symbol" -> symbol, 
+			"recvWindow" -> 5000
+		|>, 
+		"httpmethod" -> "GET", 
+		opts
+	]
+
+
+(* ::Text:: *)
+(*All orders (USER_DATA)*)
+
+
+Options[BinanceOrdersAll] = 
+	{
+		"orderId" -> Null, 
+		"startTime" -> Null, 
+		"endTime" -> Null, 
+		"limit" -> 500
+	}
+
+
+SyntaxInformation[BinanceOrdersAll] = 
+	{
+		"ArgumentsPattern" -> {_, OptionsPattern[]}, 
+		"OptionNames" -> toOptionNames[BinanceOrdersAll]
+	}
+
+
+BinanceOrdersAll[symbol_String, opts: OptionsPattern[{BinanceOrdersAll, binanceTradeAPI}]] := 
+	binanceTradeAPI[
+		"allOrders", 
+		<|
+			"symbol" -> symbol, 
+			"recvWindow" -> 5000
+		|> ~ Join ~ <|FilterRules[Flatten[{opts}], Options[BinanceOrdersAll]]|>, 
+		"httpmethod" -> "GET", 
+		FilterRules[Flatten[{opts}], Options[binanceTradeAPI]]
+	]
+
+
+(* ::Text:: *)
+(*New OCO (TRADE)*)
+
+
+SyntaxInformation[BinanceOCOrderCreate] = 
+	{
+		"ArgumentsPattern" -> {_, _, _, _, _, _}
+	}
 
 
 BinanceOCOrderCreate[symbol_String, side_String, type_String, 
 	quantity: _Real | _Integer | _String, 
 	price: _Real | _Integer | _String, 
-	price2: _Real | _Integer | _String, 
+	stopPrice: _Real | _Integer | _String, 
 	opts: OptionsPattern[binanceTradeAPI]
 ] := 
 	binanceTradeAPI[
@@ -546,12 +690,16 @@ BinanceOCOrderCreate[symbol_String, side_String, type_String,
 			"timeInForce" -> "GTC", 
 			"quantity" -> quantity, 
 			"price" -> price, 
-			"stopPrice" -> price2, 
+			"stopPrice" -> stopPrice, 
 			"recvWindow" -> 5000
 		|>, 
 		"httpmethod" -> "POST", 
 		opts
 	]
+
+
+(* ::Text:: *)
+(*Query OCO (USER_DATA)*)
 
 
 BinanceOCOrderGet[orderListID_Integer, opts: OptionsPattern[binanceTradeAPI]] := 
@@ -563,19 +711,61 @@ BinanceOCOrderGet[orderListID_Integer, opts: OptionsPattern[binanceTradeAPI]] :=
 	]
 
 
+(* ::Text:: *)
+(*Cancel OCO (TRADE)*)
+
+
 BinanceOCOrderCancel[symbol_String, orderListID_Integer, opts: OptionsPattern[binanceTradeAPI]] := 
 	binanceTradeAPI[
 		"orderList", 
-		<|"symbol" -> symbol, "orderListId" -> orderListID|>, 
+		<|"symbol" -> symbol, "orderListId" -> orderListID, "recvWindow" -> 5000|>, 
 		"httpmethod" -> "DELETE", 
 		opts
 	]
 
 
-BinanceOCOrders
+(* ::Text:: *)
+(*Query Open OCO (USER_DATA)*)
 
 
-BinanceOCOrdersAll
+BinanceOCOrdersNow[opts: OptionsPattern[binanceTradeAPI]] := 
+	binanceTradeAPI[
+		"openOrderList", 
+		<|"recvWindow" -> 5000|>, 
+		"httpmethod" -> "GET", 
+		opts
+	]
+
+
+(* ::Text:: *)
+(*Query all OCO (USER_DATA)*)
+
+
+Options[BinanceOCOrdersAll] = 
+	{
+		"fromId" -> Null, 
+		"startTime" -> Null, 
+		"endTime" -> Null, 
+		"limit" -> 500
+	}
+
+
+SyntaxInformation[BinanceOCOrdersAll] = 
+	{
+		"ArgumentsPattern" -> {OptionsPattern[]}, 
+		"OptionNames" -> toOptionNames[BinanceOCOrdersAll]
+	}
+
+
+BinanceOCOrdersAll[opts: OptionsPattern[{BinanceOCOrdersAll, binanceTradeAPI}]] := 
+	binanceTradeAPI[
+		"openOrderList", 
+		<|
+			"recvWindow" -> 5000
+		|> ~ Join ~ <|FilterRules[Flatten[{opts}], Options[BinanceOrdersAll]]|>, 
+		"httpmethod" -> "GET", 
+		FilterRules[Flatten[{opts}], Options[binanceTradeAPI]]
+	]
 
 
 (* ::Section:: *)

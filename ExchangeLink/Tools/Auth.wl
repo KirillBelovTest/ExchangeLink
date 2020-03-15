@@ -8,9 +8,6 @@
 (*Info*)
 
 
-
-
-
 (* ::Section:: *)
 (*Begin package*)
 
@@ -68,11 +65,19 @@ ExchangeLinkIniRead::error =
 "`1`: `2`"
 
 
-ExchangeLinkIniRead[section_String, key_String, OptionsPattern[]] := 
+ExchangeLinkIniRead[OptionsPattern[]] := 
 	Block[{file = OptionValue["File"]}, 
 		If[Not[FileExistsQ[file]], Message[ExchangeLinkIniRead::error, "file not found", file]; Return[Null]];
-		Get[file][section, key]
+		Get[file]
 	]
+
+
+ExchangeLinkIniRead[section_String, opts: OptionsPattern[]] := 
+	ExchangeLinkIniRead[opts][section]
+
+
+ExchangeLinkIniRead[section_String, key_String, opts: OptionsPattern[]] := 
+	ExchangeLinkIniRead[opts][section, key]
 
 
 (* ::Subsubsection:: *)
