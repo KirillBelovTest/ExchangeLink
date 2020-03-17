@@ -95,6 +95,14 @@ BinanceOrderCreate::usage =
 "BinanceOrderCreate[symbol, side, type, quantity, price]"
 
 
+BinanceBuy::usage = 
+"BinanceBuy[symbol, qty, price]"
+
+
+BinanceSell::usage = 
+"BinanceBuy[symbol, qty, price]"
+
+
 BinanceOrderGet::usage = 
 "BinanceOrderGet[symbol, orderID]"
 
@@ -218,6 +226,71 @@ toExpr[value_String] :=
 
 toParams[params: {___Rule}, opts: OptionsPattern[]] := 
 	DeleteCases[Join[params, Flatten[{opts}]], _[_, Automatic | Null | None]]
+
+
+toQty[symbol_String, qty_?NumericQ] := 
+	Block[{qtyStep = 
+		SelectFirst[
+			SelectFirst[
+				$BinanceExchangeInfo["symbols"], 
+				#symbol == symbol&
+			]["filters"], 
+			#filterType === "LOT_SIZE"&
+		]["stepSize"]
+	}, 
+		ToString[Which[
+			NumericQ[qtyStep] && qtyStep < 1, 
+				NumberForm[qty, {16, Round[-Log10[qtyStep]]}], 
+				
+			NumericQ[qtyStep] && qtyStep >= 1, 
+				NumberForm[Round[qty, qtyStep]], 
+			
+			True, 
+				qty
+		]]
+	]
+
+
+toPrice[symbol_String, price_?NumericQ] := 
+	Block[{priceStep = 
+		SelectFirst[
+			SelectFirst[
+				$BinanceExchangeInfo["symbols"], 
+				#symbol == symbol&
+			]["filters"], 
+			#filterType === "PRICE_FILTER"&
+		]["tickSize"]
+	}, 
+		ToString[Which[
+			NumericQ[priceStep] && priceStep < 1, 
+				NumberForm[price, {16, Round[-Log10[priceStep]]}], 
+				
+			NumericQ[priceStep] && priceStep >= 1, 
+				NumberForm[Round[price, priceStep]], 
+			
+			True, 
+				price
+		]]
+	]
+
+
+(* ::Subsubsection:: *)
+(*ENUMs*)
+
+
+$orderTypes = 
+	"LIMIT" | 
+	"MARKET" | 
+	"STOP_LOSS" | 
+	"STOP_LOSS_LIMIT" | 
+	"TAKE_PROFIT" | 
+	"TAKE_PROFIT_LIMIT" | 
+	"LIMIT_MAKET"
+
+
+$orderSides = 
+	"BUY" | 
+	"SELL"
 
 
 (* ::Subsubsection:: *)
@@ -541,9 +614,12 @@ SyntaxInformation[BinanceOrderCreate] =
 	}
 
 
-BinanceOrderCreate[symbol_String, side_String, type_String, 
-	quantity: _Real | _Integer | _String, 
-	price: _Real | _Integer | _String, opts: OptionsPattern[binanceTradeAPI]] := 
+BinanceOrderCreate[
+	symbol_String, 
+	side: $orderSides, 
+	type: $orderTypes, 
+	quantity_?NumericQ, 
+	price_?NumericQ, opts: OptionsPattern[binanceTradeAPI]] := 
 	binanceTradeAPI[
 		"order", 
 		<|
@@ -551,13 +627,43 @@ BinanceOrderCreate[symbol_String, side_String, type_String,
 			"side" -> side, 
 			"type" -> type, 
 			"timeInForce" -> "GTC", 
-			"quantity" -> quantity, 
-			"price" -> price, 
+			"quantity" -> toQty[symbol, quantity], 
+			"price" -> toPrice[symbol, price], 
 			"recvWindow" -> 5000
 		|>, 
 		"httpmethod" -> "POST", 
 		opts
 	]
+
+
+(* ::Text:: *)
+(*New order BUY  (TRADE)*)
+
+
+SyntaxInformation[BinanceBuy] = 
+	{
+		"ArgumentsPattern" -> {_, _, _}
+	}
+
+
+BinanceBuy[symbol_String, quantity_?NumericQ, price_?NumericQ, 
+	opts: OptionsPattern[binanceTradeAPI]] := 
+	BinanceOrderCreate[symbol, "BUY", "LIMIT", quantity, price, opts]
+
+
+(* ::Text:: *)
+(*New order SELL (TRADE)*)
+
+
+SyntaxInformation[BinanceSell] = 
+	{
+		"ArgumentsPattern" -> {_, _, _}
+	}
+
+
+BinanceSell[symbol_String, quantity_?NumericQ, price_?NumericQ, 
+	opts: OptionsPattern[binanceTradeAPI]] := 
+	BinanceOrderCreate[symbol, "SELL", "LIMIT", quantity, price, opts]
 
 
 (* ::Text:: *)
