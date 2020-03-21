@@ -60,5 +60,5 @@ BinanceTime[]
 
 ## Contributing
 
-After uploading to githab
+After uploading to github
 
