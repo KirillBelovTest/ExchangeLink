@@ -136,7 +136,83 @@ PairedHistogram[
 ]
 ```
 
-![](https://wolfr.am/LdqAAGTu)
+>![](https://wolfr.am/LdqAAGTu)
+
+Last trades for the pair - order size, time and other
+
+```wolfram
+BinanceTrades["BTCUSDT"]
+```
+
+>{<|"id" -> 275374890, price -> 6232.51, qty -> quoteQty -> 267.026, time -> DateObject[<..>], ...|>, ...}
+
+### Market prices
+
+Get current price of Bitcoin
+
+```wolfram
+BinancePrice["BTCUSDT"]
+```
+
+><|"symbol" -> "BTCUSDT", "price" -> 6231.45|>
+
+More information about cryptocurrency pair. Result has information about 24h change, 
+volume and last prices
+
+```wolfram
+BinanceTicker["BTCUSDT"]
+```
+
+><|"symbol" -> "BTCUSDT", "priceChange" -> -287.64, 
+> "priceChangePercent" -> -4.405, "weightedAvgPrice" -> 6207.84, 
+> "prevClosePrice" -> 6529.23, "lastPrice" -> 6242.19, 
+> "lastQty" -> 0.150057, "bidPrice" -> 6241.39, "bidQty" -> 0.083302, 
+> "askPrice" -> 6243.39, "askQty" -> 1.71051, "openPrice" -> 6529.83, 
+> "highPrice" -> 6714.53, "lowPrice" -> 5670., "volume" -> 182195., 
+> "quoteVolume" -> 1.1310340689753455*10^9, 
+> "openTime" -> 
+>  DateObject<>, "closeTime" -> 
+>  DateObject<>, "firstId" -> 274022160, "lastId" -> 275354648, 
+> "count" -> 1332489|>
+
+And for all currency pairs
+
+```wolfram
+BinanceTicker[]
+```
+
+>{<|"symbol" -> "ETHBTC", "priceChange" -> -0.00007, 
+> "priceChangePercent" -> -0.327, "weightedAvgPrice" -> 0.0213236, 
+> "prevClosePrice" -> 0.021413, "lastPrice" -> 0.021351, 
+> "lastQty" -> 1.204, "bidPrice" -> 0.021351, <...>, 
+> "volume" -> 312333., "quoteVolume" -> 6660.05, 
+> "openTime" -> 
+>  DateObject<>, "closeTime" -> 
+>  DateObject<>, "firstId" -> 169520504, "lastId" -> 169718743, 
+> "count" -> 198240|>, < .. 767 ..>}
+
+### Chart
+
+Get historical data from Binance
+
+* "BTCUSDT" - cryptocurrency pair
+* "15m" - time interval of the one "candle". Available intervals: 1m, 3m, 5m, 15m, 30m, 1h, 2h, 4h, 6h, 12h, 1d
+* "limit" -> 96 - number of candles. Max value is 1000, default - 500
+
+Interactive chart with different indicators
+
+```wolfram
+InteractiveTradingChart[
+	Query[All, {1, {2, 3, 4, 5, 6}}] @ BinanceKlines["BTCUSDT", "15m", "limit" -> 192], 
+	ImageSize -> Large, PlotTheme -> "Marketing"
+]
+```
+
+>![](https://wolfr.am/LdrufmFh)
+
+### Account
+
+### Trade
 
 ## Contributing
 
