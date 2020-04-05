@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     12653,        330]
-NotebookOptionsPosition[      8282,        236]
-NotebookOutlinePosition[      8701,        252]
-CellTagsIndexPosition[      8658,        249]
+NotebookDataLength[     13130,        338]
+NotebookOptionsPosition[      8703,        243]
+NotebookOutlinePosition[      9178,        260]
+CellTagsIndexPosition[      9135,        257]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -116,16 +116,17 @@ Cell["XXXX", "Text",
  CellID->1534169418,ExpressionUUID->"a16dc237-85b9-451b-a8a6-5a613e5d8a22"],
 
 Cell[BoxData[GridBox[{
-   {"XXXX", Cell[
-    "XXXX", "TableText",ExpressionUUID->
+   {"BinanceTicker", Cell[
+    "current 24hr info", "TableText",ExpressionUUID->
      "6d2b3acc-6b83-48d6-979e-7925d8e25c07"]},
-   {"XXXX", Cell[
-    "XXXX", "TableText",ExpressionUUID->
+   {"BinancePrice", Cell[
+    "current price", "TableText",ExpressionUUID->
      "fc2a77cb-d1ef-44ee-b313-57cbbd8787bd"]},
    {"XXXX", Cell[
     "XXXX", "TableText",ExpressionUUID->
      "5a2968f3-4947-4c5d-a543-ae23bcd596c1"]}
   }]], "DefinitionBox",
+ CellChangeTimes->{{3.7948099039237556`*^9, 3.794809947222287*^9}},
  CellID->2096742444,ExpressionUUID->"bd2a59b4-47a3-4a58-b37f-cdb2629441b5"],
 
 Cell["XXXX.", "Caption",
@@ -133,13 +134,14 @@ Cell["XXXX.", "Caption",
 
 Cell[CellGroupData[{
 
-Cell["XXXX", "MathCaption",
+Cell["Get ExchangeLink` functions", "MathCaption",
+ CellChangeTimes->{{3.794809862443025*^9, 3.7948098846302795`*^9}},
  CellID->836781195,ExpressionUUID->"873b49c6-0545-4190-871f-3d3d5cfa0145"],
 
 Cell[BoxData[
  RowBox[{"<<", "ExchangeLink`"}]], "Input",
  CellChangeTimes->{{3.7931808386832647`*^9, 3.793180845335249*^9}},
- CellLabel->"In[25]:=",
+ CellLabel->"In[8]:=",
  CellID->2058623809,ExpressionUUID->"e90f4677-fde0-4713-a46f-bbc1d2c42dba"],
 
 Cell[CellGroupData[{
@@ -147,62 +149,67 @@ Cell[CellGroupData[{
 Cell[BoxData[
  RowBox[{"BinanceTicker", "[", "\"\<BTCUSDT\>\"", "]"}]], "Input",
  CellChangeTimes->{{3.793180850281271*^9, 3.793180862813325*^9}},
- CellLabel->"In[26]:=",
+ CellLabel->"In[9]:=",
  CellID->239990974,ExpressionUUID->"043eb894-2dcf-4d0d-a8ba-4a1d54b5fddb"],
 
 Cell[BoxData[
  RowBox[{"\[LeftAssociation]", 
   RowBox[{
    RowBox[{"\<\"symbol\"\>", "\[Rule]", "\<\"BTCUSDT\"\>"}], ",", 
-   RowBox[{"\<\"priceChange\"\>", "\[Rule]", 
-    RowBox[{"-", "260.11`"}]}], ",", 
-   RowBox[{"\<\"priceChangePercent\"\>", "\[Rule]", 
-    RowBox[{"-", "4.631`"}]}], ",", 
-   RowBox[{"\<\"weightedAvgPrice\"\>", "\[Rule]", "5368.70908361`"}], ",", 
-   RowBox[{"\<\"prevClosePrice\"\>", "\[Rule]", "5616.34`"}], ",", 
-   RowBox[{"\<\"lastPrice\"\>", "\[Rule]", "5356.21`"}], ",", 
-   RowBox[{"\<\"lastQty\"\>", "\[Rule]", "0.060981`"}], ",", 
-   RowBox[{"\<\"bidPrice\"\>", "\[Rule]", "5356.3`"}], ",", 
-   RowBox[{"\<\"bidQty\"\>", "\[Rule]", "0.5`"}], ",", 
-   RowBox[{"\<\"askPrice\"\>", "\[Rule]", "5357.1`"}], ",", 
-   RowBox[{"\<\"askQty\"\>", "\[Rule]", "0.247646`"}], ",", 
-   RowBox[{"\<\"openPrice\"\>", "\[Rule]", "5616.32`"}], ",", 
-   RowBox[{"\<\"highPrice\"\>", "\[Rule]", "5955.`"}], ",", 
-   RowBox[{"\<\"lowPrice\"\>", "\[Rule]", "4807.`"}], ",", 
-   RowBox[{"\<\"volume\"\>", "\[Rule]", "243114.515749`"}], ",", 
-   RowBox[{"\<\"quoteVolume\"\>", "\[Rule]", 
-    "1.3052111090580705`17.115680761547104*^9"}], ",", 
+   RowBox[{"\<\"priceChange\"\>", "\[Rule]", "341.82`"}], ",", 
+   RowBox[{"\<\"priceChangePercent\"\>", "\[Rule]", "5.429`"}], ",", 
+   RowBox[{"\<\"weightedAvgPrice\"\>", "\[Rule]", "6447.7202766`"}], ",", 
+   RowBox[{"\<\"prevClosePrice\"\>", "\[Rule]", "6296.39`"}], ",", 
+   RowBox[{"\<\"lastPrice\"\>", "\[Rule]", "6637.81`"}], ",", 
+   RowBox[{"\<\"lastQty\"\>", "\[Rule]", "0.097286`"}], ",", 
+   RowBox[{"\<\"bidPrice\"\>", "\[Rule]", "6637.81`"}], ",", 
+   RowBox[{"\<\"bidQty\"\>", "\[Rule]", "0.348581`"}], ",", 
+   RowBox[{"\<\"askPrice\"\>", "\[Rule]", "6638.`"}], ",", 
+   RowBox[{"\<\"askQty\"\>", "\[Rule]", "1.015144`"}], ",", 
+   RowBox[{"\<\"openPrice\"\>", "\[Rule]", "6295.99`"}], ",", 
+   RowBox[{"\<\"highPrice\"\>", "\[Rule]", "6744.`"}], ",", 
+   RowBox[{"\<\"lowPrice\"\>", "\[Rule]", "6150.11`"}], ",", 
+   RowBox[{"\<\"volume\"\>", "\[Rule]", "100990.551983`"}], ",", 
+   RowBox[{"\<\"quoteVolume\"\>", "\[Rule]", "6.511588297657204`*^8"}], ",", 
    RowBox[{"\<\"openTime\"\>", "\[Rule]", 
-    TemplateBox[{RowBox[{"\"Fri 13 Mar 2020 13:21:04\"", 
-        StyleBox["\"GMT\"", FontColor -> GrayLevel[0.5]]}],
+    TemplateBox[{
+      RowBox[{"\"Wed 1 Apr 2020 13:51:30\"", 
+        StyleBox[
+         RowBox[{"\"GMT+\"", "\[InvisibleSpace]", 
+           StyleBox["4.`", NumberMarks -> False, StripOnInput -> False]}], 
+         FontColor -> GrayLevel[0.5]]}], 
       RowBox[{"DateObject", "[", 
         RowBox[{
           RowBox[{"{", 
             
-            RowBox[{"2020", ",", "3", ",", "13", ",", "13", ",", "21", ",", 
-              "4.1519999504089355`"}], "}"}], ",", "\"Instant\"", ",", 
-          "\"Gregorian\"", ",", "0.`"}], "]"}]},
+            RowBox[{"2020", ",", "4", ",", "1", ",", "13", ",", "51", ",", 
+              "30.119999885559082`"}], "}"}], ",", "\"Instant\"", ",", 
+          "\"Gregorian\"", ",", "4.`"}], "]"}]},
      "DateObject",
      Editable->False]}], ",", 
    RowBox[{"\<\"closeTime\"\>", "\[Rule]", 
-    TemplateBox[{RowBox[{"\"Sat 14 Mar 2020 13:21:04\"", 
-        StyleBox["\"GMT\"", FontColor -> GrayLevel[0.5]]}],
+    TemplateBox[{
+      RowBox[{"\"Thu 2 Apr 2020 13:51:30\"", 
+        StyleBox[
+         RowBox[{"\"GMT+\"", "\[InvisibleSpace]", 
+           StyleBox["4.`", NumberMarks -> False, StripOnInput -> False]}], 
+         FontColor -> GrayLevel[0.5]]}], 
       RowBox[{"DateObject", "[", 
         RowBox[{
           RowBox[{"{", 
-            RowBox[{
-             "2020", ",", "3", ",", "14", ",", "13", ",", "21", ",", 
-              "4.1519999504089355`"}], "}"}], ",", "\"Instant\"", ",", 
-          "\"Gregorian\"", ",", "0.`"}], "]"}]},
+            
+            RowBox[{"2020", ",", "4", ",", "2", ",", "13", ",", "51", ",", 
+              "30.119999885559082`"}], "}"}], ",", "\"Instant\"", ",", 
+          "\"Gregorian\"", ",", "4.`"}], "]"}]},
      "DateObject",
      Editable->False]}], ",", 
-   RowBox[{"\<\"firstId\"\>", "\[Rule]", "265065753"}], ",", 
-   RowBox[{"\<\"lastId\"\>", "\[Rule]", "266690666"}], ",", 
-   RowBox[{"\<\"count\"\>", "\[Rule]", "1624914"}]}], 
+   RowBox[{"\<\"firstId\"\>", "\[Rule]", "283816181"}], ",", 
+   RowBox[{"\<\"lastId\"\>", "\[Rule]", "284615664"}], ",", 
+   RowBox[{"\<\"count\"\>", "\[Rule]", "799484"}]}], 
   "\[RightAssociation]"}]], "Output",
- CellChangeTimes->{3.7931808643253293`*^9},
- CellLabel->"Out[26]=",
- CellID->246928592,ExpressionUUID->"fbed951f-4102-492f-acb3-4599b7c14b6f"]
+ CellChangeTimes->{3.7931808643253293`*^9, 3.794809891853001*^9},
+ CellLabel->"Out[9]=",
+ CellID->285789927,ExpressionUUID->"08c9fcbc-5e0c-4840-b631-cb0e5a187a5c"]
 }, Open  ]]
 }, Open  ]],
 
@@ -234,11 +241,12 @@ Cell["XXXX", "TutorialRelatedLinks",
 }, Open  ]]
 }, Open  ]]
 },
-WindowSize->{700, 770},
-WindowMargins->{{Automatic, 461}, {66, Automatic}},
-FrontEndVersion->"12.0 for Microsoft Windows (64-bit) (April 8, 2019)",
+WindowSize->{700, 783},
+WindowMargins->{{Automatic, 37}, {Automatic, 79}},
+FrontEndVersion->"12.1 for Microsoft Windows (64-bit) (March 18, 2020)",
 StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "TutorialPageStyles.nb", 
-  CharacterEncoding -> "UTF-8"]
+  CharacterEncoding -> "UTF-8"],
+ExpressionUUID->"5b54061e-791f-4705-8a5c-a966d8e7af41"
 ]
 (* End of Notebook Content *)
 
@@ -297,44 +305,42 @@ Cell[3427, 110, 184, 2, 105, "Title",ExpressionUUID->"78a35534-68ad-4607-ae5a-99
  CellID->509267359],
 Cell[3614, 114, 96, 1, 21, "Text",ExpressionUUID->"a16dc237-85b9-451b-a8a6-5a613e5d8a22",
  CellID->1534169418],
-Cell[3713, 117, 439, 11, 80, "DefinitionBox",ExpressionUUID->"bd2a59b4-47a3-4a58-b37f-cdb2629441b5",
+Cell[3713, 117, 546, 12, 80, "DefinitionBox",ExpressionUUID->"bd2a59b4-47a3-4a58-b37f-cdb2629441b5",
  CellID->2096742444],
-Cell[4155, 130, 100, 1, 27, "Caption",ExpressionUUID->"133a41a5-8122-4bdc-b5c0-02878bbe76ab",
+Cell[4262, 131, 100, 1, 27, "Caption",ExpressionUUID->"133a41a5-8122-4bdc-b5c0-02878bbe76ab",
  CellID->1891092685],
 Cell[CellGroupData[{
-Cell[4280, 135, 102, 1, 38, "MathCaption",ExpressionUUID->"873b49c6-0545-4190-871f-3d3d5cfa0145",
+Cell[4387, 136, 193, 2, 38, "MathCaption",ExpressionUUID->"873b49c6-0545-4190-871f-3d3d5cfa0145",
  CellID->836781195],
-Cell[4385, 138, 225, 4, 25, "Input",ExpressionUUID->"e90f4677-fde0-4713-a46f-bbc1d2c42dba",
+Cell[4583, 140, 224, 4, 25, "Input",ExpressionUUID->"e90f4677-fde0-4713-a46f-bbc1d2c42dba",
  CellID->2058623809],
 Cell[CellGroupData[{
-Cell[4635, 146, 245, 4, 25, "Input",ExpressionUUID->"043eb894-2dcf-4d0d-a8ba-4a1d54b5fddb",
+Cell[4832, 148, 244, 4, 25, "Input",ExpressionUUID->"043eb894-2dcf-4d0d-a8ba-4a1d54b5fddb",
  CellID->239990974],
-Cell[4883, 152, 2512, 52, 162, "Output",ExpressionUUID->"fbed951f-4102-492f-acb3-4599b7c14b6f",
- CellID->246928592]
+Cell[5079, 154, 2737, 57, 190, "Output",ExpressionUUID->"08c9fcbc-5e0c-4840-b631-cb0e5a187a5c",
+ CellID->285789927]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[7444, 210, 120, 1, 70, "TutorialMoreAboutSection",ExpressionUUID->"dac3cc01-bd24-46b5-b765-b7810ea374fb",
+Cell[7865, 217, 120, 1, 70, "TutorialMoreAboutSection",ExpressionUUID->"dac3cc01-bd24-46b5-b765-b7810ea374fb",
  CellID->23220180],
-Cell[7567, 213, 109, 1, 20, "TutorialMoreAbout",ExpressionUUID->"a1523428-6c48-453a-9111-a81159892aa6",
+Cell[7988, 220, 109, 1, 20, "TutorialMoreAbout",ExpressionUUID->"a1523428-6c48-453a-9111-a81159892aa6",
  CellID->1567025153]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[7713, 219, 127, 1, 70, "RelatedTutorialsSection",ExpressionUUID->"92f8f496-0615-4bef-9b1c-e373174adcd7",
+Cell[8134, 226, 127, 1, 70, "RelatedTutorialsSection",ExpressionUUID->"92f8f496-0615-4bef-9b1c-e373174adcd7",
  CellID->415694126],
-Cell[7843, 222, 107, 1, 20, "RelatedTutorials",ExpressionUUID->"dbf6dac1-b9ae-422f-8998-76898d78ed4e",
+Cell[8264, 229, 107, 1, 20, "RelatedTutorials",ExpressionUUID->"dbf6dac1-b9ae-422f-8998-76898d78ed4e",
  CellID->806871991]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[7987, 228, 153, 1, 70, "TutorialRelatedLinksSection",ExpressionUUID->"2798b1d5-2a10-414a-aa3e-4cb95995e079",
+Cell[8408, 235, 153, 1, 70, "TutorialRelatedLinksSection",ExpressionUUID->"2798b1d5-2a10-414a-aa3e-4cb95995e079",
  CellID->415694148],
-Cell[8143, 231, 111, 1, 20, "TutorialRelatedLinks",ExpressionUUID->"27fa31be-e4bc-4f92-ad7c-b5018c8a3715",
+Cell[8564, 238, 111, 1, 20, "TutorialRelatedLinks",ExpressionUUID->"27fa31be-e4bc-4f92-ad7c-b5018c8a3715",
  CellID->415694149]
 }, Open  ]]
 }, Open  ]]
 }
 ]
 *)
-
-(* End of internal cache information *)
 
