@@ -264,9 +264,9 @@ own API Key and API sercret key. Use following way to do this:
 ![](https://wolfr.am/LA5pbcHc)
 3. Click to the button "Create"  
 ![](https://wolfr.am/LA6N8OcM)
-4. Follow the instructions of Binance. You have to conform process in your email
+4. Follow the instructions of Binance. You have to confirm process in your email
 
-After previous operation you have to copy Keys and save it in a spetial file - 
+After previous operation you have to copy Keys and save it in a special file - 
 *.ExchangeLink*. Data in the file must be a Wolfram Association like this: 
 
 ```wolfram
