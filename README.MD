@@ -8,9 +8,9 @@ We are going to try to see if we can do a community project.
 ExchangeLink is an attempt to cover the top 10 crypto exchanges 
 with Wolfram Language connectivity.
 
-The start is the Binance example library.
+Binance is the first exchange library and will serve as an example.
 
-There are several ways to contribute. 
+There are several ways to contribute:
 
 1. Code Editting
 	
@@ -25,7 +25,7 @@ There are several ways to contribute.
 
 3. Suggestions
 	* New Exchange Libraries (see list)
-	* Examples
+	* Examples using the exchange libraries
 
 We look forward to seeing how this project goes!
 
@@ -39,8 +39,8 @@ Exchanges:
 4. Kraken
 
 Futures: 
-1. Derbit
-2. Bitmex
+1. Bitmex 
+2. Derbit
 
 ## Using
 
