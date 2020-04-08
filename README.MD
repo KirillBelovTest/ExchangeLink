@@ -53,7 +53,7 @@ Futures:
 
 ### Information
 
-After initialization Binance API methods are available in the current notebook. 
+After the initialization of Binance API methods are available in the current notebook 
 You can see list of functions/methods using following command:
 
 ```wolfram
@@ -75,10 +75,11 @@ You can see list of functions/methods using following command:
 
 ### General data
 
-General information from Binance server.
+General information from the Binance server.
 
-Check that server is available and get server time. 
-This need if you want use trade API. Server time used in the creating of e-sign.
+Check that the server is available and get the server time. 
+This is needed if you want to use the trade API. 
+The server time is used in the creation of the e-sign.
 
 ```wolfram
 BinancePing[]
