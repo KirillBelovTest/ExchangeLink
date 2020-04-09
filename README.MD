@@ -89,10 +89,10 @@ BinanceTime[]
 ><||>  
 ><|"serverTime" -> DateObject[<...>]|>
 
-Information about order limits, precision. 
-List of all pairs available on Binance and current statuses. 
-This information needs if you want to create own orders. 
-Binance has restrictions for aprecision of prices or quantities in orders. 
+Information about order limits and precision. 
+List of all the trading pairs available on Binance and the current statuses. 
+This is the information you need, if you want to create your own orders. 
+Binance has restrictions on precision of prices or quantities in orders. 
 
 ```wolfram
 BinanceExchangeInfo[]
@@ -108,9 +108,9 @@ BinanceExchangeInfo[]
 >|> 
 
 ExchangeInfo cache. `BinanceExchangeInfo[]` is nearly constant data. 
-It changes about one time per week. So you can save current value of this variable 
-in the session and you can use it without request to binance. Value that saved in memory 
-exists during one day. After time 00:00 `$BinanceExchangeInfo` will be updated. 
+It changes about one time per week. So you can save the current value of this variable 
+in the session and you can use it without another request to Binance. The value that is saved in memory 
+exists for one day. After time 00:00 `$BinanceExchangeInfo` will be updated. 
 
 
 ```wolfram
@@ -190,7 +190,7 @@ BinanceTrades["BTCUSDT"]
 
 ### Market prices
 
-Get current price of Bitcoin
+Get the current price of Bitcoin
 
 ```wolfram
 BinancePrice["BTCUSDT"]
@@ -198,7 +198,7 @@ BinancePrice["BTCUSDT"]
 
 ><|"symbol" -> "BTCUSDT", "price" -> 6231.45|>
 
-More information about cryptocurrency pair. Result has information about 24h change, 
+More information about a cryptocurrency pair. The result has information about the 24h change, 
 volume and last prices
 
 ```wolfram
@@ -257,8 +257,9 @@ InteractiveTradingChart[
 
 ### API Keys
 
-If you want to use account and trade API endpoint, you must create your 
-own API Key and API sercret key. Use following way to do this:
+If you want to use your account and trade API endpoint, you must create your own API Key and API sercret key. 
+
+Use following way to do this:
 
 1. Go and login to [binance.com](https://www.binance.com)
 2. Click to the menu item "API Managment" in your account actions menu  
@@ -267,8 +268,10 @@ own API Key and API sercret key. Use following way to do this:
 ![](https://wolfr.am/LA6N8OcM)
 4. Follow the instructions of Binance. You have to confirm process in your email
 
-After previous operation you have to copy Keys and save it in a special file - 
-*.ExchangeLink*. Data in the file must be a Wolfram Association like this: 
+After the previous operation you have to copy the keys and save them in a special file - 
+*.ExchangeLink*. 
+
+Data in the file must be a Wolfram Association like this: 
 
 ```wolfram
 <|
