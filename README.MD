@@ -271,7 +271,7 @@ Use following way to do this:
 After the previous operation you have to copy the keys and save them in a special file - 
 *.ExchangeLink*. 
 
-Data in the file must be a Wolfram Association like this: 
+Data in the file must be a Wolfram Association in a format like this: 
 
 ```wolfram
 <|
@@ -283,9 +283,8 @@ Data in the file must be a Wolfram Association like this:
 |>
 ```
 
-This file maybe store in the current working directory or in the 
-project directory. If you cloned the project from github - *.ExchangeLink* already 
-exists in the project directory. 
+This file maybe stored in the current working directory or in the project directory. 
+If you cloned the project from github - *.ExchangeLink* already exists in the project directory. 
 
 ### Account
 
@@ -314,8 +313,8 @@ BinanceMyTrades["BTCUSDT"]
 >    4.], "isBuyer" -> False, "isMaker" -> True, 
 >  "isBestMatch" -> True|>, ...}
 
-History of all ordes. Like trades but in this statistics you can see 
-what ordes was canceled. 
+History of all orders. 
+Like all trades but in these statistics you can see what orders were canceled. 
 
 ```wolfram
 BinanceOrdersAll["BTCUSDT"]
@@ -333,19 +332,21 @@ BinanceOrdersAll["BTCUSDT"]
 >  DateObject[{2018, 2, 14, 8, 7, 40.198}, "Instant", "Gregorian", 4.],
 >  "isWorking" -> True, "origQuoteOrderQty" -> 0.|>
 
-### Trade
+### Trading
 
-One of the important part for thi guide - trading. 
-Binance exists for it! You can create simple order using following. 
-First - get current price of BTC:
+One of the important parts of this guide - trading. 
+The point of Binance is to trade cryptocurrency!
 
+You can create simple order using following. 
+
+First - get the current price of BTC:
 ```wolfram
 price = BinancePrice["BTCUSDT"]["price"]
 ```
 
 >6808.69
 
-And try to sell BTC 10% more expensive:
+And try to sell BTC 10% more expensive than our original purchase:
 
 ```wolfram
 BinanceSell["BTCUSDT", 0.001, price * 1.1]
@@ -360,13 +361,15 @@ BinanceSell["BTCUSDT", 0.001, price * 1.1]
 > "timeInForce" -> "GTC", "type" -> "LIMIT", "side" -> "SELL", 
 > "fills" -> {}|>
 
-Now you can check that order was created. Try to get all opened orders:
+Now you can check that the order was created. 
+
+Try to get all opened orders:
 
 ```wolfram
 orders = BinanceOrdersNow["BTCUSDT"]
 ```
 
-Get first order info
+Get order informoation first: 
 
 ```wolfram
 BinanceOrderGet["BTCUSDT", orders[[1, "orderId"]]]
@@ -384,7 +387,7 @@ BinanceOrderGet["BTCUSDT", orders[[1, "orderId"]]]
 >  DateObject[{2020, 4, 5, 23, 10, 35.547}, "Instant", "Gregorian", 
 >   4.], "isWorking" -> True, "origQuoteOrderQty" -> 0.|>
 
-If you changed the decision then you can cancel the order:
+If you changed the decision, then you can cancel the order:
 
 ```wolfram
 BinanceOrderCancel["BTCUSDT", orders[[1, "orderId"]]]
