@@ -1,3 +1,6 @@
+(* this file must be have name ".ExchangeLink" and placed in working directory or near PacletInfo.m *)
+
+
 <|
 	"Binance" -> <|
 		"Domain" -> "binance.com", 
