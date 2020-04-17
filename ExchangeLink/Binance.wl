@@ -301,6 +301,7 @@ $orderSides =
 (*Binance public API request*)
 
 
+<<<<<<< HEAD
 $BinanceDomain = 
 "COM"
 
@@ -311,6 +312,15 @@ $BinanceDomain /: Set[$BinanceDomain, value: "COM" | "US"] :=
 
 $binanceAPI := 
 "https://api.binance." <> ToLowerCase[$BinanceDomain]
+=======
+binanceAPIURL[domain_String] := binanceAPIURL[domain] = 
+	Which[
+		StringMatchQ[domain, {"binance.com", "com"}, IgnoreCase -> True], 
+			"https://api.binance.com", 
+		StringMatchQ[domain, {"binance.us", "us"}, IgnoreCase -> True], 
+			"https://api.binance.us"
+	]
+>>>>>>> 906781178b84d27f711fc777ca0974cec02be59f
 
 
 binancePublicAPI::reqerr = 
@@ -319,9 +329,10 @@ binancePublicAPI::reqerr =
 
 binancePublicAPI[version: "v1" | "v3", method: _String | PatternSequence[_String, _String], parameters: {___Rule}] := 
 	Module[{
-		url, request, response, status, body, result
+		api, url, request, response, status, body, result
 	}, 
-		url = URLBuild[{$binanceAPI, "api", version, method}, parameters];
+		api = binanceAPIURL[ExchangeLink`$ExchangeLink["Binance", "Domain"]]; 
+		url = URLBuild[{api, "api", version, method}, parameters];
 		request = HTTPRequest[url];
 		TimeConstrained[Check[response = URLRead[request], Message[binancePublicAPI::reqerr, "getting http-response", url]; Return[Null]], 1, Message[binancePublicAPI::reqerr, "executing request", request]; Return[Null]]; 
 		status = response["StatusCode"];
@@ -339,8 +350,7 @@ binancePublicAPI[version: "v1" | "v3", method: _String | PatternSequence[_String
 
 Options[binanceTradeAPI] := 
 	{
-		"apikey" :> ExchangeLink`$ExchangeLink["Binance", "APIKey"], 
-		"secretkey" :> ExchangeLink`$ExchangeLink["Binance", "SecretKey"], 
+		"auth" :> ExchangeLink`$ExchangeLink["Binance"], 
 		"time" :> toBinanceTime[], 
 		"httpmethod" -> "POST", 
 		"version" -> "v3"
@@ -353,10 +363,11 @@ binanceTradeAPI[method_String, parameters: <|___Rule|>, OptionsPattern[]] :=
 		query, 
 		queryString, 
 		postParams, 
-		apikey = OptionValue["apikey"],
-		secretkey = OptionValue["secretkey"],
-		time = OptionValue["time"],
-		httpmethod = OptionValue["httpmethod"],
+		domain = OptionValue["auth"]["Domain"], 
+		apikey = OptionValue["auth"]["APIKey"], 
+		secretkey = OptionValue["auth"]["SecretKey"], 
+		time = OptionValue["time"], 
+		httpmethod = OptionValue["httpmethod"], 
 		version = OptionValue["version"],  
 		request, response
 	}, 
@@ -365,7 +376,7 @@ binanceTradeAPI[method_String, parameters: <|___Rule|>, OptionsPattern[]] :=
 		
 		postParams = query ~ Join ~ <|"signature" -> ExchangeLinkHMAC[secretkey, queryString, "SHA256"]|>;
 		
-		url = URLBuild[{$binanceAPI, "api", version, method}, postParams];
+		url = URLBuild[{binanceAPIURL[domain], "api", version, method}, postParams];
 		request = HTTPRequest[url, 
 			<|
 				Method -> httpmethod, 
