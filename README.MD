@@ -44,6 +44,7 @@ Futures:
 
 ## Using
 
+0. Download [paclet file](https://github.com/ExchangeLink/ExchangeLink/releases/download/v0.0.1/ExchangeLink-0.0.1.paclet)
 1. Open any notebook
 2. Evaluate code: <code>PacletInstall["<dowloads/ExchageLink.paclet>"]</code>
 3. Evaluate code: <code>Get["ExchangeLink`"]</code>
