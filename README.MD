@@ -277,6 +277,7 @@ Data in the file must be a Wolfram Association in a format like this:
 <|
 	"Binance" -> 
 	<|
+		"Domain" -> "binance.com", (*also binance.us is available*)
 		"APIKey" -> "JqbsI8dNvn4wQ2tQ00bzChAdIiKVxas98ZMQPxO7Iykr0zrp32mPMOBO2tFbrdw5", 
 		"SecretKey" -> "nwVaV8d25Btl9PqSJgks0IUBtZMj44xIdJY2wHceAcGqH3zpagEx9R6mn1G7rbbo"
 	|> 
@@ -403,4 +404,16 @@ BinanceOrderCancel["BTCUSDT", orders[[1, "orderId"]]]
 
 ## Contributing
 
-After uploading to github
+You can use all available ways to contribute to this project. 
+
+#### 1. Join to the team.
+
+We will glad to see you in ExchangeLink team. Please contact with us. 
+
+#### 2. Standard github flow
+
+More about this way on the [official github help page](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/github-flow)
+
+#### 3. Contact with the team
+
+If you have any suggestions or questions, you can always write us an email. We will consider any offer and try to answer all your questions.
