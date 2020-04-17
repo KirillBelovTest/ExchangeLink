@@ -48,10 +48,6 @@ $BinanceExchangeInfo::usage =
 "BinanceExchangeInfo cash for the one day"
 
 
-$BinanceDomain::usage = 
-"COM|US"
-
-
 BinanceDepth::usage = 
 "BinanceDepth[symbol]"
 
@@ -301,18 +297,6 @@ $orderSides =
 (*Binance public API request*)
 
 
-<<<<<<< HEAD
-$BinanceDomain = 
-"COM"
-
-
-$BinanceDomain /: Set[$BinanceDomain, value: "COM" | "US"] := 
-	(Unprotect[$BinanceDomain]; With[{val = value}, $BinanceDomain := val]; Protect[$BinanceDomain]; $BinanceDomain)
-
-
-$binanceAPI := 
-"https://api.binance." <> ToLowerCase[$BinanceDomain]
-=======
 binanceAPIURL[domain_String] := binanceAPIURL[domain] = 
 	Which[
 		StringMatchQ[domain, {"binance.com", "com"}, IgnoreCase -> True], 
@@ -320,7 +304,6 @@ binanceAPIURL[domain_String] := binanceAPIURL[domain] =
 		StringMatchQ[domain, {"binance.us", "us"}, IgnoreCase -> True], 
 			"https://api.binance.us"
 	]
->>>>>>> 906781178b84d27f711fc777ca0974cec02be59f
 
 
 binancePublicAPI::reqerr = 
