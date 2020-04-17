@@ -83,11 +83,19 @@ symbolQ[_] :=
 	True
 
 
-toSymbol[symbol_String] /; MemberQ[$BitfinexPairs, symbol] := 
+symbolTickerQ[symbol_String] := 
+	MemberQ[$BitfinexPairs, symbol]
+
+
+symbolFundQ[symbol_String] := 
+	MemberQ[$BitfinexCurrencies, symbol]
+
+
+toSymbol[symbol_String?symbolTickerQ] := 
 	"t" <> ToUpperCase[symbol]
 
 
-toSymbol[symbol_String] /; MemberQ[$BitfinexCurrencies, symbol] := 
+toSymbol[symbol_String?symbolFundQ] := 
 	"f" <> ToUpperCase[symbol]
 
 
@@ -256,7 +264,83 @@ BitfinexTrades[symbol_String?symbolQ, opts: OptionsPattern[]] :=
 			DeleteCases[Flatten[{opts}], _[_, Automatic]]
 		]
 	}, 
-		result
+		Query[All, MapAt[FromUnixTime[#/1000.]&, "MTS"]] @ 
+		Which[
+			symbolTickerQ[symbol], 
+				Map[<|Thread[{"Id", "Time", "Amount", "Price"} -> #]|>&, result], 
+			
+			symbolFundQ[symbol], 
+				Map[<|Thread[{"Id", "Time", "Amount", "Rate", "Period"} -> #]|>&, result]
+		]
+	]
+
+
+(* ::Text:: *)
+(*Book*)
+
+
+Options[BitfinexBook] = 
+	{
+		"len" -> Automatic
+	}
+
+
+SyntaxInformation[BitfinexBook] = 
+	{
+		"ArgumentsPattern" -> {_, _., OptionsPattern[]}, 
+		"OptionNames" -> {"\"len\""}
+	}
+
+
+BitfinexBook[symbol_String?symbolQ, precision: "P0"|"P1"|"P2"|"P3"|"P4"|"R0": "P0", opts: OptionsPattern[]] := 
+	Block[{result = bitfinexPublicEndpointExec["GET", 
+			{"book", toSymbol[symbol], precision}, 
+			DeleteCases[Flatten[{opts}], _[_, Automatic]]
+		]
+	}, 
+		Which[
+			symbolTickerQ[symbol], 
+				Map[<|Thread[{"Price", "Count", "Amount"} -> #]|>&, result], 
+			
+			symbolFundQ[symbol], 
+				Map[<|Thread[{"Rate", "Period", "Count", "Amount"} -> #]|>&, result]
+		]
+	]
+
+
+(* ::Text:: *)
+(*Candles*)
+
+
+Options[BitfinexCandles] = 
+	{
+		"limit" -> Automatic, 
+		"start" -> Automatic, 
+		"end" -> Automatic, 
+		"sort" -> Automatic
+	}
+
+
+SyntaxInformation[BitfinexCandles] = 
+	{
+		"ArgumentsPattern" -> {_, _., OptionsPattern[]}, 
+		"OptionNames" -> {"\"len\""}
+	}
+
+
+BitfinexCandles[symbol_String?symbolQ, stimeFrame_String?symbolQ, opts: OptionsPattern[]] := 
+	Block[{result = bitfinexPublicEndpointExec["GET", 
+			{"book", toSymbol[symbol], precision}, 
+			DeleteCases[Flatten[{opts}], _[_, Automatic]]
+		]
+	}, 
+		Which[
+			symbolTickerQ[symbol], 
+				Map[<|Thread[{"Price", "Count", "Amount"} -> #]|>&, result], 
+			
+			symbolFundQ[symbol], 
+				Map[<|Thread[{"Rate", "Period", "Count", "Amount"} -> #]|>&, result]
+		]
 	]
 
 
