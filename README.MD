@@ -406,7 +406,7 @@ BinanceOrderCancel["BTCUSDT", orders[[1, "orderId"]]]
 
 You can use all available ways to contribute to this project. 
 
-#### 1. Join to the team.
+#### 1. Join the team.
 
 We will glad to see you in ExchangeLink team. Please contact with us. 
 
