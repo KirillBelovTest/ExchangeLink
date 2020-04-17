@@ -420,5 +420,5 @@ If you have any suggestions or questions, you can always write us an email. We w
 
 ## Contacts
 
-**Jon Woodard** (@Lenley) - j.lenley.woodard@aya.yale.edu
-**Kirill Belov** (@KirillBelovTest) - KirillBelovTest@gmail.com
+**Jon Woodard** ([@Lenley](https://github.com/Lenley)) - j.lenley.woodard@aya.yale.edu  
+**Kirill Belov** ([@KirillBelovTest](https://github.com/KirillBelovTest)) - KirillBelovTest@gmail.com
