@@ -417,3 +417,8 @@ More about this way on the [official github help page](https://help.github.com/e
 #### 3. Contact with the team
 
 If you have any suggestions or questions, you can always write us an email. We will consider any offer and try to answer all your questions.
+
+## Contacts
+
+**Jon Woodard** (@Lenley) - j.lenley.woodard@aya.yale.edu
+**Kirill Belov** (@KirillBelovTest) - KirillBelovTest@gmail.com
