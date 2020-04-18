@@ -57,8 +57,10 @@ Begin["`Private`"]
 (*ExchangeLinkIniRead*)
 
 
+With[{$ProjectDirectory = ParentDirectory[DirectoryName[$InputFileName]]}, 
 Options[ExchangeLinkIniRead] = 
-	{"File" :> First[FileNames[".ExchangeLink", {Directory[], $HomeDirectory}]]}
+	{"File" :> First[FileNames[".ExchangeLink", Flatten[{$ProjectDirectory, Directory[], $HomeDirectory, $Path}]]]}
+]
 
 
 ExchangeLinkIniRead::error = 
