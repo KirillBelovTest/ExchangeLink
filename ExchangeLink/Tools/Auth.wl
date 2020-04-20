@@ -31,7 +31,7 @@ ClearAll["`*"]
 
 ExchangeLinkIniRead::usage = 
 "ExchangeLinkIniRead[section, key]
-ExchangeLinkIniRead[section, key, \"File\" -> \"~/.ExchangeLink\"]"
+ExchangeLinkIniRead[section, key, \"File\" -> \"~/.ExchangeLink.wl\"]"
 
 
 ExchangeLinkHMAC::usage = 
@@ -59,7 +59,7 @@ Begin["`Private`"]
 
 With[{$ProjectDirectory = ParentDirectory[DirectoryName[$InputFileName]]}, 
 Options[ExchangeLinkIniRead] = 
-	{"File" :> First[FileNames[".ExchangeLink", Flatten[{$ProjectDirectory, Directory[], $HomeDirectory, $Path}]]]}
+	{"File" :> First[FileNames["ExchangeLink.wl", Flatten[{$ProjectDirectory, Directory[], $HomeDirectory, $Path}]]]}
 ]
 
 

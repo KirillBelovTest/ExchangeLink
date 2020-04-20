@@ -1,8 +1,6 @@
-(*::Package::*)
-
-
 (* Paclet Info File *)
 
+(* created 2020/04/20*)
 
 Paclet[
     Name -> "ExchangeLink",
@@ -11,7 +9,8 @@ Paclet[
     Creator -> "Kirill Belov",
     Extensions -> 
         {
-            {"Documentation", Language -> "English"}
+            {"Documentation", Language -> "English"}, 
+            {"Kernel", Root -> ".", Context -> "ExchangeLink`"}
         }
 ]
 

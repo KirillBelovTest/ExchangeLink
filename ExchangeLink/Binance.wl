@@ -298,12 +298,12 @@ $orderSides =
 
 
 binanceAPIURL[domain_String] := binanceAPIURL[domain] = 
-	Which[
+	Check[Which[
 		StringMatchQ[domain, {"binance.com", "com"}, IgnoreCase -> True], 
 			"https://api.binance.com", 
 		StringMatchQ[domain, {"binance.us", "us"}, IgnoreCase -> True], 
 			"https://api.binance.us"
-	]
+	], "https://api.binance.com"]
 
 
 binancePublicAPI::reqerr = 
