@@ -44,9 +44,8 @@ Futures:
 
 ## Using
 
-0. Download [paclet file](https://github.com/ExchangeLink/ExchangeLink/releases/download/v0.0.1/ExchangeLink-0.0.1.paclet)
 1. Open any notebook
-2. Evaluate code: <code>PacletInstall["<dowloads/ExchageLink.paclet>"]</code>
+2. Evaluate code: `PacletInstall["https://github.com/ExchangeLink/ExchangeLink/releases/download/v0.0.1/ExchangeLink-0.0.1.paclet"]`
 3. Evaluate code: <code>Get["ExchangeLink`"]</code>
 4. All functions are available
 
@@ -64,7 +63,7 @@ Use following way to do this:
 4. Follow the instructions of Binance. You have to confirm process in your email
 
 After the previous operation you have to copy the keys and save them in a special file - 
-*.ExchangeLink*. 
+*ExchangeLink.wl*. 
 
 Data in the file must be a Wolfram Association in a format like this: 
 
@@ -80,11 +79,9 @@ Data in the file must be a Wolfram Association in a format like this:
 ```
 
 This file maybe stored in the current working directory or in the project directory. 
-If you cloned the project from github - *.ExchangeLink* already exists in the project directory. 
+If you cloned the project from github - *ExchangeLink.wl* already exists in the project directory. 
 
-## Binance
-
-### Information
+## Information
 
 After the initialization of Binance API methods are available in the current notebook 
 You can see list of functions/methods using following command:
@@ -106,7 +103,7 @@ You can see list of functions/methods using following command:
 >| **BinanceKlines**           | **BinanceOrdersAll**     |                          |
 >| **BinanceMyTrades**         | **BinanceOrdersNow**     |                          |
 
-### General data
+## General data
 
 General information from the Binance server.
 
@@ -182,7 +179,7 @@ $BinanceExchangeInfo["symbols"]
 >| MCOBTC  | 1.e-7    | 1000.    | 1.e-7    | 0.01    | 9.e7    | 0.01     |
 >| WTCBTC  | 1.e-7    | 1000.    | 1.e-7    | 0.01    | 9.e7    | 0.01     |
 
-### Market data
+## Market data
 
 Current order book
 
@@ -221,7 +218,7 @@ BinanceTrades["BTCUSDT"]
 
 >{<|"id" -> 275374890, price -> 6232.51, qty -> quoteQty -> 267.026, time -> DateObject[<..>], ...|>, ...}
 
-### Market prices
+## Market prices
 
 Get the current price of Bitcoin
 
@@ -266,7 +263,7 @@ BinanceTicker[]
 >  DateObject<>, "firstId" -> 169520504, "lastId" -> 169718743, 
 > "count" -> 198240|>, < .. 767 ..>}
 
-### Chart
+## Chart
 
 Get historical data from Binance
 
@@ -286,7 +283,7 @@ InteractiveTradingChart[
 
 >![](https://wolfr.am/LdrufmFh)
 
-### Account
+## Account
 
 Non zero balances
 
@@ -332,7 +329,7 @@ BinanceOrdersAll["BTCUSDT"]
 >  DateObject[{2018, 2, 14, 8, 7, 40.198}, "Instant", "Gregorian", 4.],
 >  "isWorking" -> True, "origQuoteOrderQty" -> 0.|>
 
-### Trading
+## Trading
 
 One of the important parts of this guide - trading. 
 The point of Binance is to trade cryptocurrency!
@@ -405,15 +402,15 @@ BinanceOrderCancel["BTCUSDT", orders[[1, "orderId"]]]
 
 You can use all available ways to contribute to this project. 
 
-#### 1. Join the team.
+### 1. Join the team.
 
 We will glad to see you in ExchangeLink team. Please contact with us. 
 
-#### 2. Standard github flow
+### 2. Standard github flow
 
 More about this way on the [official github help page](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/github-flow)
 
-#### 3. Contact with the team
+### 3. Contact with the team
 
 If you have any suggestions or questions, you can always write us an email. We will consider any offer and try to answer all your questions.
 
