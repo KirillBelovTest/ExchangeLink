@@ -50,6 +50,38 @@ Futures:
 3. Evaluate code: <code>Get["ExchangeLink`"]</code>
 4. All functions are available
 
+### API Keys
+
+If you want to use your account and trade API endpoint, you must create your own API Key and API sercret key. 
+
+Use following way to do this:
+
+1. Go and login to [binance.com](https://www.binance.com)
+2. Click to the menu item "API Managment" in your account actions menu  
+![](https://wolfr.am/LA5pbcHc)
+3. Click to the button "Create"  
+![](https://wolfr.am/LA6N8OcM)
+4. Follow the instructions of Binance. You have to confirm process in your email
+
+After the previous operation you have to copy the keys and save them in a special file - 
+*.ExchangeLink*. 
+
+Data in the file must be a Wolfram Association in a format like this: 
+
+```wolfram
+<|
+	"Binance" -> 
+	<|
+		"Domain" -> "binance.com", (*also binance.us is available*)
+		"APIKey" -> "JqbsI8dNvn4wQ2tQ00bzChAdIiKVxas98ZMQPxO7Iykr0zrp32mPMOBO2tFbrdw5", 
+		"SecretKey" -> "nwVaV8d25Btl9PqSJgks0IUBtZMj44xIdJY2wHceAcGqH3zpagEx9R6mn1G7rbbo"
+	|> 
+|>
+```
+
+This file maybe stored in the current working directory or in the project directory. 
+If you cloned the project from github - *.ExchangeLink* already exists in the project directory. 
+
 ## Binance
 
 ### Information
@@ -253,40 +285,6 @@ InteractiveTradingChart[
 ```
 
 >![](https://wolfr.am/LdrufmFh)
-
-
-
-### API Keys
-
-If you want to use your account and trade API endpoint, you must create your own API Key and API sercret key. 
-
-Use following way to do this:
-
-1. Go and login to [binance.com](https://www.binance.com)
-2. Click to the menu item "API Managment" in your account actions menu  
-![](https://wolfr.am/LA5pbcHc)
-3. Click to the button "Create"  
-![](https://wolfr.am/LA6N8OcM)
-4. Follow the instructions of Binance. You have to confirm process in your email
-
-After the previous operation you have to copy the keys and save them in a special file - 
-*.ExchangeLink*. 
-
-Data in the file must be a Wolfram Association in a format like this: 
-
-```wolfram
-<|
-	"Binance" -> 
-	<|
-		"Domain" -> "binance.com", (*also binance.us is available*)
-		"APIKey" -> "JqbsI8dNvn4wQ2tQ00bzChAdIiKVxas98ZMQPxO7Iykr0zrp32mPMOBO2tFbrdw5", 
-		"SecretKey" -> "nwVaV8d25Btl9PqSJgks0IUBtZMj44xIdJY2wHceAcGqH3zpagEx9R6mn1G7rbbo"
-	|> 
-|>
-```
-
-This file maybe stored in the current working directory or in the project directory. 
-If you cloned the project from github - *.ExchangeLink* already exists in the project directory. 
 
 ### Account
 
