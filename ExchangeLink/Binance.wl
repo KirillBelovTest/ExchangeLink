@@ -314,10 +314,11 @@ binancePublicAPI[version: "v1" | "v3", method: _String | PatternSequence[_String
 	Module[{
 		api, url, request, response, status, body, result
 	}, 
-		api = binanceAPIURL[ExchangeLink`$ExchangeLink["Binance", "Domain"]]; 
+		api = binanceAPIURL[$ExchangeLinkConfig["Binance", "Domain"]]; 
 		url = URLBuild[{api, "api", version, method}, parameters];
 		request = HTTPRequest[url];
-		TimeConstrained[Check[response = URLRead[request], Message[binancePublicAPI::reqerr, "getting http-response", url]; Return[Null]], 1, Message[binancePublicAPI::reqerr, "executing request", request]; Return[Null]]; 
+		TimeConstrained[Check[response = URLRead[request], Message[binancePublicAPI::reqerr, "getting http-response", url]; Return[Null]], 1, 
+			Message[binancePublicAPI::reqerr, "executing request", request]; Return[Null]]; 
 		status = response["StatusCode"];
 		body = response["Body"];
 		If[status =!= 200, Message[binancePublicAPI::reqerr, "checking response", body]; Return[Null]];
@@ -333,7 +334,7 @@ binancePublicAPI[version: "v1" | "v3", method: _String | PatternSequence[_String
 
 Options[binanceTradeAPI] := 
 	{
-		"auth" :> ExchangeLink`$ExchangeLink["Binance"], 
+		"auth" :> $ExchangeLinkConfig["Binance"], 
 		"time" :> toBinanceTime[], 
 		"httpmethod" -> "POST", 
 		"version" -> "v3"

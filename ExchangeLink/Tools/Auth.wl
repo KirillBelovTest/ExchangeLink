@@ -34,6 +34,10 @@ ExchangeLinkIniRead::usage =
 ExchangeLinkIniRead[section, key, \"File\" -> \"~/.ExchangeLink.wl\"]"
 
 
+$ExchangeLinkConfig::usage = 
+"$ExchangeLinkConfig[\"Binance\", \"Domain\"] = \"binance.com\""
+
+
 ExchangeLinkHMAC::usage = 
 "ExchangeLinkHMAC[key, message, method]"
 
@@ -57,29 +61,32 @@ Begin["`Private`"]
 (*ExchangeLinkIniRead*)
 
 
-With[{$ProjectDirectory = ParentDirectory[DirectoryName[$InputFileName]]}, 
-Options[ExchangeLinkIniRead] = 
-	{"File" :> First[FileNames["ExchangeLink.wl", Flatten[{$ProjectDirectory, Directory[], $HomeDirectory, $Path}]]]}
-]
+$ExchangeLinkConfig := 
+	(Unprotect[$ExchangeLinkConfig]; 
+	$ExchangeLinkConfig = 
+	Block[{path = FileNameJoin[{$HomeDirectory, ".ExchangeLink", "Config"}]}, 
+		If[Not[AssociationQ[LocalSymbol[File[path]]]], 
+			LocalSymbol[File[path]] = <|
+				"Binance" -> <|"Domain" -> "binance.us", "APIKey" -> Automatic, "SecretKey" -> Automatic|>
+			|>
+		];
+		LocalSymbol[File[path]]
+	]; 
+	Protect[$ExchangeLinkConfig]; 
+	$ExchangeLinkConfig)
 
 
-ExchangeLinkIniRead::error = 
-"`1`: `2`"
-
-
-ExchangeLinkIniRead[OptionsPattern[]] := 
-	Block[{file = OptionValue["File"]}, 
-		If[Not[FileExistsQ[file]], Message[ExchangeLinkIniRead::error, "file not found", file]; Return[Null]];
-		Get[file]
+$ExchangeLinkConfig /: 
+Set[$ExchangeLinkConfig["Binance", key: "Domain" | "APIKey" | "SecretKey"], value_String] := 
+	Block[{copy = $ExchangeLinkConfig, path = FileNameJoin[{$HomeDirectory, ".ExchangeLink", "Config"}]}, 
+		copy["Binance", key] = value; 
+		Unprotect[$ExchangeLinkConfig];
+		$ExchangeLinkConfig = copy;
+		LocalSymbol[File[path]] = $ExchangeLinkConfig;
+		Protect[$ExchangeLinkConfig];
+		
+		Return[value]
 	]
-
-
-ExchangeLinkIniRead[section_String, opts: OptionsPattern[]] := 
-	ExchangeLinkIniRead[opts][section]
-
-
-ExchangeLinkIniRead[section_String, key_String, opts: OptionsPattern[]] := 
-	ExchangeLinkIniRead[opts][section, key]
 
 
 (* ::Subsubsection:: *)

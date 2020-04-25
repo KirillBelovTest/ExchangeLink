@@ -62,24 +62,22 @@ Use following way to do this:
 ![](https://wolfr.am/LA6N8OcM)
 4. Follow the instructions of Binance. You have to confirm process in your email
 
-After the previous operation you have to copy the keys and save them in a special file - 
-*ExchangeLink.wl*. 
+After the previous operation you have to copy the keys and save them in a special variable - 
+*$ExchangeLinkConfig*. 
 
-Data in the file must be a Wolfram Association in a format like this: 
+You must execute the same code but with *your* domain and api/secret keys: 
 
 ```wolfram
-<|
-	"Binance" -> 
-	<|
-		"Domain" -> "binance.com", (*also binance.us is available*)
-		"APIKey" -> "JqbsI8dNvn4wQ2tQ00bzChAdIiKVxas98ZMQPxO7Iykr0zrp32mPMOBO2tFbrdw5", 
-		"SecretKey" -> "nwVaV8d25Btl9PqSJgks0IUBtZMj44xIdJY2wHceAcGqH3zpagEx9R6mn1G7rbbo"
-	|> 
-|>
+$ExchangeLinkConfig["Binance", "Domain"] = "binance.com" (*also binance.us is available*) 
+$ExchangeLinkConfig["Binance", "APIKey"] = "JqbsI8dNvn4wQ2tQ00bzChAdIiKVxas98ZMQPxO7Iykr0zrp32mPMOBO2tFbrdw5" 
+$ExchangeLinkConfig["Binance", "SecretKey"] = "nwVaV8d25Btl9PqSJgks0IUBtZMj44xIdJY2wHceAcGqH3zpagEx9R6mn1G7rbbo"
 ```
 
-This file maybe stored in the current working directory or in the project directory. 
-If you cloned the project from github - *ExchangeLink.wl* already exists in the project directory. 
+You can view all config data:
+
+```wolfram
+$ExchangeLinkConfig
+```
 
 ## Information
 
