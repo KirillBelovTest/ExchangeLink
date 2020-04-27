@@ -29,11 +29,6 @@ ClearAll["`*"]
 (*Public names declaration*)
 
 
-ExchangeLinkIniRead::usage = 
-"ExchangeLinkIniRead[section, key]
-ExchangeLinkIniRead[section, key, \"File\" -> \"~/.ExchangeLink.wl\"]"
-
-
 $ExchangeLinkConfig::usage = 
 "$ExchangeLinkConfig[\"Binance\", \"Domain\"] = \"binance.com\""
 
@@ -81,6 +76,7 @@ configSave[newConfig_Association] :=
 		config = newConfig
 	}, 
 		Unprotect[$ExchangeLinkConfig]; 
+		If[!DirectoryQ[DirectoryName[source]], CreateDirectory[DirectoryName[source]]];
 		Put[config, source]; 
 		Encode[source, target, MachineID -> "ID"]; 
 		DeleteFile[source]; 
