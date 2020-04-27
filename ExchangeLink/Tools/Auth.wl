@@ -61,31 +61,54 @@ Begin["`Private`"]
 (*ExchangeLinkIniRead*)
 
 
-$ExchangeLinkConfig := 
-	(Unprotect[$ExchangeLinkConfig]; 
-	$ExchangeLinkConfig = 
-	Block[{path = FileNameJoin[{$HomeDirectory, ".ExchangeLink", "Config"}]}, 
-		If[Not[AssociationQ[LocalSymbol[File[path]]]], 
-			LocalSymbol[File[path]] = <|
-				"Binance" -> <|"Domain" -> "binance.us", "APIKey" -> Automatic, "SecretKey" -> Automatic|>
-			|>
-		];
-		LocalSymbol[File[path]]
+$defaultConfig = <|
+	"Binance" -> <|
+		"Domain" -> "binance.us", 
+		"APIKey" -> Automatic, 
+		"SecretKey" -> Automatic
+	|>
+|>
+
+
+configQ[exchange_, key_] := 
+	KeyExistsQ[$defaultConfig, exchange] && KeyExistsQ[$defaultConfig[exchange], key]
+
+
+configSave[newConfig_Association] := 
+	Block[{
+		source = FileNameJoin[{$HomeDirectory, ".ExchangeLink", "Config.wl"}], 
+		target = FileNameJoin[{$HomeDirectory, ".ExchangeLink", "Config.mx"}], 
+		config = newConfig
+	}, 
+		Unprotect[$ExchangeLinkConfig]; 
+		Put[config, source]; 
+		Encode[source, target, MachineID -> "ID"]; 
+		DeleteFile[source]; 
+		$ExchangeLinkConfig = config;
+		
+		Protect[$ExchangeLinkConfig]; 
+		Return[$ExchangeLinkConfig]
 	]; 
-	Protect[$ExchangeLinkConfig]; 
-	$ExchangeLinkConfig)
 
 
 $ExchangeLinkConfig /: 
-Set[$ExchangeLinkConfig["Binance", key: "Domain" | "APIKey" | "SecretKey"], value_String] := 
-	Block[{copy = $ExchangeLinkConfig, path = FileNameJoin[{$HomeDirectory, ".ExchangeLink", "Config"}]}, 
-		copy["Binance", key] = value; 
-		Unprotect[$ExchangeLinkConfig];
-		$ExchangeLinkConfig = copy;
-		LocalSymbol[File[path]] = $ExchangeLinkConfig;
-		Protect[$ExchangeLinkConfig];
-		
-		Return[value]
+Set[$ExchangeLinkConfig[exchange_String, key_String], value_String] /; 
+	configQ[exchange, key] := 
+	Block[{config = $ExchangeLinkConfig}, 
+		config[exchange, key] = value; 
+		configSave[config]
+	];
+
+
+$ExchangeLinkConfig := 
+	Block[{path = FileNameJoin[{$HomeDirectory, ".ExchangeLink", "Config.mx"}]}, 
+		If[FileExistsQ[path], 
+			Unprotect[$ExchangeLinkConfig]; 
+			$ExchangeLinkConfig = Get[path]; 
+			Protect[$ExchangeLinkConfig];, 
+			configSave[$defaultConfig]
+		]; 
+		Return[$ExchangeLinkConfig]
 	]
 
 
