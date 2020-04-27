@@ -328,6 +328,32 @@ binancePublicAPI[version: "v1" | "v3", method: _String | PatternSequence[_String
 	]
 
 
+setConfigDialog[] := 
+	DynamicModule[{config, domain, apiKey, secretKey}, 
+		config = DialogInput[{
+			domain = "binance.us", 
+			apiKey = Automatic, 
+			secretKey = Automatic
+		}, 
+		Column[{
+			"Binance domain", PopupMenu[Dynamic[domain], {"binance.us", "binance.com"}], 
+			"Binance APIKey", InputField[Dynamic[apiKey], String, ImageSize -> {Large, Automatic}], 
+			"Binance SecretKey", InputField[Dynamic[secretKey], String, ImageSize -> {Large, Automatic}], 
+			Button["Save", DialogReturn[
+				<|
+					"Domain" -> domain, 
+					"APIKey" -> apiKey, 
+					"SecretKey" -> secretKey
+				|>
+			], 
+			ImageSize -> Automatic]
+		}]]; 
+		$ExchangeLinkConfig["Binance", "Domain"] = config["Domain"];
+		$ExchangeLinkConfig["Binance", "APIKey"] = config["APIKey"];
+		$ExchangeLinkConfig["Binance", "SecretKey"] = config["SecretKey"];
+	]
+
+
 (* ::Subsubsection:: *)
 (*Binance trade API request*)
 
@@ -355,6 +381,13 @@ binanceTradeAPI[method_String, parameters: <|___Rule|>, OptionsPattern[]] :=
 		version = OptionValue["version"],  
 		request, response
 	}, 
+		If[apikey === Automatic || secretkey === Automatic, 
+			setConfigDialog[]; 
+			domain = OptionValue["auth"]["Domain"];
+			apikey = OptionValue["auth"]["APIKey"]; 
+			secretkey = OptionValue["auth"]["SecretKey"];
+		];
+	
 		query = parameters ~ Join ~ <|"timestamp" -> time|>;
 		queryString = StringTrim[URLBuild[{}, query], "?"];
 		
