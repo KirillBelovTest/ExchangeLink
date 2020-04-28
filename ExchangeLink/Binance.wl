@@ -337,8 +337,8 @@ setConfigDialog[] :=
 		}, 
 		Column[{
 			"Binance domain", PopupMenu[Dynamic[domain], {"binance.us", "binance.com"}], 
-			"Binance APIKey", InputField[Dynamic[apiKey], String, ImageSize -> {Large, Automatic}], 
-			"Binance SecretKey", InputField[Dynamic[secretKey], String, ImageSize -> {Large, Automatic}], 
+			"Binance APIKey", InputField[Dynamic[apiKey], String, FieldSize -> {64, 1}], 
+			"Binance SecretKey", InputField[Dynamic[secretKey], String, FieldSize -> {64, 1}], 
 			Button["Save", DialogReturn[
 				<|
 					"Domain" -> domain, 
@@ -348,9 +348,7 @@ setConfigDialog[] :=
 			], 
 			ImageSize -> Automatic]
 		}]]; 
-		$ExchangeLinkConfig["Binance", "Domain"] = config["Domain"];
-		$ExchangeLinkConfig["Binance", "APIKey"] = config["APIKey"];
-		$ExchangeLinkConfig["Binance", "SecretKey"] = config["SecretKey"];
+		$ExchangeLinkConfig["Binance"] = config;
 	]
 
 
@@ -383,9 +381,10 @@ binanceTradeAPI[method_String, parameters: <|___Rule|>, OptionsPattern[]] :=
 	}, 
 		If[apikey === Automatic || secretkey === Automatic, 
 			setConfigDialog[]; 
-			domain = OptionValue["auth"]["Domain"];
+			domain = OptionValue["auth"]["Domain"]; 
 			apikey = OptionValue["auth"]["APIKey"]; 
-			secretkey = OptionValue["auth"]["SecretKey"];
+			secretkey = OptionValue["auth"]["SecretKey"]; 
+			time = OptionValue["time"]; 
 		];
 	
 		query = parameters ~ Join ~ <|"timestamp" -> time|>;

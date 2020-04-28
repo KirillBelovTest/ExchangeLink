@@ -30,7 +30,8 @@ ClearAll["`*"]
 
 
 $ExchangeLinkConfig::usage = 
-"$ExchangeLinkConfig[\"Binance\", \"Domain\"] = \"binance.com\""
+"$ExchangeLinkConfig[\"Binance\"] = <|\"Domain\" -> \"binance.com\", \"APIKey\" -> <api key>, \"SecretKey\" -> <secret key>|>
+$ExchangeLinkConfig[\"Binance\", \"Domain\"] = \"binance.com\""
 
 
 ExchangeLinkHMAC::usage = 
@@ -65,8 +66,16 @@ $defaultConfig = <|
 |>
 
 
-configQ[exchange_, key_] := 
+configQ[exchange_String, key_String] := 
 	KeyExistsQ[$defaultConfig, exchange] && KeyExistsQ[$defaultConfig[exchange], key]
+
+
+configQ[exchange_String, value_Association] := 
+	KeyExistsQ[$defaultConfig, exchange] && Keys[$defaultConfig[exchange]] == Keys[value]
+
+
+configQ[___] := 
+	False
 
 
 configSave[newConfig_Association] := 
@@ -76,12 +85,11 @@ configSave[newConfig_Association] :=
 		config = newConfig
 	}, 
 		Unprotect[$ExchangeLinkConfig]; 
-		If[!DirectoryQ[DirectoryName[source]], CreateDirectory[DirectoryName[source]]];
+		If[!DirectoryQ[DirectoryName[source]], CreateDirectory[DirectoryName[source]]]; 
 		Put[config, source]; 
-		Encode[source, target, MachineID -> "ID"]; 
+		Encode[source, target, MachineID -> $MachineID]; 
 		DeleteFile[source]; 
-		$ExchangeLinkConfig = config;
-		
+		$ExchangeLinkConfig = config; 
 		Protect[$ExchangeLinkConfig]; 
 		Return[$ExchangeLinkConfig]
 	]; 
@@ -96,11 +104,20 @@ Set[$ExchangeLinkConfig[exchange_String, key_String], value_String] /;
 	];
 
 
+$ExchangeLinkConfig /: 
+Set[$ExchangeLinkConfig[exchange_String], value_Association] /; 
+	configQ[exchange, value] := 
+	Block[{config = $ExchangeLinkConfig}, 
+		config[exchange] = value; 
+		configSave[config]
+	];
+
+
 $ExchangeLinkConfig := 
 	Block[{path = FileNameJoin[{$HomeDirectory, ".ExchangeLink", "Config.mx"}]}, 
 		If[FileExistsQ[path], 
 			Unprotect[$ExchangeLinkConfig]; 
-			$ExchangeLinkConfig = Get[path]; 
+			$ExchangeLinkConfig = Get[path];  
 			Protect[$ExchangeLinkConfig];, 
 			configSave[$defaultConfig]
 		]; 
