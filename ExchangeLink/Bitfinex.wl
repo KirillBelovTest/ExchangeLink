@@ -19,19 +19,26 @@ ClearAll["`*"]
 (*Public names declaration*)
 
 
-BitfinexPlatformStatus
+BitfinexPlatformStatus::usage = 
+"BitfinexPlatformStatus[]"
 
 
-BitfinexTickers
+BitfinexTickers::usage = 
+"BitfinexTickers[]
+BitfinexTickers[symbol]
+BitfinexTickers[{symbols}]"
 
 
-BitfinexTicker
+BitfinexTicker::usage = 
+"BitfinexTicker[symbol]"
 
 
-BitfinexTrades
+BitfinexTrades::usage = 
+"BitfinexTrades[symbol]"
 
 
-BitfinexBook
+BitfinexBook::usage = 
+"BitfinexBook[symbol, precision, opts]"
 
 
 BitfinexStats
@@ -309,6 +316,10 @@ BitfinexBook[symbol_String?symbolQ, precision: "P0"|"P1"|"P2"|"P3"|"P4"|"R0": "P
 
 
 (* ::Text:: *)
+(*Stats*)
+
+
+(* ::Text:: *)
 (*Candles*)
 
 
@@ -344,12 +355,22 @@ BitfinexCandles[symbol_String?symbolQ, stimeFrame_String?symbolQ, opts: OptionsP
 	]
 
 
+(* ::Text:: *)
+(*Configs*)
+
+
+BitfinexConfigs[]
+
+
 (* ::Section:: *)
 (*Common auth API method*)
 
 
 $bitfinexAuthenticatedEndpoint = 
 	"https://api.bitfinex.com"
+
+
+bitfinexAuth[]
 
 
 (* ::Section:: *)

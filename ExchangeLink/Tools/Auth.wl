@@ -62,6 +62,10 @@ $defaultConfig = <|
 		"Domain" -> "binance.us", 
 		"APIKey" -> Automatic, 
 		"SecretKey" -> Automatic
+	|>, 
+	"Bitfinex" -> <|
+		"APIKey" -> Automatic, 
+		"SecretKey" -> Automatic
 	|>
 |>
 
@@ -129,7 +133,7 @@ $ExchangeLinkConfig :=
 (*ExchangeLinkHMAC*)
 
 
-ExchangeLinkHMAC[key_String, message_String, method: ("SHA512" | "SHA256")] :=
+ExchangeLinkHMAC[key_String, message_String, method: ("SHA512" | "SHA384" | "SHA256")] :=
 	Block[{
 		keyLen = StringLength[key],
 		hBlockSize, 
@@ -139,6 +143,7 @@ ExchangeLinkHMAC[key_String, message_String, method: ("SHA512" | "SHA256")] :=
 	},
 
 		hBlockSize["SHA512"] = 128;
+		hBlockSize["SHA384"] = 128;
 		hBlockSize["SHA256"] = 64;
 
 		hash = If[$VersionNumber >= 11.3, Developer`LegacyHash, Hash];
@@ -165,35 +170,6 @@ ExchangeLinkHMAC[key_String, message_String, method: ("SHA512" | "SHA256")] :=
 
 		(*Return*)
 		IntegerString[hash[StringJoin[opad, hIn], method], 16]
-	];
-
-
-(* ::Subsubsection:: *)
-(*ExchangeLinkNonce*)
-
-
-ExchangeLinkNonce[folder_String, key_String] := 
-    Block[{path, file}, 
-		path = FileNameJoin[{$HomeDirectory, ".ExchangeLink", "Nonce", folder, key}];
-		file = File[path]; 
-		
-		If[Not[IntegerQ[LocalSymbol[file]]], LocalSymbol[file] = 0];
-		If[IntegerQ[LocalSymbol[file]] && LocalSymbol[file] >= 0, LocalSymbol[file] = LocalSymbol[file] + 1];
-		
-		Return[LocalSymbol[file]]
-	];
-
-
-ExchangeLinkNonce /: 
-Set[ExchangeLinkNonce[folder_, key_], value_Integer] /; 
-StringQ[folder] && StringQ[key] && ExchangeLinkNonce[folder, key] < value := 
-	With[{folder0 = folder, key0 = key}, 
-		Block[{path, file}, 
-			file = File[path]; 
-			path = FileNameJoin[{$HomeDirectory, ".ExchangeLink", "Nonce", folder0, key0}]; 
-			
-			LocalSymbol[file] = value
-		]
 	];
 
 
