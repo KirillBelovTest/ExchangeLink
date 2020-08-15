@@ -43,7 +43,7 @@ Exchanges:
 
 Futures: 
 1. Bitmex 
-2. Derbit
+2. Deribit
 
 ## Using
 
