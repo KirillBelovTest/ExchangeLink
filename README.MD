@@ -29,13 +29,12 @@ There are several ways to contribute:
 
 We look forward to seeing how this project goes!
 
-Current Suggestions of exchanges:
+Current Suggestions of Services:
 
 Data Services: 
 1. Kaiko
 
 Exchanges:
-
 1. Binance (.com, .us)
 2. Bitfinex
 3. Coinbase
