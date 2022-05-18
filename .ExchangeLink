@@ -1,0 +1,8 @@
+<|
+    "Binance" -> <|
+        "APIKey" -> "Bcp2PqQzRdfMpCwZVCDgyOSCZ2DxK8yZxcl7gLIGqPbOyFcTKA0jEIiGKUKx4cxw", 
+        "SecretKey" -> "urtbxwUdzALxEhZV2zLwH4yUA8r8Q6aZR86En3FeYDOt30w5yZzsnVXrwZe7s1Fv", 
+        "Endpoint" -> "https://api.binance.com", 
+        "WebSocketEndpoint" -> "wss://stream.binance.com:9443"
+    |>
+|>
