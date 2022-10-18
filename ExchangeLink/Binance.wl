@@ -34,6 +34,14 @@ BinanceTickerPrice::usage =
 BinanceTickerPrice[symbol]"
 
 
+BinanceAggTradeStream::usage = 
+"BinanceAggTradeStream[symbol]"
+
+
+BinanceTradeStream::usage = 
+"BinanceTradeStream[symbol]"
+
+
 BinanceKlinesStream::usage = 
 "BinanceKlinesStream[symbol, interval]"
 
@@ -50,11 +58,26 @@ BinanceTickerStream[symbol]
 BinanceTickerStream[{symbols}]"
 
 
+$Biannce
+
+
 Begin["`Private`"]
 
 
-$settings := $settings = 
+$settings = 
 ExchangeLinkSettings[]["Binance"]
+
+
+$formatter = 
+URLQueryFormat
+
+
+$deserializer = 
+JSONDeserialize
+
+
+$serializer = 
+JSONSerialize
 
 
 getTime[] := 
@@ -63,7 +86,7 @@ getTime[] :=
 
 Options[createRequest] = {
 	"Endpoint" :> $settings["Endpoint"], 
-	"Formatter" :> URLQueryFormat, 
+	"Formatter" :> $formatter, 
 	"HTTPMethod" :> "GET"
 }
 
@@ -85,7 +108,7 @@ Block[{endpoint, serializer, formatter, httpMethod, query, url},
 Options[createSignedRequest] = {
 	"Auth" :> $settings[{"APIKey", "SecretKey"}], 
 	"Endpoint" :> $settings["Endpoint"], 
-	"Formatter" :> URLQueryFormat, 
+	"Formatter" :> $formatter, 
 	"HTTPMethod" :> "GET"
 }
 
@@ -120,7 +143,7 @@ Module[{
 
 
 Options[getResponse] = {
-	"Deserializer" :> JSONDeserialize, 
+	"Deserializer" :> $deserializer, 
 	"Timeout" :> 5
 }
 
@@ -168,9 +191,9 @@ Block[{request, response},
 
 Options[BinanceStreamSubscribe] = {
 	"WebSocketEndpoint" :> $settings["WebSocketEndpoint"], 
-	"Deserializer" :> JSONDeserialize, 
+	"Deserializer" :> $deserializer, 
 	"EventHandler" :> Function[#], 
-	"Serializer" :> JSONSerialize
+	"Serializer" :> $serializer
 }
 
 
@@ -207,13 +230,13 @@ BinanceStreamSubscribe[connection, {stream}, opts]
 
 
 Options[BinanceStreamUnsubscribe] = {
-	"Serializer" -> JSONSerialize
+	"Serializer" -> $serializer
 }
 
 
 BinanceStreamUnsubscribe[connection_WebSocketConnectionObject, streams: {__String}, OptionsPattern[]] :=  
 Module[{id, frame, serialize}, 
-	id = RandonInteger[{1, 4294967295}]; 
+	id = RandomInteger[{1, 4294967295}]; 
 	frame = <|"method" -> "UNSUBSCRIBE", "params" -> streams, "id" -> id|>; 
 	serialize = OptionValue["Serializer"]; 
 	WebSocketSend[connection, frame, "Serializer" -> serialize]
@@ -238,6 +261,20 @@ SelectFirst[KeyExistsQ[#, "id"] && #["id"] == id&] @ Reverse @ Normal[connection
 
 BinanceStreamClose[connection_WebSocketConnectionObject] := 
 WebSocketClose[connection]
+
+
+SyntaxInformation[BinanceAggTradeStream] = {
+	"ArgumentsPattern" -> {_, OptionsPattern[BinanceStreamSubscribe]}, 
+	"OptionNames" -> Map["\"" <> ToString[#] <> "\""&, Keys[Options[BinanceStreamSubscribe]]]
+}
+
+
+BinanceAggTradeStream[symbol_String, opts: OptionsPattern[BinanceStreamSubscribe]] := 
+BinanceStreamSubscribe[ToLowerCase[symbol] <> "@aggTrade", opts]
+
+
+BinanceAggTradeStream[symbols: {__String}, opts: OptionsPattern[BinanceStreamSubscribe]] := 
+BinanceStreamSubscribe[Map[# <> "@aggTrade"&, symbols], opts]
 
 
 SyntaxInformation[BinanceTickerStream] = {
@@ -333,10 +370,6 @@ BinanceKlines[symbol_, interval_, opts: OptionsPattern[{}]] :=
 binancePublic[{BinanceKlines, "v3", "klines", "symbol" -> symbol, "interval" -> interval}, opts];
 
 
-(* ::Subsubsection:: *)
-(*Current Average Price*)
-
-
 SyntaxInformation[BinanceAveragePrice] = {
 	"ArgumentsPattern" -> {_}
 };
@@ -344,10 +377,6 @@ SyntaxInformation[BinanceAveragePrice] = {
 
 BinanceAveragePrice[symbol_String, opts: OptionsPattern[{}]] := 
 binancePublic[{BinanceAveragePrice, "v3", "avgPrice", "symbol" -> symbol}, opts];
-
-
-(* ::Subsubsection:: *)
-(*24hr Ticker Price Change Statistics*)
 
 
 SyntaxInformation[BinanceTicker24hr] = {
@@ -365,10 +394,6 @@ BinanceTicker24hr[symbol_String, opts: OptionsPattern[{}]] :=
 binancePublic[{BinanceTicker24hr, "v3", "ticker", "24hr", "symbol" -> symbol}, opts, 
 	"deserializer" -> nativeDeserialize @* $responseDeserializer
 ];
-
-
-(* ::Subsubsection:: *)
-(*Symbol Price Ticker*)
 
 
 SyntaxInformation[BinanceTickerPrice] = {
