@@ -8,11 +8,11 @@
 (*Begin*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Begin package*)
 
 
-BeginPackage["KirillBelov`ExchangeLink`", {"WebSocketJLink`"}]
+BeginPackage["KirillBelov`ExchangeLink`", {"KirillBelov`WebSocketJLink`"}]
 
 
 (* ::Section::Closed:: *)
