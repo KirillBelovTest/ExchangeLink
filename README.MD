@@ -36,9 +36,8 @@ Data Services:
 
 Exchanges:
 1. Binance (.com, .us)
-2. Bitfinex
+2. Kraken
 3. Coinbase
-4. Kraken
 
 Futures: 
 1. Bitmex 
