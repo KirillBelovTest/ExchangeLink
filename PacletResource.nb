@@ -12,7 +12,6 @@ Rest API and WebSocket clients for different crypto currency exchanges\
 \>", "Text",
  Deletable->False,
  TaggingRules->{},
- CellChangeTimes->{{3.876374846763753*^9, 3.87637486052262*^9}},
  CellTags->{"Description", "TemplateCell"},
  CellID->382971023,ExpressionUUID->"e806552a-b30d-4a9f-a5ab-37c359b1b8c8"],
 
@@ -576,7 +575,6 @@ excluded using ",
 
 Cell["Install", "Text",
  TaggingRules->{},
- CellChangeTimes->{{3.876565306942391*^9, 3.8765653078832693`*^9}},
  CellID->14609348,ExpressionUUID->"506155ca-f15d-4232-82b1-2632b1c79126"],
 
 Cell[BoxData[
@@ -584,14 +582,11 @@ Cell[BoxData[
   "]"}]], "Input", "Excluded",
  TaggingRules->{},
  InitializationCell->True,
- CellChangeTimes->{{3.8765455874163046`*^9, 3.8765455939452653`*^9}, {
-  3.876545812172354*^9, 3.87654582613636*^9}},
  CellLabel->"In[1]:=",
  CellID->996717066,ExpressionUUID->"f416541d-652a-4366-8960-411d8c65d062"],
 
 Cell["Create settings file", "Text",
  TaggingRules->{},
- CellChangeTimes->{{3.876565310547965*^9, 3.8765653139908524`*^9}},
  CellID->713960188,ExpressionUUID->"1a191156-8d84-4714-a5f4-433d93d5c4f9"],
 
 Cell[BoxData[
@@ -651,14 +646,11 @@ Cell[BoxData[
   " "}]], "Input", "Excluded",
  TaggingRules->{},
  InitializationCell->True,
- CellChangeTimes->{{3.876565145386941*^9, 3.8765652974918156`*^9}, {
-  3.8767965256244173`*^9, 3.876796529571531*^9}},
  CellLabel->"In[3]:=",
  CellID->189113755,ExpressionUUID->"7ae9116d-c21b-4132-8eb8-2c9fa719cfbe"],
 
 Cell["Import", "Text",
  TaggingRules->{},
- CellChangeTimes->{{3.876565325301278*^9, 3.8765653259555206`*^9}},
  CellID->507296772,ExpressionUUID->"c7682a28-7d5d-4b7b-a366-37eac5361e8d"],
 
 Cell[BoxData[{
@@ -672,7 +664,6 @@ Cell[BoxData[{
   ";"}]}], "Input", "Excluded",
  TaggingRules->{},
  InitializationCell->True,
- CellChangeTimes->{{3.8766746862697477`*^9, 3.876674698808028*^9}},
  CellLabel->"In[1]:=",
  CellID->172764492,ExpressionUUID->"e9cc892d-938f-4ca6-bec9-72ab7d698e44"]
 }, Open  ]],
@@ -681,16 +672,12 @@ Cell[CellGroupData[{
 
 Cell["Binance market data", "Subsection",
  TaggingRules->{},
- CellChangeTimes->{{3.8765457122258453`*^9, 3.8765457417143993`*^9}, {
-  3.8765459360830855`*^9, 3.876545966585128*^9}},
  CellID->462042388,ExpressionUUID->"d92be200-e627-4d45-996f-1f4d1fb34739"],
 
 Cell[CellGroupData[{
 
 Cell["Info", "Subsubsection",
  TaggingRules->{},
- CellChangeTimes->{{3.876545941652382*^9, 3.876545956194765*^9}, {
-  3.8765546595954237`*^9, 3.8765546602652335`*^9}},
  CellID->272742127,ExpressionUUID->"fb8656ca-959a-48f3-bc0a-fc726baf7239"],
 
 Cell["Just check connection", "Text",
@@ -708,8 +695,6 @@ Cell[BoxData[
 Cell[BoxData[
  RowBox[{"\[LeftAssociation]", "\[RightAssociation]"}]], "Output",
  TaggingRules->{},
- CellChangeTimes->{3.876552560393191*^9, 3.876674718201646*^9, 
-  3.87679654834173*^9},
  CellLabel->"Out[3]=",
  CellID->235543323,ExpressionUUID->"8245df82-8731-4fc7-8210-54cb97d07078"]
 }, Open  ]],
@@ -745,7 +730,6 @@ Cell[BoxData[
     "DateObject",
     Editable->False]}], "\[RightAssociation]"}]], "Output",
  TaggingRules->{},
- CellChangeTimes->{3.876552562077428*^9},
  CellLabel->"Out[7]=",
  CellID->781534373,ExpressionUUID->"06f2cbdf-cb00-489a-a0ba-1f734b5fee9c"]
 }, Open  ]],
@@ -831,7 +815,6 @@ Cell[BoxData[
    OutputSizeLimit`Defer, "version" -> 1|>,
   "OutputSizeLimitTemplate"]], "Output",
  TaggingRules->{},
- CellChangeTimes->{3.876552565308439*^9},
  CellLabel->"Out[8]=",
  CellID->335742451,ExpressionUUID->"a51d1524-7fcd-4251-a9b0-5419f7e0356a"]
 }, Open  ]],
@@ -1010,7 +993,6 @@ Cell[BoxData[
           ",", "\<\"TRD_GRP_004\"\>", ",", "\<\"TRD_GRP_005\"\>"}], "}"}]}]}],
        "\[RightAssociation]"}], "}"}]}]}], "\[RightAssociation]"}]], "Output",
  TaggingRules->{},
- CellChangeTimes->{3.876552568335174*^9},
  CellLabel->"Out[9]=",
  CellID->200396381,ExpressionUUID->"2b2e9e9f-b1c5-4b98-bd3c-d7b254d8da8c"]
 }, Open  ]],
@@ -1279,7 +1261,6 @@ Cell[BoxData[
             "\[RightAssociation]"}], ",", 
            RowBox[{"\[LeftAssociation]", 
             RowBox[{
-             
              RowBox[{"\<\"filterType\"\>", 
               "\[Rule]", "\<\"TRAILING_DELTA\"\>"}], ",", 
              RowBox[{"\<\"minTrailingAboveDelta\"\>", "\[Rule]", "10"}], ",", 
@@ -1310,14 +1291,12 @@ Cell[BoxData[
           "}"}]}]}], "\[RightAssociation]"}]}], "}"}]}]}], 
   "\[RightAssociation]"}]], "Output",
  TaggingRules->{},
- CellChangeTimes->{3.876552570895465*^9},
  CellLabel->"Out[10]=",
  CellID->1333774,ExpressionUUID->"6f721bdf-a86e-4ee9-9af1-170bfb19b06c"]
 }, Open  ]],
 
 Cell["Options", "Text",
  TaggingRules->{},
- CellChangeTimes->{{3.8765526961793776`*^9, 3.8765526995971165`*^9}},
  CellID->418521074,ExpressionUUID->"b1282107-8744-4f03-8454-fed99c1c1cc2"],
 
 Cell[CellGroupData[{
@@ -1332,14 +1311,12 @@ Cell[BoxData[
  RowBox[{"{", 
   RowBox[{"\<\"permissions\"\>", "\[Rule]", "Automatic"}], "}"}]], "Output",
  TaggingRules->{},
- CellChangeTimes->{3.8765525729387007`*^9},
  CellLabel->"Out[11]=",
  CellID->174569527,ExpressionUUID->"b8ab62f9-4f16-4071-9f93-154310b39b94"]
 }, Open  ]],
 
 Cell["All permissions", "Text",
  TaggingRules->{},
- CellChangeTimes->{{3.8765527028362827`*^9, 3.8765527062095103`*^9}},
  CellID->41608225,ExpressionUUID->"1c10bd8d-5243-4a78-8dfd-d3b5762cc1be"],
 
 Cell[CellGroupData[{
@@ -1354,8 +1331,6 @@ Cell[BoxData[
      "\"\<TRD_GRP_004\>\"", ",", "\"\<TRD_GRP_005\>\""}], "}"}]}], 
   "]"}]], "Input",
  TaggingRules->{},
- CellChangeTimes->{{3.876552580648922*^9, 3.8765526018250256`*^9}, {
-  3.8765526620829105`*^9, 3.876552681011366*^9}},
  CellLabel->"In[13]:=",
  CellID->491392781,ExpressionUUID->"3c0a2de5-a0ef-4465-afe5-9234e005b9da"],
 
@@ -1428,7 +1403,6 @@ Cell[BoxData[
    OutputSizeLimit`Defer, "version" -> 1|>,
   "OutputSizeLimitTemplate"]], "Output",
  TaggingRules->{},
- CellChangeTimes->{{3.876552670192974*^9, 3.8765526853416*^9}},
  CellLabel->"Out[13]=",
  CellID->260901821,ExpressionUUID->"ca33ae34-61f1-411e-befe-8c00c184d811"]
 }, Open  ]],
@@ -1516,7 +1490,6 @@ Cell[BoxData[
    OutputSizeLimit`Defer, "version" -> 1|>,
   "OutputSizeLimitTemplate"]], "Output",
  TaggingRules->{},
- CellChangeTimes->{3.876552712051914*^9},
  CellLabel->"Out[14]=",
  CellID->15567158,ExpressionUUID->"fcaaad55-95f9-4dd4-a2f6-69259c506b4b"]
 }, Open  ]]
@@ -1526,7 +1499,6 @@ Cell[CellGroupData[{
 
 Cell["Orders", "Subsubsection",
  TaggingRules->{},
- CellChangeTimes->{{3.876554647274294*^9, 3.876554655173848*^9}},
  CellID->421435824,ExpressionUUID->"0bc7ac33-6b2e-400b-992f-adb1ae75bf8c"],
 
 Cell["Order book", "Text",
@@ -1541,8 +1513,6 @@ Cell[BoxData[
    RowBox[{"BinanceOrderBook", "[", "\"\<BTCUSDT\>\"", "]"}]}], 
   "]"}]], "Input",
  TaggingRules->{},
- CellChangeTimes->{{3.876555784405078*^9, 3.876555801096445*^9}, {
-  3.8765900063394747`*^9, 3.876590007851282*^9}},
  CellLabel->"In[44]:=",
  CellID->469973879,ExpressionUUID->"13806c6d-5a08-4d56-9066-35eb3190054a"],
 
@@ -2128,7 +2098,6 @@ lastPathIsLeafHeader, TypeSystem`NestedGrid`PackagePrivate`headerHidden$ = And[
   SelectWithContents->True,
   Selectable->False]], "Output",
  TaggingRules->{},
- CellChangeTimes->{3.876555801943225*^9, 3.8765900110713863`*^9},
  CellLabel->"Out[44]=",
  CellID->5064181,ExpressionUUID->"9dd93f78-c1e1-4203-acf6-85ae55a265b6"]
 }, Open  ]],
@@ -2169,8 +2138,6 @@ Cell[BoxData[
      RowBox[{"{", 
       RowBox[{"7", ",", " ", "8"}], "}"}]}], "}"}]}], "]"}]], "Input",
  TaggingRules->{},
- CellChangeTimes->{{3.876589750299197*^9, 3.8765897599278007`*^9}, {
-  3.8765898189435825`*^9, 3.8765899247228484`*^9}},
  CellLabel->"In[42]:=",
  CellID->396909775,ExpressionUUID->"2639b111-93e2-4103-95e9-30c8b5adb428"],
 
@@ -2788,7 +2755,6 @@ Cell[BoxData[
   PlotRange->{{All, All}, {All, All}},
   PlotRangePadding->Scaled[0.02]]], "Output",
  TaggingRules->{},
- CellChangeTimes->{3.8765899258615007`*^9},
  CellLabel->"Out[42]=",
  CellID->423438504,ExpressionUUID->"c1c9fe3d-7df3-4417-aa53-b52f6807987d"]
 }, Open  ]],
@@ -2805,16 +2771,12 @@ Cell[BoxData[
          RowBox[{"\"\<bids\>\"", ",", " ", "\"\<asks\>\""}], "}"}], ",", " ", 
         "All", ",", " ", "2"}], "]"}], "]"}], "]"}], "]"}], "]"}]}]], "Input",
  TaggingRules->{},
- CellChangeTimes->{{3.8765896750448046`*^9, 3.876589687367556*^9}, {
-  3.8765899803063145`*^9, 3.876589980663795*^9}, {3.8765900420003357`*^9, 
-  3.8765901145318727`*^9}},
  CellLabel->"In[51]:=",
  CellID->340123825,ExpressionUUID->"9521e78c-57f5-4523-b10d-083a62358cd5"],
 
 Cell[BoxData[
  RowBox[{"\[IndentingNewLine]", "0.00001`"}]], "Input",
  TaggingRules->{},
- CellChangeTimes->{{3.8765902495115695`*^9, 3.8765902495115695`*^9}},
  CellLabel->"Out[51]=",
  CellID->787898147,ExpressionUUID->"6c83ca80-851c-45d1-9e8c-f1b2bc68e9a0"],
 
@@ -2829,13 +2791,11 @@ Cell[BoxData[
     RowBox[{"[", 
      RowBox[{"1", ",", " ", "2"}], "]"}], "]"}], "/", "min"}], "]"}]], "Input",
  TaggingRules->{},
- CellChangeTimes->{{3.876590280319288*^9, 3.876590296389743*^9}},
  CellLabel->"In[57]:=",
  CellID->196900896,ExpressionUUID->"582ca461-9c2f-4f1f-9847-fccc66e63c5e"],
 
 Cell[BoxData["236"], "Output",
  TaggingRules->{},
- CellChangeTimes->{{3.876590281351369*^9, 3.8765902968648424`*^9}},
  CellLabel->"Out[57]=",
  CellID->513770459,ExpressionUUID->"f49df37d-f133-4962-a172-0d85fb641c46"]
 }, Open  ]],
@@ -2877,8 +2837,6 @@ Cell[BoxData[
       RowBox[{"[", "\"\<asks\>\"", "]"}], "]"}]}], "]"}], ",", " ", 
    RowBox[{"PlotTheme", "->", "\"\<Marketing\>\""}]}], "]"}]], "Input",
  TaggingRules->{},
- CellChangeTimes->{{3.8765901378284297`*^9, 3.8765902168329453`*^9}, {
-  3.8765903024820623`*^9, 3.8765903527572403`*^9}},
  CellLabel->"In[59]:=",
  CellID->772723672,ExpressionUUID->"337d7025-c664-44ca-9882-3d428342f628"],
 
@@ -2904,8 +2862,6 @@ Cell[BoxData[
    "wrap" -> OutputSizeLimit`Defer, "version" -> 1|>,
   "OutputSizeLimitTemplate"]], "Output",
  TaggingRules->{},
- CellChangeTimes->{3.8765896693924356`*^9, 3.8765901555086775`*^9, 
-  3.876590217476248*^9, 3.876590306315079*^9},
  CellLabel->"Out[58]=",
  CellID->342454349,ExpressionUUID->"69501d46-c0d8-4b18-b5ed-198990d71577"]
 }, Open  ]]
@@ -2915,7 +2871,6 @@ Cell[CellGroupData[{
 
 Cell["Trades", "Subsubsection",
  TaggingRules->{},
- CellChangeTimes->{{3.8765896591603756`*^9, 3.876589659980364*^9}},
  CellID->203474544,ExpressionUUID->"3da031a9-93cb-4543-a885-940d7ea3b9b7"],
 
 Cell["List of trades", "Text",
@@ -2971,7 +2926,6 @@ Cell[CellGroupData[{
 
 Cell["Candlestick", "Subsubsection",
  TaggingRules->{},
- CellChangeTimes->{{3.876554721352873*^9, 3.8765547234849358`*^9}},
  CellID->983463946,ExpressionUUID->"9488c067-66ea-4b36-af0e-622f74310126"],
 
 Cell["Candlestick", "Text",
@@ -3044,15 +2998,12 @@ Cell[BoxData[
 }, Open  ]],
 
 Cell["Binance market streams", "Subsection",
- CellChangeTimes->{{3.876674363446566*^9, 3.876674371733136*^9}},
  CellID->744721135,ExpressionUUID->"9dd990af-9624-462d-9148-5b5432b5188d"],
 
 Cell["Binance spot trading", "Subsection",
- CellChangeTimes->{{3.8766743125691204`*^9, 3.8766743229120097`*^9}},
  CellID->147039302,ExpressionUUID->"69868fa3-3e5f-43f1-95d3-63bb5cdac098"],
 
 Cell["Kraken ", "Subsection",
- CellChangeTimes->{{3.8766743067396755`*^9, 3.8766743082900133`*^9}},
  CellID->548420225,ExpressionUUID->"bb038eb7-ab89-4dfe-9fc4-97903eebeaa3"],
 
 Cell[CellGroupData[{
@@ -10354,6 +10305,7 @@ EBGE6PJNzMtMSy0uQdWJniq5uxccYtGzYQAAyiphUnhPwns=
 ExchangeLink-1.0.0.paclet"}},
 CreateCellID->True,
 DynamicEvaluationTimeout->60,
+TrackCellChangeTimes->False,
 FrontEndVersion->"13.1 for Microsoft Windows (64-bit) (August 22, 2022)",
 StyleDefinitions->Notebook[{
    Cell[
