@@ -8,7 +8,7 @@
 (*Begin*)
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*Begin package*)
 
 
@@ -69,9 +69,9 @@ $BinanceExchangeInfo::usage =
 "$BinanceExchangeInfo"
 
 
-BinanceOrderBook::usage = 
-"BinanceOrderBook[SYMBOL]
-BinanceOrderBook[SYMBOL, opts]"
+BinanceDepth::usage = 
+"BinanceDepth[SYMBOL]
+BinanceDepth[SYMBOL, opts]"
 
 
 BinanceTrades::usage = 
@@ -116,10 +116,10 @@ BinanceTickerPrice[SYMBOL]
 BinanceTickerPrice[{SYMBOLS}]"
 
 
-BinanceOrderBookTicker::usage = 
-"BinanceOrderBookTicker[]
-BinanceOrderBookTicker[SYMBOL]
-BinanceOrderBookTicker[{SYMBOLS}]"
+BinanceBookTicker::usage = 
+"BinanceBookTicker[]
+BinanceBookTicker[SYMBOL]
+BinanceBookTicker[{SYMBOLS}]"
 
 
 BinanceTicker::usage = 
@@ -143,9 +143,9 @@ BinanceStreamSubscribe[connections, {streams}]"
 
 
 BinanceStreamUnsubscribe::usage = 
-"BinanceStreamUnsubscribe[connection] - unsubscribe all
-BinanceStreamUnsubscribe[connection, stream] - specific stream
-BinanceStreamUnsubscribe[connection, {streams}] - several streams"
+"BinanceStreamUnsubscribe[connection]
+BinanceStreamUnsubscribe[connection, stream]
+BinanceStreamUnsubscribe[connection, {streams}]"
 
 
 BinanceStreamSubscribtions::usage = 
@@ -157,9 +157,9 @@ BinanceAggTradesStream::usage =
 BinanceAggTradesStream[connection, SYMBOL]"
 
 
-BinanceTradeStream::usage = 
-"BinanceTradeStream[SYMBOL]
-BinanceTradeStream[connection, SYMBOL]"
+BinanceTradesStream::usage = 
+"BinanceTradesStream[SYMBOL]
+BinanceTradesStream[connection, SYMBOL]"
 
 
 BinanceKlinesStream::usage = 
@@ -194,7 +194,102 @@ BinanceBookTickerStream[connection, SYMBOLS]"
 
 
 (* ::Section::Italic:: *)
-(*Binance spot trade*)
+(*Binance wallet endpoints*)
+
+
+BinanceSystemStatus::usage = 
+"BinanceSystemStatus[]"
+
+
+BinanceMyCapital::usage = 
+"BinanceMyCapital[]"
+
+
+BinanceAccountSnapshot::usage = 
+"BinanceAccountSnapshot[type]"
+
+
+BinanceMyAsset::usage = 
+"BinanceMyAsset[]
+BinanceMyAsset[ASSET]"
+
+
+(* ::Section::Italic::Closed:: *)
+(*Binance spot trade endpoints*)
+
+
+BinanceOrderTest::usage = 
+"BinanceOrderTest[SYMBOL, side, type, opts]"
+
+
+BinanceOrderCreate::usage = 
+"BinanceOrderCreate[SYMBOL, side, type, opts]"
+
+
+BinanceBuy::usage = 
+"BinanceBuy[SYMBOL, quantity] - create MARKET order
+BinanceBuy[SYMBOL, quantity, price] - create LIMIT order"
+
+
+BinanceSell::usage = 
+"BinanceSell[SYMBOL, quantity] - create MARKET order
+BinanceSell[SYMBOL, quantity, price] - create LIMIT order"
+
+
+BinanceOrderCancel::usage = 
+"BinanceOrderCancel[SYMBOL, orderID]
+BinanceOrderCancel[SYMBOL, \"origClientOrderID\"]"
+
+
+BinanceOrderCancelAll::usage = 
+"BinanceOrderCancel[SYMBOL]
+BinanceOrderCancel[SYMBOL]"
+
+
+BinanceOrderGet::usage = 
+"BinanceOrderGet[SYMBOL, orderID]
+BinanceOrderGet[SYMBOL, \"origClientOrderID\"]"
+
+
+BinanceOrderCancelReplace::usage = 
+"BinanceOrderCancelReplace[SYMBOL, side, type, cancelReplaceMode, orderID]
+BinanceOrderCancelReplace[SYMBOL, side, type, cancelReplaceMode, \"cancelOrigClientOrderID\"]"
+
+
+BinanceOrderGetOpened::usage = 
+"BinanceOrderGetOpened[SYMBOL]"
+
+
+BinanceOrderGetAll::usage = 
+"BinanceOrderGetAll[SYMBOL]"
+
+
+BinanceMyTrades::usage = 
+"BinanceMyTrades[SYMBOL]"
+
+
+BinanceOrderCount::usage = 
+"BinanceOrderCount[]"
+
+
+(* ::Section::Italic::Closed:: *)
+(*Binance websocket user data streams*)
+
+
+BinanceUserDataStreamCreateKey::usage = 
+"BinanceUserDataStreamCreateKey[]"
+
+
+BinanceUserDataStreamPing::usage = 
+"BinanceUserDataStreamPing[listenKey]"
+
+
+BinanceUserDataStreamClose::usage = 
+"BinanceUserDataStreamClose[listenKey]"
+
+
+BinanceUserDataStream::usage = 
+"BinanceUserDataStream[]"
 
 
 (* ::Chapter:: *)
@@ -415,11 +510,77 @@ KrakenStakingTransactions::usage =
 
 
 (* ::Section::Italic::Closed:: *)
-(*Kraken web socket rest api endpoints*)
+(*Kraken websocket rest api endpoints*)
 
 
 KrakenGetWebSocketToken::usage = 
 "KrakenGetWebSocketToken[]"
+
+
+(* ::Section::Italic::Closed:: *)
+(*Kraken websocket market channels*)
+
+
+KrakenChannelCreate::usage = 
+"KrakenChannelCreate[]"
+
+
+KrakenChannelSubscribe::usage = 
+"KrakenChannelSubscribe[connection, channel]
+KrakenChannelSubscribe[connection, {channels}]"
+
+
+KrakenChannelUnsubscribe::usage = 
+"KrakenChannelUnsubscribe[connection, channel]
+KrakenChannelUnsubscribe[connection, {channels}]"
+
+
+KrakenTickerChannel::usage = 
+"KrakenTickerChannel[pair]
+KrakenTickerChannel[{pairs}]"
+
+
+KrakenOHLCChannel::usage = 
+"KrakenOHLCChannel[pair, interval]
+KrakenOHLCChannel[{pairs}, interval]"
+
+
+KrakenTradesChannel::usage = 
+"KrakenTradesChannel[pair]
+KrakenTradesChannel[{pairs}]"
+
+
+KrakenSpreadChannel::usage = 
+"KrakenSpreadChannel[pair]
+KrakenSpreadChannel[{pairs}]"
+
+
+KrakenBookChannel::usage = 
+"KrakenBookChannel[pair]
+KrakenBookChannel[{pairs}]"
+
+
+(* ::Chapter:: *)
+(*Coinbase*)
+
+
+(* ::Section::Closed:: *)
+(*Coinbase websocket market streams*)
+
+
+CoinbaseChannelCreate::usage = 
+"CoinbaseChannelCreate[]"
+
+
+CoinbaseChannelSubscribe::usage = 
+"CoinbaseChannelSubscribe[connection, channel]
+CoinbaseChannelSubscribe[connection, {channels}]
+CoinbaseChannelSubscribe[connection, channels, producsId]
+CoinbaseChannelSubscribe[connection, channels, {producsIds}]"
+
+
+CoinbaseChannelUnsubscribe::usage = 
+"CoinbaseChannelUnsubscribe[]"
 
 
 (* ::Chapter:: *)
@@ -517,6 +678,10 @@ Module[{time = AbsoluteTime[], roundedTime, previouseTime = cache[expr, {"Date"}
 
 optionNames[funcs__Symbol] := 
 Map["\"" <> # <> "\""&] @ Keys[Flatten[Map[Options] @ {funcs}]]
+
+
+func_Symbol[args___, filter[opts: OptionsPattern[{}]]] ^:= 
+func[args, FilterRules[Flatten[{opts}], Options[func]]]
 
 
 (* ::Section::Closed:: *)
@@ -709,6 +874,10 @@ binanceDeserialize[body_String] :=
 binanceToExpr @ ImportString[body, "RawJSON"]
 
 
+binanceTextToJSONDeserialize[body_String] := 
+binanceToExpr @ ImportString[ExportString[body, "Text"], "RawJSON"]
+
+
 (* ::Section::Closed:: *)
 (*Binance public request*)
 
@@ -759,8 +928,71 @@ binancePublic[
 ]
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*Binance signed request*)
+
+
+Options[binanceSigned] = {
+    "HTTPMethod" :> "POST", 
+    "V" :> "v3", 
+    "API" :> "api", 
+    "recvWindow" :> 5000, 
+    "timestamp" :> timestamp[], 
+    "signature" :> Automatic, 
+    "Settings" :> $ExchangeLinkSettings, 
+    "Encoder" :> binanceEncode, 
+    "Serializer" :> URLQueryEncode, 
+    "Deserializer" :> binanceDeserialize
+}
+
+
+binanceSigned[{method__String, args_?AssociationQ}, OptionsPattern[]] := 
+Module[{httpMethod, settings, endpoint, url, request, response, body, result, serializer, 
+	encoder, deserializer, parameters, v, api, recvWindow, apiKey, secretKey, timestamp, signature, requestBody}, 
+	
+	v = OptionValue["V"]; 
+	api = OptionValue["API"]; 
+    httpMethod = OptionValue["HTTPMethod"]; 
+    recvWindow = OptionValue["recvWindow"]; 
+    timestamp = OptionValue["timestamp"]; 
+	settings = OptionValue["Settings"]; 
+    endpoint = settings["Binance", "Endpoint"]; 
+    apiKey = settings["Binance", "APIKey"]; 
+    secretKey = settings["Binance", "SecretKey"]; 
+    encoder = OptionValue["Encoder"]; 
+    deserializer = OptionValue["Deserializer"]; 
+    serializer = OptionValue["Serializer"]; 
+    signature = OptionValue["signature"]; 
+
+    parameters = Join[args, <|"timestamp" -> timestamp, "recvWindow" -> recvWindow|>];   
+    requestBody = serializer[encoder[parameters]]; 
+    If[signature == Automatic, signature = HMAC[requestBody, secretKey, "SHA256"]]; 
+    AppendTo[parameters, "signature" -> signature];
+    url = URLBuild[{endpoint, api, v, method}, encoder[parameters]]; 
+    
+    request = HTTPRequest[url, <|
+		Method -> httpMethod, 
+		"Headers" -> {"X-MBX-APIKEY" -> apiKey}
+	|>]; 
+    
+    response = URLRead[request]; 
+    saveToHistory[request, response]; 
+    
+    body = response["Body"]; 
+    result = deserializer[body]; 
+
+    Return[result]
+]
+
+
+binanceSigned[{method__String, args: OptionsPattern[{}]}, opts: OptionsPattern[{}]] := 
+binanceSigned[
+	{
+		method, 
+		<|FilterRules[Flatten[{args}], Except[Options[binanceSigned]]]|>
+	}, 
+	FilterRules[Flatten[{opts}], Options[binanceSigned]]
+]
 
 
 (* ::Chapter:: *)
@@ -818,18 +1050,18 @@ $BinanceExchangeInfo :=
 cache[BinanceExchangeInfo[], 60 * 60]
 
 
-Options[BinanceOrderBook] = {
+Options[BinanceDepth] = {
 	"limit" -> Automatic
 }
 
 
-SyntaxInformation[BinanceOrderBook] = {
+SyntaxInformation[BinanceDepth] = {
 	"ArgumentsPattern" -> {_, OptionsPattern[]}, 
-	"OptionNames" -> optionNames[binancePublic, BinanceOrderBook]
+	"OptionNames" -> optionNames[binancePublic, BinanceDepth]
 }
 
 
-BinanceOrderBook[symbol_String, opts: OptionsPattern[{binancePublic, BinanceOrderBook}]] := 
+BinanceDepth[symbol_String, opts: OptionsPattern[{binancePublic, BinanceDepth}]] := 
 binancePublic[{"depth", "symbol" -> symbol, opts}, opts]
 
 
@@ -967,21 +1199,21 @@ BinanceTickerPrice[symbols: {__String}, opts: OptionsPattern[binancePublic]] :=
 binancePublic[{"ticker", "price", "symbols" -> symbols}, opts]
 
 
-SyntaxInformation[BinanceOrderBookTicker] = {
+SyntaxInformation[BinanceBookTicker] = {
 	"ArgumentsPattern" -> {_., OptionsPattern[]}, 
 	"OptionNames" -> optionNames[binancePublic]
 }
 
 
-BinanceOrderBookTicker[opts: OptionsPattern[binancePublic]] := 
+BinanceBookTicker[opts: OptionsPattern[binancePublic]] := 
 binancePublic[{"ticker", "bookTicker"}, opts]
 
 
-BinanceOrderBookTicker[symbol_String, opts: OptionsPattern[binancePublic]] := 
+BinanceBookTicker[symbol_String, opts: OptionsPattern[binancePublic]] := 
 binancePublic[{"ticker", "bookTicker", "symbol" -> symbol}, opts]
 
 
-BinanceOrderBookTicker[symbols: {__String}, opts: OptionsPattern[binancePublic]] := 
+BinanceBookTicker[symbols: {__String}, opts: OptionsPattern[binancePublic]] := 
 binancePublic[{"ticker", "bookTicker", "symbols" -> symbols}, opts]
 
 
@@ -1005,26 +1237,26 @@ BinanceTicker[symbols: {__String}, opts: OptionsPattern[{binancePublic, BinanceT
 binancePublic[{"ticker", "symbols" -> symbols, opts}, opts]
 
 
-(* ::Section::Bold:: *)
+(* ::Section::Bold::Closed:: *)
 (*Binance websocket market streams implementation *)
 
 
 Options[BinanceStreamCreate] = {
 	"Settings" :> $ExchangeLinkSettings, 
 	"Deserializer" :> binanceDeserialize, 
-	"EventHandler" :> Print, 
-	"Serializer" :> binanceSerialize
+	"EventHandler" :> Print
 }
 
 
 SyntaxInformation[BinanceStreamCreate] = {
 	"ArgumentsPattern" -> {_, _., OptionsPattern[]}, 
-	"OptionNames" -> optionNames[BinanceStreamSubscribe]
+	"OptionNames" -> optionNames[BinanceStreamCreate]
 }
 
 
 BinanceStreamCreate[stream_String, OptionsPattern[]] := 
-Module[{address, settings, webSocketEndpoint, deserializer, eventHandler, connection}, 
+Module[{address, settings, webSocketEndpoint, deserializer, eventHandler}, 
+	deserializer = OptionValue["Deserializer"]; 
 	eventHandler = OptionValue["EventHandler"]; 
 	settings = OptionValue["Settings"]; 
 	webSocketEndpoint = settings["Binance", "WebSocketEndpoint"]; 
@@ -1043,6 +1275,11 @@ Module[{address, settings, webSocketEndpoint, deserializer, eventHandler, connec
 	
 	WebSocketConnect[address, "Deserializer" -> deserializer, "EventHandler" -> eventHandler]	
 ]
+
+
+Options[BinanceStreamSubscribe] = {
+	"Serializer" -> binanceSerialize
+}
 
 
 BinanceStreamSubscribe[connection_WebSocketConnectionObject, streams_List, OptionsPattern[]] := 
@@ -1064,7 +1301,7 @@ BinanceStreamSubscribe[connection_WebSocketConnectionObject, stream_String, opts
 BinanceStreamSubscribe[connection, {stream}, opts]
 
 
-BinanceUnsubscribe[connection_WebSocketConnectionObject, streams: {__String}, opts: OptionsPattern[]] := 
+BinanceStreamUnsubscribe[connection_WebSocketConnectionObject, streams: {__String}, opts: OptionsPattern[]] := 
 Module[{serializer, id, frame}, 
 	serializer = OptionValue["Serializer"]; 
 	id = RandomInteger[10^9]; 
@@ -1078,11 +1315,415 @@ Module[{serializer, id, frame},
 ]
 
 
-BinanceUnsubscribe[connection_WebSocketConnectionObject, stream_String, opts: OptionsPattern[]] := 
-BinanceUnsubscribe[connection, {stream}, opts]
+BinanceStreamUnsubscribe[connection_WebSocketConnectionObject, stream_String, opts: OptionsPattern[]] := 
+BinanceStreamUnsubscribe[connection, {stream}, opts]
 
 
-BinanceAggTradesStream
+BinanceAggTradesStream[symbols: _String | {__String}, opts: OptionsPattern[BinanceStreamCreate]] := 
+BinanceStreamCreate[Map[# <> "@aggTrade"&] @ Flatten[{symbols}], opts]
+
+
+BinanceAggTradesStream[connection_WebSocketConnectionObject, symbols: _String | {__String}, 
+	opts: OptionsPattern[BinanceStreamSubscribe]] := 
+BinanceStreamSubscribe[connection, Map[# <> "@aggTrade"&] @ Flatten[{symbols}], opts]
+
+
+BinanceTradesStream[symbols: _String | {__String}, opts: OptionsPattern[BinanceStreamCreate]] := 
+BinanceStreamCreate[Map[# <> "@trade"&] @ Flatten[{symbols}], opts]
+
+
+BinanceTradesStream[connection_WebSocketConnectionObject, symbols: _String | {__String}, 
+	opts: OptionsPattern[BinanceStreamSubscribe]] := 
+BinanceStreamSubscribe[connection, Map[# <> "@trade"&] @ Flatten[{symbols}], opts]
+
+
+BinanceKlinesStream[symbols: _String | {__String}, intervals: _String | {__String}, 
+	opts: OptionsPattern[BinanceStreamCreate]] /; Length[Flatten[{symbols}]] == Length[Flatten[{intervals}]] := 
+BinanceStreamCreate[MapThread[#1 <> "@kline_" <> #2&] @ {Flatten[{symbols}], Flatten[{intervals}]}, opts]
+
+
+BinanceKlinesStream[connection_WebSocketConnectionObject, 
+	symbols: _String | {__String}, intervals: _String | {__String}, 
+	opts: OptionsPattern[BinanceStreamSubscribe]] /; Length[Flatten[{symbols}]] == Length[Flatten[{intervals}]] := 
+BinanceStreamSubscribe[connection, 
+	MapThread[#1 <> "@kline_" <> #2&] @ {Flatten[{symbols}], Flatten[{intervals}]}, opts]
+
+
+BinanceMiniTickerStream[opts: OptionsPattern[BinanceStreamCreate]] := 
+BinanceStreamCreate[{"!miniTicker@arr"}, opts]
+
+
+BinanceMiniTickerStream[connection_WebSocketConnectionObject, opts: OptionsPattern[BinanceStreamCreate]] := 
+BinanceStreamSubscribe[connection, {"!miniTicker@arr"}, opts]
+
+
+BinanceMiniTickerStream[symbols: _String | {__String}, opts: OptionsPattern[BinanceStreamCreate]] := 
+BinanceStreamCreate[Map[# <> "@miniTicker"&] @ Flatten[{symbols}], opts]
+
+
+BinanceMiniTickerStream[connection_WebSocketConnectionObject, symbols: _String | {__String}, 
+	opts: OptionsPattern[BinanceStreamSubscribe]] := 
+BinanceStreamSubscribe[connection, Map[# <> "@miniTicker"&] @ Flatten[{symbols}], opts]
+
+
+BinanceTickerStream[opts: OptionsPattern[BinanceStreamCreate]] := 
+BinanceStreamCreate[{"!ticker@arr"}, opts]
+
+
+BinanceTickerStream[connection_WebSocketConnectionObject, opts: OptionsPattern[BinanceStreamCreate]] := 
+BinanceStreamSubscribe[connection, {"!ticker@arr"}, opts]
+
+
+BinanceTickerStream[symbols: _String | {__String}, opts: OptionsPattern[BinanceStreamCreate]] := 
+BinanceStreamCreate[Map[# <> "@ticker"&] @ Flatten[{symbols}], opts]
+
+
+BinanceTickerStream[connection_WebSocketConnectionObject, symbols: _String | {__String}, 
+	opts: OptionsPattern[BinanceStreamSubscribe]] := 
+BinanceStreamSubscribe[connection, Map[# <> "@ticker"&] @ Flatten[{symbols}], opts]
+
+
+BinanceTickerStream[symbols: _String | {__String}, windowSizes: _String | {__String}, 
+	opts: OptionsPattern[BinanceStreamCreate]] /; Length[Flatten[{symbols}]] == Length[Flatten[{windowSizes}]] := 
+BinanceStreamCreate[MapThread[#1 <> "@ticker_" <> #2&] @ {Flatten[{symbols}], Flatten[{windowSizes}]}, opts]
+
+
+BinanceTickerStream[connection_WebSocketConnectionObject, 
+	symbols: _String | {__String}, windowSizes: _String | {__String}, 
+	opts: OptionsPattern[BinanceStreamSubscribe]] /; Length[Flatten[{symbols}]] == Length[Flatten[{windowSizes}]] := 
+BinanceStreamSubscribe[connection, 
+	MapThread[#1 <> "@ticker_" <> #2&] @ {Flatten[{symbols}], Flatten[{windowSizes}]}, opts]
+
+
+(* ::Section::Bold::Closed:: *)
+(*Binance wallet implementation*)
+
+
+SyntaxInformation[BinanceSystemStatus] = {
+	"ArgumentsPattern" -> {OptionsPattern[]}, 
+	"OptionNames" -> optionNames[binancePublic]
+}
+
+
+BinanceSystemStatus[opts: OptionsPattern[binancePublic]] := 
+binancePublic[{"system", "status"}, opts, "V" -> "v1", "API" -> "sapi"]
+
+
+SyntaxInformation[BinanceMyCapital] = {
+	"ArgumentsPattern" -> {OptionsPattern[]}, 
+	"OptionNames" -> optionNames[binanceSigned]
+}
+
+
+BinanceMyCapital[opts: OptionsPattern[binanceSigned]] := 
+binanceSigned[{"capital", "config", "getall"}, opts, "API" -> "sapi", "V" -> "v1", "HTTPMethod" -> "GET", 
+	"Deserializer" -> binanceTextToJSONDeserialize]
+
+
+Options[BinanceAccountSnapshot] = {
+	"startTime" -> Automatic, 
+	"endTime" -> Automatic, 
+	"limit" -> Automatic
+}
+
+
+SyntaxInformation[BinanceAccountSnapshot] = {
+	"ArgumentsPattern" -> {_, OptionsPattern[]}, 
+	"OptionNames" -> optionNames[binanceSigned, BinanceAccountSnapshot]
+}
+
+
+BinanceAccountSnapshot[type_String, opts: OptionsPattern[{BinanceAccountSnapshot, binanceSigned}]] := 
+binanceSigned[{"accountSnapshot", "type" -> type, opts}, 
+	opts, "API" -> "sapi", "V" -> "v1", "HTTPMethod" -> "GET"]
+
+
+Options[BinanceMyAsset] = {
+	"needBtcValuation" -> Automatic
+}
+
+
+SyntaxInformation[BinanceMyAsset] = {
+	"ArgumentsPattern" -> {_., OptionsPattern[]}, 
+	"OptionNames" -> optionNames[binanceSigned, BinanceMyAsset]
+}
+
+
+BinanceMyAsset[asset_String: Automatic, opts: OptionsPattern[{binanceSigned, BinanceMyAsset}]] := 
+binanceSigned[{"asset", "getUserAsset", "asset" -> asset, opts}, opts, "API" -> "sapi"]
+
+
+(* ::Section::Bold:: *)
+(*Binance spot trade implementation*)
+
+
+Options[BinanceOrderTest] = {
+	"timeInForce" -> Automatic, 
+	"quantity" -> Automatic, 
+	"price" -> Automatic, 
+	"quoteOrderQty" -> Automatic, 
+	"price" -> Automatic, 
+	"newClientOrderId" -> Automatic, 
+	"strategyId" -> Automatic, 
+	"strategyType" -> Automatic, 
+	"stopPrice" -> Automatic, 
+	"trailingDelta" -> Automatic, 
+	"icebergQty" -> Automatic, 
+	"newOrderRespType" -> Automatic
+}
+
+
+SyntaxInformation[BinanceOrderTest] = {
+	"ArgumentsPattern" -> {_, _, _, OptionsPattern[]}, 
+	"OptionNames" -> optionNames[binanceSigned, BinanceOrderTest]
+}
+
+
+BinanceOrderTest[symbol_String, side_String, orderType_String, 
+	opts: OptionsPattern[{binanceSigned, BinanceOrderTest}]] := 
+binanceSigned[{"order", "test", "symbol" -> symbol, "side" -> side, "type" -> orderType, opts}, opts]
+
+
+Options[BinanceOrderCreate] = {
+	"timeInForce" -> Automatic, 
+	"quantity" -> Automatic, 
+	"price" -> Automatic, 
+	"quoteOrderQty" -> Automatic, 
+	"price" -> Automatic, 
+	"newClientOrderId" -> Automatic, 
+	"strategyId" -> Automatic, 
+	"strategyType" -> Automatic, 
+	"stopPrice" -> Automatic, 
+	"trailingDelta" -> Automatic, 
+	"icebergQty" -> Automatic, 
+	"newOrderRespType" -> Automatic
+}
+
+
+SyntaxInformation[BinanceOrderCreate] = {
+	"ArgumentsPattern" -> {_, _, _, OptionsPattern[]}, 
+	"OptionNames" -> optionNames[binanceSigned, BinanceOrderCreate]
+}
+
+
+BinanceOrderCreate[symbol_String, side_String, orderType_String, 
+	opts: OptionsPattern[{binanceSigned, BinanceOrderCreate}]] := 
+binanceSigned[{"order", "symbol" -> symbol, "side" -> side, "type" -> orderType, opts}, opts]
+
+
+SyntaxInformation[BinanceBuy] = {
+	"ArgumentsPattern" -> {_, _, _., OptionsPattern[]}, 
+	"OptionNames" -> optionNames[binanceSigned, BinanceOrder]
+}
+
+
+BinanceBuy[symbol_String, quantity_?NumericQ, price_?NumericQ, 
+	opts: OptionsPattern[{binanceSigned, BinanceOrderCreate}]] := 
+BinanceOrderCreate[symbol, "BUY", "LIMIT", quantity, opts]
+
+
+BinanceBuy[symbol_String, quantity_?NumericQ, opts: OptionsPattern[{binanceSigned, BinanceOrderCreate}]] := 
+BinanceOrderCreate[symbol, "BUY", "MARKET", quantity, opts, "timeInForce" -> "GTC"]
+
+
+SyntaxInformation[BinanceSell] = {
+	"ArgumentsPattern" -> {_, _, _., OptionsPattern[]}, 
+	"OptionNames" -> optionNames[binanceSigned, BinanceOrderCreate]
+}
+
+
+BinanceSell[symbol_String, quantity_?NumericQ, price_?NumericQ, 
+	opts: OptionsPattern[{binanceSigned, BinanceOrderCreate}]] := 
+BinanceOrderCreate[symbol, "SELL", "LIMIT", quantity, opts]
+
+
+BinanceSell[symbol_String, quantity_?NumericQ, opts: OptionsPattern[{binanceSigned, BinanceOrderCreate}]] := 
+BinanceOrderCreate[symbol, "SELL", "MARKET", quantity, opts, "timeInForce" -> "GTC"]
+
+
+Options[BinanceOrderCancel] = {
+	"newClientOrderId" -> Automatic
+}
+
+
+SyntaxInformation[BinanceOrderCancel] = {
+	"ArgumentsPattern" -> {_, _, OptionsPattern[]}, 
+	"OptionNames" -> optionNames[binanceSigned, BinanceOrderCancel]
+}
+
+
+BinanceOrderCancel[symbol_String, orderID_Integer, opts: OptionsPattern[{binanceSigned, BinanceOrderCancel}]] := 
+binanceSigned[{"order", "symbol" -> symbol, "orderId" -> orderID, opts}, opts, "HTTPMethod" -> "DELETE"]
+
+
+BinanceOrderCancel[symbol_String, origClientOrderID_String, 
+	opts: OptionsPattern[{binanceSigned, BinanceOrderCancel}]] := 
+binanceSigned[{"order", "symbol" -> symbol, "origClientOrderId" -> origClientOrderID, opts}, 
+	opts, "HTTPMethod" -> "DELETE"]
+
+
+SyntaxInformation[BinanceOrderCancelAll] = {
+	"ArgumentsPattern" -> {_, OptionsPattern[]}, 
+	"OptionNames" -> optionNames[binanceSigned]
+}
+
+
+BinanceOrderCancelAll[symbol_String, opts: OptionsPattern[binanceSigned]] := 
+binanceSigned[{"openOrders", "symbol" -> symbol}, opts, "HTTPMethod" -> "DELETE"]
+
+
+SyntaxInformation[BinanceOrderGet] = {
+	"ArgumentsPattern" -> {_, _, OptionsPattern[]}, 
+	"OptionNames" -> optionNames[binanceSigned]
+}
+
+
+BinanceOrderGet[symbol_String, orderID_Integer, opts: OptionsPattern[binanceSigned]] := 
+binanceSigned[{"order", "symbol" -> symbol, "orderId" -> orderID, opts}, opts, "HTTPMethod" -> "GET"]
+
+
+BinanceOrderGet[symbol_String, origClientOrderID_String, opts: OptionsPattern[binanceSigned]] := 
+binanceSigned[{"order", "symbol" -> symbol, "origClientOrderId" -> origClientOrderID}, opts, "HTTPMethod" -> "GET"]
+
+
+Options[BinanceOrderCancelReplace] = {
+	"timeInForce" -> Automatic, 
+	"quantity" -> Automatic, 
+	"quoteOrderQty" -> Automatic, 
+	"price" -> Automatic, 
+	"cancelNewClientOrderId" -> Automatic, 
+	"newClientOrderId" -> Automatic, 
+	"strategyId" -> Automatic, 
+	"strategyType" -> Automatic, 
+	"stopPrice" -> Automatic, 
+	"trailingDelta" -> Automatic, 
+	"icebergQty" -> Automatic, 
+	"newOrderRespType" -> Automatic
+}
+
+
+SyntaxInformation[BinanceOrderCancelReplace] = {
+	"ArgumentsPattern" -> {_, _, _, _, _, OptionsPattern[]}, 
+	"OptionNames" -> optionNames[binanceSigned, BinanceOrderCancelReplace]
+}
+
+
+BinanceOrderCancelReplace[symbol_String, side_String, type_String, cancelReplaceMode_String, 
+	cancelOrigClientOrderID_String, opts: OptionsPattern[{binanceSigned, BinanceOrderCancelReplace}]] := 
+binanceSigned[{"order", "cancelReplace", "symbol" -> symbol, "side" -> side, "type" -> type, 
+	"cancelReplaceMode" -> cancelReplaceMode, "cancelOrigClientOrderId" -> cancelOrigClientOrderID, opts}, opts]
+
+
+BinanceOrderCancelReplace[symbol_String, side_String, type_String, cancelReplaceMode_String, 
+	cancelOrderID_Integer, opts: OptionsPattern[{binanceSigned, BinanceOrderCancelReplace}]] := 
+binanceSigned[{"order", "cancelReplace", "symbol" -> symbol, "side" -> side, "type" -> type, 
+	"cancelReplaceMode" -> cancelReplaceMode, "cancelOrderId" -> cancelOrderID, opts}, opts]
+
+
+SyntaxInformation[BinanceOrderGetOpened] = {
+	"ArgumentsPattern" -> {_, OptionsPattern[]}, 
+	"OptionNames" -> optionNames[binanceSigned]
+}
+
+
+BinanceOrderGetOpened[symbol_String, opts: OptionsPattern[binanceSigned]] := 
+binanceSigned[{"openOrders", "symbol" -> symbol}, opts, "HTTPMethod" -> "GET"]
+
+
+Options[BinanceOrderGetAll] = {
+	"orderId" -> Automatic, 
+	"startTime" -> Automatic, 
+	"endTime" -> Automatic, 
+	"limit" -> Automatic
+}
+
+
+SyntaxInformation[BinanceOrderGetAll] = {
+	"ArgumentsPattern" -> {_, OptionsPattern[]}, 
+	"OptionNames" -> optionNames[binanceSigned, BinanceOrderGetAll]
+}
+
+
+BinanceOrderGetAll[symbol_String, opts: OptionsPattern[{binanceSigned, BinanceOrderGetAll}]] := 
+binanceSigned[{"openOrders", "symbol" -> symbol, opts}, opts, "HTTPMethod" -> "GET"]
+
+
+Options[BinanceMyTrades] = {
+	"orderId" -> Automatic, 
+	"startTime" -> Automatic, 
+	"endTime" -> Automatic, 
+	"fromId" -> Automatic, 
+	"limit" -> Automatic
+}
+
+
+SyntaxInformation[BinanceMyTrades] = {
+	"ArgumentsPattern" -> {_, OptionsPattern[]}, 
+	"OptionNames" -> optionNames[binanceSigned, BinanceMyTrades]
+}
+
+
+BinanceMyTrades[symbol_String, opts: OptionsPattern[{binanceSigned, BinanceMyTrades}]] := 
+binanceSigned[{"myTrades", "symbol" -> symbol, opts}, opts, "HTTPMethod" -> "GET"]
+
+
+SyntaxInformation[BinanceOrderCount] = {
+	"ArgumentsPattern" -> {_, OptionsPattern[]}, 
+	"OptionNames" -> optionNames[binanceSigned]
+}
+
+
+BinanceOrderCount[opts: OptionsPattern[binanceSigned]] := 
+binanceSigned[{"rateLimit", "order"}, opts, "HTTPMethod" -> "GET"]
+
+
+(* ::Section::Bold::Closed:: *)
+(*Binance websocket user data rest methods implementation*)
+
+
+SyntaxInformation[BinanceUserDataStreamCreateKey] = {
+	"ArgumentsPattern" -> {OptionsPattern[]}, 
+	"OptionNanes" -> optionNames[binanceSigned]
+}
+
+
+BinanceUserDataStreamCreateKey[opts: OptionsPattern[binanceSigned]] := 
+binanceSigned[{"userDataStream"}, opts, "timestamp" -> Null, "recvWindow" -> Null, "signature" -> Null]
+
+
+SyntaxInformation[BinanceUserDataStreamPing] = {
+	"ArgumentsPattern" -> {_, OptionsPattern[]}, 
+	"OptionNanes" -> optionNames[binanceSigned]
+}
+
+
+BinanceUserDataStreamPing[listenKey_String, opts: OptionsPattern[binanceSigned]] := 
+binanceSigned[{"userDataStream", "listenKey" -> listenKey}, opts, 
+	"HTTPMethod" -> "PUT", "timestamp" -> Null, "recvWindow" -> Null, "signature" -> Null]
+
+
+SyntaxInformation[BinanceUserDataStreamClose] = {
+	"ArgumentsPattern" -> {_, OptionsPattern[]}, 
+	"OptionNanes" -> optionNames[binanceSigned]
+}
+
+
+BinanceUserDataStreamClose[listenKey_String, opts: OptionsPattern[binanceSigned]] := 
+binanceSigned[{"userDataStream", "listenKey" -> listenKey}, opts, 
+	"HTTPMethod" -> "DELETE", "timestamp" -> Null, "recvWindow" -> Null, "signature" -> Null]
+
+
+SyntaxInformation[BinanceUserDataStream] = {
+	"ArgumentsPattern" -> {OptionsPattern[]}, 
+	"OptionNanes" -> optionNames[binanceSigned, BinanceStreamCreate]
+}
+
+
+BinanceUserDataStream[opts: OptionsPattern[{binanceSigned, BinanceStreamCreate}]] := 
+Module[{listenKey}, 
+	listenKey = BinanceUserDataStreamCreateKey[filter[opts]]["listenKey"]; 
+	<|"listemKey" -> listenKey, "stream" -> BinanceStreamCreate[listenKey, filter[opts]]|>
+]
 
 
 (* ::Chapter:: *)
@@ -1301,6 +1942,22 @@ krakenSigned[
 ]
 
 
+(* ::Section::Closed:: *)
+(*Kraken objects*)
+
+
+krakenTradeOrderTypes[] := 
+"market" | "limit" | "stop-loss" | "take-profit" | "stop-loss-limit" | "take-profit-limit" | "settle-position"
+
+
+krakenTradeTypes[] := 
+"buy" | "sell"
+
+
+krakenChannelNames[] := 
+"book" | "ohlc" | "openOrders" |" ownTrades" | "spread" | "ticker" |" trade" | "*"
+
+
 (* ::Chapter:: *)
 (*Kraken*)
 
@@ -1472,7 +2129,7 @@ Options[KrakenAddOrder] = {
 
 SyntaxInformation[KrakenAddOrder] = {
 	"ArgumentsPattern" -> {_, _, _, _, OptionsPattern[]}, 
-	"OptionNames" -> optionNames[krakenPrivate, KrakenAddOrder]
+	"OptionNames" -> optionNames[krakenSigned, KrakenAddOrder]
 }
 
 
@@ -1560,22 +2217,609 @@ KrakenCancelAllOrdersBatch[orders_List, opts: OptionsPattern[krakenSigned]] :=
 krakenSigned[{"CancelAllOrdersBatch", "orders" -> orders}, opts, "Serializer" -> krakenSerializeToJSON]
 
 
+(* ::Section::Bold::Closed:: *)
+(*Kraken user data implementation*)
+
+
+SyntaxInformation[KrakenBalance] = {
+	"ArgumentsPattern" -> {OptionsPattern[]}, 
+	"OptionNames" -> optionNames[krakenSigned]
+}
+
+
+KrakenBalance[opts: OptionsPattern[{krakenSigned}]] := 
+krakenSigned[{"Balance"}, opts]
+
+
+SyntaxInformation[KrakenTradeBalance] = {
+	"ArgumentsPattern" -> {_., OptionsPattern[]}, 
+	"OptionNames" -> optionNames[krakenSigned]
+}
+
+
+KrakenTradeBalance[opts: OptionsPattern[{krakenSigned}]] := 
+krakenSigned[{"TradeBalance"}, opts]
+
+
+KrakenTradeBalance[asset_String, opts: OptionsPattern[{krakenSigned}]] := 
+krakenSigned[{"TradeBalance", "asset" -> asset}, opts]
+
+
+Options[KrakenOpenOrders] = {
+	"trades" -> Automatic, 
+	"userref" -> Automatic
+}
+
+
+SyntaxInformation[KrakenOpenOrders] = {
+	"ArgumentsPattern" -> {OptionsPattern[]}, 
+	"OptionNames" -> optionNames[krakenSigned, KrakenOpenOrders]
+}
+
+
+KrakenOpenOrders[opts: OptionsPattern[{krakenSigned, KrakenOpenOrders}]] := 
+krakenSigned[{"OpenOrders", opts}, opts]
+
+
+Options[KrakenClosedOrders] = {
+	"trades" -> Automatic, 
+	"userref" -> Automatic, 
+	"start" -> Automatic, 
+	"end" -> Automatic, 
+	"ofs" -> Automatic, 
+	"closetime" -> Automatic
+}
+
+
+SyntaxInformation[KrakenOpenOrders] = {
+	"ArgumentsPattern" -> {OptionsPattern[]}, 
+	"OptionNames" -> optionNames[krakenSigned, KrakenClosedOrders]
+}
+
+
+KrakenClosedOrders[opts: OptionsPattern[{krakenSigned, KrakenClosedOrders}]] := 
+krakenSigned[{"ClosedOrders", opts}, opts]
+
+
+Options[KrakenQueryOrders] = {
+	"trades" -> Automatic, 
+	"userref" -> Automatic
+}
+
+
+SyntaxInformation[KrakenOpenOrders] = {
+	"ArgumentsPattern" -> {_, OptionsPattern[]}, 
+	"OptionNames" -> optionNames[krakenSigned, KrakenQueryOrders]
+}
+
+
+KrakenQueryOrders[txid_String, opts: OptionsPattern[{krakenSigned, KrakenQueryOrders}]] := 
+krakenSigned[{"QueryOrders", "txid" -> txid, opts}, opts]
+
+
+Options[KrakenTradeHistory] = {
+	"type" -> Automatic, 
+	"trades" -> Automatic, 
+	"start" -> Automatic, 
+	"end" -> Automatic, 
+	"ofs" -> Automatic
+}
+
+
+SyntaxInformation[KrakenTradeHistory] = {
+	"ArgumentsPattern" -> {OptionsPattern[]}, 
+	"OptionNames" -> optionNames[krakenSigned, KrakenTradeHistory]
+}
+
+
+KrakenTradeHistory[opts: OptionsPattern[{krakenSigned, KrakenTradeHistory}]] := 
+krakenSigned[{"TradeHistory", opts}, opts]
+
+
+Options[KrakenQueryTrades] = {
+	"txid" -> Automatic, 
+	"trades" -> Automatic
+}
+
+
+SyntaxInformation[KrakenQueryTrades] = {
+	"ArgumentsPattern" -> {OptionsPattern[]}, 
+	"OptionNames" -> optionNames[krakenSigned, KrakenQueryTrades]
+}
+
+
+KrakenQueryTrades[opts: OptionsPattern[{krakenSigned, KrakenQueryTrades}]] := 
+krakenSigned[{"QueryTrades", opts}, opts]
+
+
+Options[KrakenOpenPositions] = {
+	"txid" -> Automatic, 
+	"docalcs" -> Automatic, 
+	"consolidation" -> Automatic
+}
+
+
+SyntaxInformation[KrakenOpenPositions] = {
+	"ArgumentsPattern" -> {OptionsPattern[{krakenSigned, KrakenOpenPositions}]}, 
+	"OptionNames" -> optionNames[krakenSigned, KrakenOpenPositions]
+}
+
+
+KrakenOpenPositions[opts: OptionsPattern[{krakenSigned, KrakenOpenPositions}]] := 
+krakenSigned[{"OpenPositions", opts}, opts]
+
+
+Options[KrakenLedgers] = {
+	"asset" -> Automatic, 
+	"aclass" -> Automatic, 
+	"type" -> Automatic, 
+	"start" -> Automatic, 
+	"end" -> Automatic, 
+	"ofs" -> Automatic
+}
+
+
+SyntaxInformation[KrakenLedgers] = {
+	"ArgumentsPattern" -> {OptionsPattern[]}, 
+	"OptionNames" -> optionNames[krakenSigned, KrakenLedgers]
+}
+
+
+KrakenLedgers[opts: OptionsPattern[{krakenSigned, KrakenLedgers}]] := 
+krakenSigned[{"Ledgers", opts}, opts]
+
+
+Options[KrakenQueryLedgers] = {
+	"id" -> Automatic, 
+	"trades" -> Automatic
+}
+
+
+SyntaxInformation[KrakenQueryLedgers] = {
+	"ArgumentsPattern" -> {OptionsPattern[]}, 
+	"OptionNames" -> optionNames[krakenSigned, KrakenQueryLedgers]
+}
+
+
+KrakenQueryLedgers[opts: OptionsPattern[{krakenSigned, KrakenQueryLedgers}]] := 
+krakenSigned[{"QueryLedgers", opts}, opts]
+
+
+Options[KrakenTradeVolume] = {
+	"pair" -> Automatic, 
+	"fee-info" -> Automatic
+}
+
+
+SyntaxInformation[KrakenTradeVolume] = {
+	"ArgumentsPattern" -> {OptionsPattern[]}, 
+	"OptionNames" -> optionNames[krakenSigned, KrakenTradeVolume]
+}
+
+
+KrakenTradeVolume[opts: OptionsPattern[{krakenSigned, KrakenTradeVolume}]] := 
+krakenSigned[{"TradeVolume", opts}, opts]
+
+
+Options[KrakenAddExport] = {
+	"format" -> Automatic, 
+	"fields" -> Automatic, 
+	"starttm" -> Automatic, 
+	"endtm" -> Automatic
+}
+
+
+SyntaxInformation[KrakenAddExport] = {
+	"ArgumentsPattern" -> {_, _, OptionsPattern[]}, 
+	"OptionNames" -> optionNames[krakenSigned, KrakenAddExport]
+}
+
+
+KrakenAddExport[report: "trades" | "ledgers", description_String, 
+	opts: OptionsPattern[{krakenSigned, KrakenAddExport}]] := 
+krakenSigned[{"AddExport", "report" -> report, "description" -> description, opts}, opts]
+
+
+SyntaxInformation[KrakenExportStatus] = {
+	"ArgumentsPattern" -> {_, OptionsPattern[]}, 
+	"OptionNames" -> optionNames[krakenSigned]
+}
+
+
+KrakenExportStatus[report: "trades" | "ledgers", opts: OptionsPattern[krakenSigned]] := 
+krakenSigned[{"ExportStatus", "report" -> report}, opts]
+
+
+SyntaxInformation[KrakenRetrieveExport] = {
+	"ArgumentsPattern" -> {_, OptionsPattern[]}, 
+	"OptionNames" -> optionNames[krakenSigned]
+}
+
+
+KrakenRetrieveExport[id_String, opts: OptionsPattern[krakenSigned]] := 
+krakenSigned[{"RetrieveExport", "id" -> id}, opts]
+
+
+SyntaxInformation[KrakenOpenOrders] = {
+	"ArgumentsPattern" -> {_, _, OptionsPattern[{krakenSigned}]}, 
+	"OptionNames" -> optionNames[krakenSigned]
+}
+
+
+KrakenRemoveExport[id_String, type: "cancel" | "delete", opts: OptionsPattern[krakenSigned]] := 
+krakenSigned[{"RemoveExport", "id" -> id, "type" -> type}, opts]
+
+
+(* ::Section::Bold::Closed:: *)
+(*Kraken user funding api implementation*)
+
+
+SyntaxInformation[KrakenDepositMethods] = {
+	"ArgumentsPattern" -> {_, OptionsPattern[]}, 
+	"OptionNames" -> optionNames[krakenSigned]
+}
+
+
+KrakenDepositMethods[asset_String, opts: OptionsPattern[]] := 
+krakenSigned[{"DepositMethods", "asset" -> asset}, opts]
+
+
+Options[KrakenDepositAddresses] = {
+	"new" -> Automatic
+}
+
+
+SyntaxInformation[KrakenDepositAddresses] = {
+	"ArgumentsPattern" -> {_, _, OptionsPattern[]}, 
+	"OptionNames" -> optionNames[krakenSigned, KrakenDepositAddresses]
+}
+
+
+KrakenDepositAddresses[asset_String, method_String, 
+	opts: OptionsPattern[{krakenSigned, KrakenDepositAddresses}]] := 
+krakenSigned[{"DepositAddresses", "asset" -> asset, "method" -> method, opts}, opts]
+
+
+Options[KrakenDepositStatus] = {
+	"method" -> Automatic
+}
+
+
+SyntaxInformation[KrakenDepositStatus] = {
+	"ArgumentsPattern" -> {_, OptionsPattern[]}, 
+	"OptionNames" -> optionNames[krakenSigned, KrakenDepositStatus]
+}
+
+
+KrakenDepositStatus[asset_String, opts: OptionsPattern[{krakenSigned, KrakenDepositStatus}]] := 
+krakenSigned[{"DepositStatus", "asset" -> asset, opts}, opts]
+
+
+SyntaxInformation[KrakenWithdrawInfo] = {
+	"ArgumentsPattern" -> {_, _, _, OptionsPattern[]}, 
+	"OptionNames" -> optionNames[krakenSigned]
+}
+
+
+KrakenWithdrawInfo[asset_String, key_String, amount_, opts: OptionsPattern[krakenSigned]] := 
+krakenSigned[{"WithdrawInfo", "asset" -> asset, "key" -> key, "amount" -> amount}, opts]
+
+
+SyntaxInformation[KrakenWithdraw] = {
+	"ArgumentsPattern" -> {_, OptionsPattern[]}, 
+	"OptionNames" -> optionNames[krakenSigned]
+}
+
+
+KrakenWithdraw[asset_String, key_String, amount_, opts: OptionsPattern[krakenSigned]] := 
+krakenSigned[{"Withdraw", "asset" -> asset, "key" -> key, "amount" -> amount}, opts]
+
+
+Options[KrakenWithdrawStatus] = {
+	"method" -> Automatic
+}
+
+
+SyntaxInformation[KrakenWithdrawStatus] = {
+	"ArgumentsPattern" -> {_, OptionsPattern[]}, 
+	"OptionNames" -> optionNames[krakenSigned, KrakenWithdrawStatus]
+}
+
+
+KrakenWithdrawStatus[asset_String, opts: OptionsPattern[{krakenSigned, KrakenWithdrawStatus}]] := 
+krakenSigned[{"WithdrawStatus", "asset" -> asset, opts}, opts]
+
+
+SyntaxInformation[KrakenWithdrawCancel] = {
+	"ArgumentsPattern" -> {_, _, OptionsPattern[]}, 
+	"OptionNames" -> optionNames[krakenSigned]
+}
+
+
+KrakenWithdrawCancel[asset_String, refid_String, opts: OptionsPattern[krakenSigned]] := 
+krakenSigned[{"WithdrawCancel", "asset" -> asset, "refid" -> refid}, opts]
+
+
+SyntaxInformation[KrakenWalletTransfer] = {
+	"ArgumentsPattern" -> {_, _, _, _, OptionsPattern[]}, 
+	"OptionNames" -> optionNames[krakenSigned]
+}
+
+
+KrakenWalletTransfer[asset_, from_, to_, amount_, opts: OptionsPattern[krakenSigned]] := 
+krakenSigned[{"WalletTransfer", "asset" -> asset, "from" -> from, "to" -> to, "amount" -> amount}, opts]
+
+
+(* ::Section::Bold::Closed:: *)
+(*Kraken user staking api implementation*)
+
+
+SyntaxInformation[KrakenStake] = {
+	"ArgumentsPattern" -> {_, _, _, OptionsPattern[]}, 
+	"OptionNames" -> optionNames[krakenSigned]
+}
+
+
+KrakenStake[asset_, amount_, method_, opts: OptionsPattern[krakenSigned]] := 
+krakenSigned[{"Stake", "asset" -> asset, "amount" -> amount, "method" -> method}, opts]
+
+
+SyntaxInformation[KrakenUnstake] = {
+	"ArgumentsPattern" -> {_, _, OptionsPattern[]}, 
+	"OptionNames" -> optionNames[krakenSigned]
+}
+
+
+KrakenUnstake[asset_, amount_, opts: OptionsPattern[krakenSigned]] := 
+krakenSigned[{"Unstake", "asset" -> asset, "amount" -> amount}, opts]
+
+
+SyntaxInformation[KrakenStakingAssets] = {
+	"ArgumentsPattern" -> {OptionsPattern[]}, 
+	"OptionNames" -> optionNames[krakenSigned]
+}
+
+
+KrakenStakingAssets[opts: OptionsPattern[krakenSigned]] := 
+krakenSigned[{"StakingAssets"}, opts]
+
+
+SyntaxInformation[KrakenStakingPending] = {
+	"ArgumentsPattern" -> {OptionsPattern[]}, 
+	"OptionNames" -> optionNames[krakenSigned]
+}
+
+
+KrakenStakingPending[opts: OptionsPattern[krakenSigned]] := 
+krakenSigned[{"StakingPending"}, opts]
+
+
+SyntaxInformation[KrakenStakingTransactions] = {
+	"ArgumentsPattern" -> {OptionsPattern[]}, 
+	"OptionNames" -> optionNames[krakenSigned]
+}
+
+
+KrakenStakingTransactions[opts: OptionsPattern[krakenSigned]] := 
+krakenSigned[{"StakingTransactions"}, opts]
+
+
+(* ::Section::Bold::Closed:: *)
+(*Kraken websocket rest api method*)
+
+
+SyntaxInformation[KrakenGetWebSocketToken] = {
+	"ArgumentsPattern" -> {OptionsPattern[]}, 
+	"OptionNames" -> optionNames[krakenSigned]
+}
+
+
+KrakenGetWebSocketToken[opts: OptionsPattern[krakenSigned]] := 
+krakenSigned[{"GetWebSocketToken"}, opts]
+
+
+(* ::Section::Bold::Closed:: *)
+(*Kraken websocket channels*)
+
+
+Options[KrakenChannelCreate] = {
+	"Settings" :> $ExchangeLinkSettings, 
+	"Deserializer" :> krakenDeserialize, 
+	"EventHandler" :> Print
+}
+
+
+KrakenChannelCreate[opts: OptionsPattern[{}]] := 
+Module[{settings, webSocketEndpoint, deserializer, eventHandler}, 
+	settings = OptionValue[KrakenChannelCreate, opts, "Settings"]; 
+	deserializer = OptionValue[KrakenChannelCreate, opts, "Deserializer"]; 
+	eventHandler = OptionValue[KrakenChannelCreate, opts, "EventHandler"]; 
+	webSocketEndpoint = settings["Kraken", "WebSocketEndpoint"]; 
+	WebSocketConnect[webSocketEndpoint, "Deserializer" -> deserializer, "EventHandler" -> eventHandler]
+]
+
+
+Options[KrakenChannelSubscribe] = {
+	"Serializer" :> krakenSerializeToJSON, 
+	"depth" -> Automatic, 
+	"interval" -> Automatic, 
+	"ratecounter" -> Automatic, 
+	"snapshot" -> Automatic, 
+	"token" -> Automatic
+}
+
+
+KrakenChannelSubscribe[connection_WebSocketConnectionObject, 
+	pairs: _String | {___String}, name: krakenChannelNames[]: "*", opts: OptionsPattern[{}]] := 
+Module[{serializer, id, frame, subscription}, 
+	serializer = OptionValue[KrakenChannelSubscribe, opts, "Serializer"]; 
+	
+	subscription = DeleteCases[<|
+		"depth" -> OptionValue[KrakenChannelSubscribe, opts, "depth"], 
+		"interval" -> OptionValue[KrakenChannelSubscribe, opts, "interval"], 
+		"name" -> name, 
+		"ratecounter" -> OptionValue[KrakenChannelSubscribe, opts, "ratecounter"], 
+		"snapshot" -> OptionValue[KrakenChannelSubscribe, opts, "snapshot"], 
+		"token" -> OptionValue[KrakenChannelSubscribe, opts, "token"]
+	|>, Automatic | Null];
+	
+	frame = <|
+		"event" -> "subscribe", 
+		"pair" -> Flatten[{pairs}], 
+		"subscription" -> subscription
+	|>; 
+	
+	WebSocketSend[connection, frame, "Serializer" -> serializer]
+]
+
+
+(* ::Section::Bold::Closed:: *)
+(*Kraken websocket public channels*)
+
+
+KrakenTickerChannel[pairs: _String | {__String}, 
+	opts: OptionsPattern[{KrakenChannelCreate, KrakenChannelSubscribe}]] := 
+Module[{connection}, 
+	connection = KrakenChannelCreate[opts]; 
+	KrakenChannelSubscribe[connection, pairs, "ticker", opts]; 
+	Return[connection]
+]
+
+
+KrakenOHLCChannel[pairs: _String | {__String}, interval_Integer, 
+	opts: OptionsPattern[{KrakenChannelCreate, KrakenChannelSubscribe}]] := 
+Module[{connection}, 
+	connection = KrakenChannelCreate[opts]; 
+	KrakenChannelSubscribe[connection, pairs, "ohlc", "interval" -> interval, opts]; 
+	Return[connection]
+]
+
+
+KrakenTradesChannel[pairs: _String | {__String}, 
+	opts: OptionsPattern[{KrakenChannelCreate, KrakenChannelSubscribe}]] := 
+Module[{connection}, 
+	connection = KrakenChannelCreate[opts]; 
+	KrakenChannelSubscribe[connection, pairs, "trade", opts]; 
+	Return[connection]
+]
+
+
+KrakenSpreadChannel[pairs: _String | {__String}, 
+	opts: OptionsPattern[{KrakenChannelCreate, KrakenChannelSubscribe}]] := 
+Module[{connection}, 
+	connection = KrakenChannelCreate[opts]; 
+	KrakenChannelSubscribe[connection, pairs, "spread", opts]; 
+	Return[connection]
+]
+
+
+KrakenBookChannel[pairs: _String | {__String}, 
+	opts: OptionsPattern[{KrakenChannelCreate, KrakenChannelSubscribe}]] := 
+Module[{connection}, 
+	connection = KrakenChannelCreate[opts]; 
+	KrakenChannelSubscribe[connection, pairs, "book", opts]; 
+	Return[connection]
+]
+
+
+(* ::Section::Bold::Closed:: *)
+(*Kraken websocket user channels*)
+
+
+KrakenOwnTradesChannel[opts: OptionsPattern[{krakenSigned, KrakenChannelCreate, KrakenChannelSubscribe}]] := 
+Module[{connection}, 
+	connection = KrakenChannelCreate[opts]; 
+	token = krakenSigned[{"GetWebSocketToken"}, opts]; 
+	KrakenChannelSubscribe[connection, {}, "ownTrades", opts]; 
+	Return[connection]
+]
+
+
+KrakenOpenOrdersChannel[opts: OptionsPattern[{krakenSigned, KrakenChannelCreate, KrakenChannelSubscribe}]] := 
+Module[{connection}, 
+	connection = KrakenChannelCreate[opts]; 
+	token = krakenSigned[{"GetWebSocketToken"}, opts]; 
+	KrakenChannelSubscribe[connection, {}, "openOrders", opts]; 
+	Return[connection]
+]
+
+
 (* ::Chapter:: *)
 (*Coinbase*)
+
+
+(* ::Section:: *)
+(*Coinbase deserializer*)
+
+
+coinbaseDeserialize[body_String] := 
+ImportString[body, "RawJSON"]
+
+
+(* ::Section:: *)
+(*Coinbase serializer*)
+
+
+coinbaseSerialize[frame_String] := 
+ExportString[frame, "RawJSON"]
+
+
+(* ::Section::Bold:: *)
+(*Coinbase websocket channels*)
+
+
+Options[CoinbaseChannelCreate] = {
+	"Settings" :> $ExchangeLinkSettings, 
+	"Deserializer" :> coinbaseDeserialize, 
+	"EventHandler" :> Print
+}
+
+
+SyntaxInformation[CoinbaseChannelCreate] = {
+	"ArgumentsPattern" -> {OptionsPattern[]}, 
+	"OptionNames" -> optionNames[CoinbaseChannelCreate]
+}
+
+
+CoinbaseChannelCreate[opts: OptionsPattern[{}]] := 
+Module[{settings, webSocketEndpoint, deserializer, eventHandler}, 
+	settings = OptionValue[CoinbaseChannelCreate, opts, "Settings"]; 
+	deserializer = OptionValue[CoinbaseChannelCreate, opts, "Deserializer"]; 
+	eventHandler = OptionValue[CoinbaseChannelCreate, opts, "EventHandler"]; 
+	webSocketEndpoint = settings["Coinbase", "WebSocketEndpoint"]; 
+	WebSocketConnect[webSocketEndpoint, "Deserializer" -> deserializer, "EventHandler" -> eventHandler]
+]
+
+
+Options[CoinbaseChannelSubscribe] = {
+	"Serializer" :> coinbaseSerialize
+}
+
+
+CoinbaseChannelSubscribe[connection_WebSocketConnectionObject, productIds_, channels_, opts: OptionsPattern[{}]] := 
+Module[{frame, serializer}, 
+	serializer = OptionValue[CoinbaseChannelSubscribe, {opts}, "Serializer"]
+	frame = <|
+		"type" -> "subscribe", 
+		"product_ids" -> productIds, 
+		"channels" -> channels
+	|>; 
+	WebSocketSend[connection, frame, "Serializer" -> serializer]
+]
 
 
 (* ::Chapter:: *)
 (*End*)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*End private*)
 
 
 End[] (* End Private Context *)
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*End package*)
 
 
