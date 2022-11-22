@@ -193,7 +193,7 @@ BinanceBookTickerStream[connection]
 BinanceBookTickerStream[connection, SYMBOLS]"
 
 
-(* ::Section::Italic:: *)
+(* ::Section::Italic::Closed:: *)
 (*Binance wallet endpoints*)
 
 
@@ -219,36 +219,35 @@ BinanceMyAsset[ASSET]"
 
 
 BinanceOrderTest::usage = 
-"BinanceOrderTest[SYMBOL, side, type, opts]"
+"BinanceOrderTest[SYMBOL, SIDE, TYPE, opts] check that order with the same parameters can be created"
 
 
 BinanceOrderCreate::usage = 
-"BinanceOrderCreate[SYMBOL, side, type, opts]"
+"BinanceOrderCreate[SYMBOL, SIDE, TYPE, opts] create order"
 
 
 BinanceBuy::usage = 
-"BinanceBuy[SYMBOL, quantity] - create MARKET order
-BinanceBuy[SYMBOL, quantity, price] - create LIMIT order"
+"BinanceBuy[SYMBOL, quantity] create MARKET order
+BinanceBuy[SYMBOL, quantity, price] create LIMIT order"
 
 
 BinanceSell::usage = 
-"BinanceSell[SYMBOL, quantity] - create MARKET order
-BinanceSell[SYMBOL, quantity, price] - create LIMIT order"
+"BinanceSell[SYMBOL, quantity] create MARKET order
+BinanceSell[SYMBOL, quantity, price] create LIMIT order"
 
 
 BinanceOrderCancel::usage = 
-"BinanceOrderCancel[SYMBOL, orderID]
-BinanceOrderCancel[SYMBOL, \"origClientOrderID\"]"
+"BinanceOrderCancel[SYMBOL, orderID] cancel order useing integer ID
+BinanceOrderCancel[SYMBOL, \"origClientOrderID\"] cancel order using string GUID"
 
 
 BinanceOrderCancelAll::usage = 
-"BinanceOrderCancel[SYMBOL]
-BinanceOrderCancel[SYMBOL]"
+"BinanceOrderCancelAll[SYMBOL] - cancel all orders of the specific currency pair"
 
 
 BinanceOrderGet::usage = 
-"BinanceOrderGet[SYMBOL, orderID]
-BinanceOrderGet[SYMBOL, \"origClientOrderID\"]"
+"BinanceOrderGet[SYMBOL, orderID] returns info about order by integer ID
+BinanceOrderGet[SYMBOL, \"origClientOrderID\"] returns info about order using string GUID"
 
 
 BinanceOrderCancelReplace::usage = 
@@ -561,7 +560,7 @@ KrakenBookChannel[{pairs}]"
 
 
 (* ::Chapter:: *)
-(*Coinbase*)
+(*Coinbase declaration*)
 
 
 (* ::Section::Closed:: *)
@@ -592,6 +591,13 @@ CoinbaseChannelUnsubscribe::usage =
 
 
 Begin["`Private`"]
+
+
+(* ::Section::Closed:: *)
+(*Clear Private*)
+
+
+ClearAll["`*"]
 
 
 (* ::Chapter:: *)
@@ -640,10 +646,6 @@ $ExchangeLinkSettings :=
 cache[exchangeLinkSettings[], 60]
 
 
-(* ::Chapter:: *)
-(*Common internal functions*)
-
-
 (* ::Section::Closed:: *)
 (*Cache*)
 
@@ -678,10 +680,6 @@ Module[{time = AbsoluteTime[], roundedTime, previouseTime = cache[expr, {"Date"}
 
 optionNames[funcs__Symbol] := 
 Map["\"" <> # <> "\""&] @ Keys[Flatten[Map[Options] @ {funcs}]]
-
-
-func_Symbol[args___, filter[opts: OptionsPattern[{}]]] ^:= 
-func[args, FilterRules[Flatten[{opts}], Options[func]]]
 
 
 (* ::Section::Closed:: *)
@@ -795,7 +793,7 @@ timestamp[]
 
 
 (* ::Chapter:: *)
-(*Binance internal functions*)
+(*Binance*)
 
 
 (* ::Section::Closed:: *)
@@ -827,15 +825,70 @@ key -> binanceToExpr[value]
 
 
 (* ::Section::Closed:: *)
+(*Binance symbols*)
+
+
+binanceSymbols[] := 
+cache[$BinanceExchangeInfo[["symbols", All, "symbol"]], 60 * 60 * 24]
+
+
+(* ::Section::Closed:: *)
+(*Binance symbol check*)
+
+
+binanceSymbolQ[symbol_String] := 
+MemberQ[binanceSymbols[], symbol]
+
+
+(* ::Section::Closed:: *)
+(*Binance price and quantity converters*)
+
+
+binancePriceTickSize[symbol_String] := 
+cache[Query[
+	"symbols", SelectFirst[#symbol==symbol&], 
+	"filters", SelectFirst[#filterType=="PRICE_FILTER"&], 
+	"tickSize"] @ $BinanceExchangeInfo, 60 * 60 * 24]
+
+
+binanceEncodePrice[symbol_String][price_?NumericQ] := 
+Module[{tickSize = binancePriceTickSize[symbol], pointPosition}, 
+	pointPosition = Round[Log10[tickSize]]; 
+	Which[
+		pointPosition < 0, ToString[DecimalForm[Round[price, tickSize], {Infinity, -pointPosition}]], 
+		pointPosition >= 0, ToString[DecimalForm[Round[price, tickSize]]]
+	]
+]
+
+
+binanceQtyStepSize[symbol_String] := 
+binanceQtyStepSize[symbol] = 
+Query[
+	"symbols", SelectFirst[#symbol==symbol&], 
+	"filters", SelectFirst[#filterType=="LOT_SIZE"&], 
+	"stepSize"] @ $BinanceExchangeInfo
+
+
+binanceEncodeQty[symbol_String][qty_?NumericQ] := 
+Module[{stepSize = binanceQtyStepSize[symbol], pointPosition}, 
+	pointPosition = Round[Log10[stepSize]]; 
+	Which[
+		pointPosition < 0, ToString[DecimalForm[Round[qty, stepSize], {Infinity, -pointPosition}]], 
+		pointPosition >= 0, ToString[DecimalForm[Round[qty, Round[stepSize]]]]
+	]
+]
+
+
+(* ::Section::Closed:: *)
 (*Binance encoder*)
-
-
-binanceEncode[date_DateObject] := 
-timestamp[date]
 
 
 binanceEncode[assoc_Association] := 
 KeyValueMap[binanceEncode] @ DeleteCases[assoc, Automatic | Null]
+
+
+binanceEncode[date_DateObject] := 
+timestamp[date]
 
 
 binanceEncode[rules: {___Rule}] := 
@@ -850,12 +903,36 @@ binanceEncode[list: {Except[_Rule]..}] :=
 StringDelete[ExportString[list, "RawJSON"], WhitespaceCharacter]
 
 
+binanceEncode[number_Real] /; Round[number] == number := 
+ToString[DecimalForm[number]] <> "0"
+
+
+binanceEncode[number_Real] := 
+ToString[DecimalForm[number]]
+
+
 binanceEncode[expr_] := 
 ToString[expr]
 
 
 binanceEncode[key_String, value_] := 
 key -> binanceEncode[value]
+
+
+binanceEncodeOrder[symbol_String][assoc_Association] := 
+KeyValueMap[binanceEncodeOrder[symbol]] @ DeleteCases[assoc, Automatic | Null]
+
+
+binanceEncodeOrder[symbol_String]["price", number_?NumericQ] := 
+"price" -> binanceEncodePrice[symbol][number]
+
+
+binanceEncodeOrder[symbol_String]["quantity", number_?NumericQ] := 
+"quantity" -> binanceEncodeQty[symbol][number]
+
+
+binanceEncodeOrder[symbol_String][expr__] := 
+binanceEncode[expr]
 
 
 (* ::Section::Closed:: *)
@@ -967,7 +1044,7 @@ Module[{httpMethod, settings, endpoint, url, request, response, body, result, se
     parameters = Join[args, <|"timestamp" -> timestamp, "recvWindow" -> recvWindow|>];   
     requestBody = serializer[encoder[parameters]]; 
     If[signature == Automatic, signature = HMAC[requestBody, secretKey, "SHA256"]]; 
-    AppendTo[parameters, "signature" -> signature];
+    AppendTo[parameters, "signature" -> signature]; 
     url = URLBuild[{endpoint, api, v, method}, encoder[parameters]]; 
     
     request = HTTPRequest[url, <|
@@ -993,10 +1070,6 @@ binanceSigned[
 	}, 
 	FilterRules[Flatten[{opts}], Options[binanceSigned]]
 ]
-
-
-(* ::Chapter:: *)
-(*Binance*)
 
 
 (* ::Section::Bold::Closed:: *)
@@ -1268,6 +1341,7 @@ Module[{address, settings, webSocketEndpoint, deserializer, eventHandler},
 
 BinanceStreamCreate[streams: {__String}, OptionsPattern[]] := 
 Module[{address, settings, webSocketEndpoint, deserializer, eventHandler, connection}, 
+	deserializer = OptionValue["Deserializer"]; 
 	eventHandler = OptionValue["EventHandler"]; 
 	settings = OptionValue["Settings"]; 
 	webSocketEndpoint = settings["Binance", "WebSocketEndpoint"]; 
@@ -1453,7 +1527,7 @@ BinanceMyAsset[asset_String: Automatic, opts: OptionsPattern[{binanceSigned, Bin
 binanceSigned[{"asset", "getUserAsset", "asset" -> asset, opts}, opts, "API" -> "sapi"]
 
 
-(* ::Section::Bold:: *)
+(* ::Section::Bold::Closed:: *)
 (*Binance spot trade implementation*)
 
 
@@ -1462,7 +1536,6 @@ Options[BinanceOrderTest] = {
 	"quantity" -> Automatic, 
 	"price" -> Automatic, 
 	"quoteOrderQty" -> Automatic, 
-	"price" -> Automatic, 
 	"newClientOrderId" -> Automatic, 
 	"strategyId" -> Automatic, 
 	"strategyType" -> Automatic, 
@@ -1479,9 +1552,10 @@ SyntaxInformation[BinanceOrderTest] = {
 }
 
 
-BinanceOrderTest[symbol_String, side_String, orderType_String, 
+BinanceOrderTest[symbol_String?binanceSymbolQ, side_String, orderType_String, 
 	opts: OptionsPattern[{binanceSigned, BinanceOrderTest}]] := 
-binanceSigned[{"order", "test", "symbol" -> symbol, "side" -> side, "type" -> orderType, opts}, opts]
+binanceSigned[{"order", "test", "symbol" -> symbol, "side" -> side, "type" -> orderType, opts}, opts, 
+	"Encoder" -> binanceEncodeOrder[symbol]]
 
 
 Options[BinanceOrderCreate] = {
@@ -1489,7 +1563,6 @@ Options[BinanceOrderCreate] = {
 	"quantity" -> Automatic, 
 	"price" -> Automatic, 
 	"quoteOrderQty" -> Automatic, 
-	"price" -> Automatic, 
 	"newClientOrderId" -> Automatic, 
 	"strategyId" -> Automatic, 
 	"strategyType" -> Automatic, 
@@ -1506,7 +1579,7 @@ SyntaxInformation[BinanceOrderCreate] = {
 }
 
 
-BinanceOrderCreate[symbol_String, side_String, orderType_String, 
+BinanceOrderCreate[symbol_String?binanceSymbolQ, side_String, orderType_String, 
 	opts: OptionsPattern[{binanceSigned, BinanceOrderCreate}]] := 
 binanceSigned[{"order", "symbol" -> symbol, "side" -> side, "type" -> orderType, opts}, opts]
 
@@ -1727,7 +1800,7 @@ Module[{listenKey},
 
 
 (* ::Chapter:: *)
-(*Kraken internal functions*)
+(*Kraken*)
 
 
 (* ::Section::Closed:: *)
@@ -1956,10 +2029,6 @@ krakenTradeTypes[] :=
 
 krakenChannelNames[] := 
 "book" | "ohlc" | "openOrders" |" ownTrades" | "spread" | "ticker" |" trade" | "*"
-
-
-(* ::Chapter:: *)
-(*Kraken*)
 
 
 (* ::Section::Bold::Closed:: *)
@@ -2748,7 +2817,7 @@ Module[{connection},
 (*Coinbase*)
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*Coinbase deserializer*)
 
 
@@ -2756,7 +2825,7 @@ coinbaseDeserialize[body_String] :=
 ImportString[body, "RawJSON"]
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*Coinbase serializer*)
 
 
@@ -2764,7 +2833,14 @@ coinbaseSerialize[frame_String] :=
 ExportString[frame, "RawJSON"]
 
 
-(* ::Section::Bold:: *)
+(* ::Section::Closed:: *)
+(*Coinbase signed request*)
+
+
+coinbaseSigned[] := {}
+
+
+(* ::Section::Bold::Closed:: *)
 (*Coinbase websocket channels*)
 
 
@@ -2798,7 +2874,7 @@ Options[CoinbaseChannelSubscribe] = {
 
 CoinbaseChannelSubscribe[connection_WebSocketConnectionObject, productIds_, channels_, opts: OptionsPattern[{}]] := 
 Module[{frame, serializer}, 
-	serializer = OptionValue[CoinbaseChannelSubscribe, {opts}, "Serializer"]
+	serializer = OptionValue[CoinbaseChannelSubscribe, {opts}, "Serializer"]; 
 	frame = <|
 		"type" -> "subscribe", 
 		"product_ids" -> productIds, 
@@ -2808,19 +2884,27 @@ Module[{frame, serializer},
 ]
 
 
+CoinbaseHeartbeatChannel[productIds: _String | {__String}, 
+	opts: OptionsPattern[{CoinbaseChannelCreate, CoinbaseChannelSubscribe}]] := 
+Module[{connection}, 
+	connection = CoinbaseChannelCreate[opts]; 
+	CoinbaseChannelSubscribe[connection, Flatten[{productIds}]]
+]
+
+
 (* ::Chapter:: *)
 (*End*)
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*End private*)
 
 
 End[] (* End Private Context *)
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*End package*)
 
 
-EndPackage[] (*ExchangeLink`*)
+EndPackage[] (*KirillBelov`ExchangeLink`*)
