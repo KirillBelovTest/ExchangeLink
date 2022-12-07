@@ -417,3 +417,15 @@ If you have any suggestions or questions, you can always write us an email. We w
 
 **Jon Woodard** ([@Lenley](https://github.com/Lenley)) - jonlbwoodard@gmail.com  
 **Kirill Belov** ([@KirillBelovTest](https://github.com/KirillBelovTest)) - KirillBelovTest@gmail.com
+
+
+
+```mermaid
+graph TD;
+    Object-->Animal;
+    Animal-->Cat;
+    Cat-->HomeCat;
+    Animal-->Dog;
+	Dog-->HuntingDog;
+	Dog-->Corgi;
+```
