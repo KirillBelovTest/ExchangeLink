@@ -783,7 +783,7 @@ BinanceMyAsset[asset_String: Automatic, opts: OptionsPattern[{signedMethod, Bina
 signedMethod[{"asset", "getUserAsset", "asset" -> asset, opts}, opts, "API" -> "sapi"]
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Binance spot trade implementation*)
 
 
@@ -835,7 +835,7 @@ SyntaxInformation[BinanceOrderCreate] = {
 }
 
 
-BinanceOrderCreate[symbol_String?binanceSymbolQ, side_String, orderType_String, 
+BinanceOrderCreate[symbol_String, side_String, orderType_String, 
 	opts: OptionsPattern[{signedMethod, BinanceOrderCreate}]] := 
 signedMethod[{"order", "symbol" -> symbol, "side" -> side, "type" -> orderType, opts}, opts]
 
@@ -1006,7 +1006,7 @@ BinanceOrderCount[opts: OptionsPattern[signedMethod]] :=
 signedMethod[{"rateLimit", "order"}, opts, "HTTPMethod" -> "GET"]
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*Binance websocket market streams implementation *)
 
 
