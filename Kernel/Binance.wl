@@ -4,17 +4,17 @@
 (*Binance*)
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*Begin package*)
 
 
 BeginPackage["KirillBelov`ExchangeLink`Binance`", { 
-    "KirillBelov`ExchangeLink`Settings`", 
-    "KirillBelov`WebSocketJLink`"
+	"KirillBelov`ExchangeLink`Settings`", 
+	"KirillBelov`WebSocketJLink`"
 }]
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*Internal references*)
 
 
@@ -125,6 +125,18 @@ BinanceMyCapital::usage =
 
 BinanceAccountSnapshot::usage = 
 "BinanceAccountSnapshot[type]"
+
+
+BinanceDisableFastWithdrawSwitch::usage = 
+"BinanceDisableFastWithdrawSwitch[]"
+
+
+BinanceEnableFastWithdrawSwitch::usage = 
+"BinanceEnableFastWithdrawSwitch[]"
+
+
+BinanceWithdraw::usage = 
+"BinanceWithdraw[COIN, address]"
 
 
 BinanceMyAsset::usage = 
@@ -372,13 +384,17 @@ ExportString[expr, "RawJSON"]
 (*Common public method*)
 
 
+General::statuscode = 
+"The request for the address `1` has been completed. Response code is `2` and error message is:\n`3`"
+
+
 Options[publicMethod] = {
-    "HTTPMethod" :> "GET", 
-    "V" :> "v3", 
-    "API" :> "api", 
-    "Settings" :> $ExchangeLinkSettings, 
-    "Encoder" :> encode, 
-    "Deserializer" :> deserialize
+	"HTTPMethod" :> "GET", 
+	"V" :> "v3", 
+	"API" :> "api", 
+	"Settings" :> $ExchangeLinkSettings, 
+	"Encoder" :> encode, 
+	"Deserializer" :> deserialize
 }
 
 
@@ -388,24 +404,30 @@ Module[{httpMethod, settings, endpoint, url, request, response, body, result,
 	
 	v = OptionValue["V"]; 
 	api = OptionValue["API"]; 
-    httpMethod = OptionValue["HTTPMethod"]; 
+	httpMethod = OptionValue["HTTPMethod"]; 
 	settings = OptionValue["Settings"]; 
-    endpoint = settings["Binance", "Endpoint"]; 
-    encoder = OptionValue["Encoder"]; 
-    deserializer = OptionValue["Deserializer"]; 
+	endpoint = settings["Binance", "Endpoint"]; 
+	encoder = OptionValue["Encoder"]; 
+	deserializer = OptionValue["Deserializer"]; 
 
 
-    parameters = encoder[DeleteCases[args, Automatic | Null]]; 
-    url = URLBuild[{endpoint, api, v, method}, parameters]; 
-    request = HTTPRequest[url, <|Method -> httpMethod|>]; 
-    
-    response = URLRead[request]; 
-    saveToHistory[request, response]; 
-    
-    body = response["Body"]; 
-    result = deserializer[body]; 
-
-    Return[result]
+	parameters = encoder[DeleteCases[args, Automatic | Null]]; 
+	url = URLBuild[{endpoint, api, v, method}, parameters]; 
+	request = HTTPRequest[url, <|Method -> httpMethod|>]; 
+	
+	response = URLRead[request]; 
+	saveToHistory[request, response]; 
+	
+	Which[
+		response["StatusCode"] == 200, 
+			body = response["Body"]; 
+			result = deserializer[body]; 
+			Return[result], 
+			
+		True, 
+			Message[URLRead::statuscode, url, response["StatusCode"], response["Body"]]; 
+			Return[Null]	
+	]; 
 ]
 
 
@@ -424,56 +446,56 @@ publicMethod[
 
 
 Options[signedMethod] = {
-    "HTTPMethod" :> "POST", 
-    "V" :> "v3", 
-    "API" :> "api", 
-    "recvWindow" :> 5000, 
-    "timestamp" :> Timestamp[], 
-    "signature" :> Automatic, 
-    "Settings" :> $ExchangeLinkSettings, 
-    "Encoder" :> encode, 
-    "Serializer" :> URLQueryEncode, 
-    "Deserializer" :> deserialize
+	"HTTPMethod" :> "POST", 
+	"V" :> "v3", 
+	"API" :> "api", 
+	"recvWindow" :> 5000, 
+	"timestamp" :> Timestamp[], 
+	"signature" :> Automatic, 
+	"Settings" :> $ExchangeLinkSettings, 
+	"Encoder" :> encode, 
+	"Serializer" :> URLQueryEncode, 
+	"Deserializer" :> deserialize
 }
 
 
 signedMethod[{method__String, args_?AssociationQ}, OptionsPattern[]] := 
 Module[{httpMethod, settings, endpoint, url, request, response, body, result, serializer, 
 	encoder, deserializer, parameters, v, api, recvWindow, apiKey, secretKey, 
-    timestamp, signature, requestBody}, 
+	timestamp, signature, requestBody}, 
 	
 	v = OptionValue["V"]; 
 	api = OptionValue["API"]; 
-    httpMethod = OptionValue["HTTPMethod"]; 
-    recvWindow = OptionValue["recvWindow"]; 
-    timestamp = OptionValue["timestamp"]; 
+	httpMethod = OptionValue["HTTPMethod"]; 
+	recvWindow = OptionValue["recvWindow"]; 
+	timestamp = OptionValue["timestamp"]; 
 	settings = OptionValue["Settings"]; 
-    endpoint = settings["Binance", "Endpoint"]; 
-    apiKey = settings["Binance", "APIKey"]; 
-    secretKey = settings["Binance", "SecretKey"]; 
-    encoder = OptionValue["Encoder"]; 
-    deserializer = OptionValue["Deserializer"]; 
-    serializer = OptionValue["Serializer"]; 
-    signature = OptionValue["signature"]; 
+	endpoint = settings["Binance", "Endpoint"]; 
+	apiKey = settings["Binance", "APIKey"]; 
+	secretKey = settings["Binance", "SecretKey"]; 
+	encoder = OptionValue["Encoder"]; 
+	deserializer = OptionValue["Deserializer"]; 
+	serializer = OptionValue["Serializer"]; 
+	signature = OptionValue["signature"]; 
 
-    parameters = Join[args, <|"timestamp" -> timestamp, "recvWindow" -> recvWindow|>];   
-    requestBody = serializer[encoder[parameters]]; 
-    If[signature == Automatic, signature = HMAC[requestBody, secretKey, "SHA256"]]; 
-    AppendTo[parameters, "signature" -> signature]; 
-    url = URLBuild[{endpoint, api, v, method}, encoder[parameters]]; 
-    
-    request = HTTPRequest[url, <|
+	parameters = Join[args, <|"timestamp" -> timestamp, "recvWindow" -> recvWindow|>];   
+	requestBody = serializer[encoder[parameters]]; 
+	If[signature == Automatic, signature = HMAC[requestBody, secretKey, "SHA256"]]; 
+	AppendTo[parameters, "signature" -> signature]; 
+	url = URLBuild[{endpoint, api, v, method}, encoder[parameters]]; 
+	
+	request = HTTPRequest[url, <|
 		Method -> httpMethod, 
 		"Headers" -> {"X-MBX-APIKEY" -> apiKey}
 	|>]; 
-    
-    response = URLRead[request]; 
-    saveToHistory[request, response]; 
-    
-    body = response["Body"]; 
-    result = deserializer[body]; 
+	
+	response = URLRead[request]; 
+	saveToHistory[request, response]; 
+	
+	body = response["Body"]; 
+	result = deserializer[body]; 
 
-    Return[result]
+	Return[result]
 ]
 
 
@@ -725,7 +747,7 @@ BinanceTicker[symbols: {__String}, opts: OptionsPattern[{publicMethod, BinanceTi
 publicMethod[{"ticker", "symbols" -> symbols, opts}, opts]
 
 
-(* ::Section::Closed:: *)
+(* ::Section:: *)
 (*Wallet implementation*)
 
 
@@ -768,6 +790,58 @@ signedMethod[{"accountSnapshot", "type" -> type, opts},
 	opts, "API" -> "sapi", "V" -> "v1", "HTTPMethod" -> "GET"]
 
 
+SyntaxInformation[BinanceDisableFastWithdrawSwitch] = {
+	"ArgumentsPattern" -> {OptionsPattern[]}, 
+	"OptionNames" -> OptionNames[signedMethod]
+}
+
+
+BinanceDisableFastWithdrawSwitch[opts: OptionsPattern[signedMethod]] := 
+signedMethod[{"account", "disableFastWithdrawSwitch", opts}, opts, "V" -> "v1", "API" -> "sapi"]
+
+
+SyntaxInformation[BinanceEnableFastWithdrawSwitch] = {
+	"ArgumentsPattern" -> {OptionsPattern[]}, 
+	"OptionNames" -> OptionNames[signedMethod]
+}
+
+
+BinanceEnableFastWithdrawSwitch[opts: OptionsPattern[signedMethod]] := 
+signedMethod[{"account", "enableFastWithdrawSwitch", opts}, opts, "V" -> "v1", "API" -> "sapi"]
+
+
+Options[BinanceWithdraw] = {
+	"withdrawOrderId" -> Automatic, 
+	"network" -> Automatic, 
+	"addressTag" -> Automatic, 
+	"transactionFeeFlag" -> Automatic, 
+	"name" -> Automatic, 
+	"walletType" -> Automatic
+}
+
+
+SyntaxInformation[BinanceWithdraw] = {
+	"ArgumentsPattern" -> {_, _, OptionsPattern[]}, 
+	"OptionNames" -> OptionNames[signedMethod, BinanceWithdraw]
+}
+
+
+BinanceWithdraw[coin_String, amount_, address_String, opts: OptionsPattern[{signedMethod, BinanceWithdraw}]] := 
+signedMethod[{"capital", "withdraw", "apply", "coin" -> coin, "amount" -> amount, "address" -> address, opts}, 
+	opts, "V" -> "v1", "API" -> "sapi"]
+
+
+Options[BinanceDepositHistory] = {
+	"coin" -> Automatic, 
+	"status" -> Automatic, 
+	"startTime" -> Automatic, 
+	"endTime" -> Automatic, 
+	"offset" -> Automatic, 
+	"limit" -> Automatic, 
+	"txId" -> Automatic
+}
+
+
 Options[BinanceMyAsset] = {
 	"needBtcValuation" -> Automatic
 }
@@ -783,7 +857,7 @@ BinanceMyAsset[asset_String: Automatic, opts: OptionsPattern[{signedMethod, Bina
 signedMethod[{"asset", "getUserAsset", "asset" -> asset, opts}, opts, "API" -> "sapi"]
 
 
-(* ::Section:: *)
+(* ::Section::Closed:: *)
 (*Binance spot trade implementation*)
 
 
