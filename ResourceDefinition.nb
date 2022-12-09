@@ -35,9 +35,8 @@ Cell[CellGroupData[{
 
 Cell["", "FileManagerTopSpacer",
  CellGroupingRules->{"SectionGrouping", 99},
- TaggingRules->{},
  CellTags->{"FileManagerCell", "FileManager-PacletFiles"},
- CellID->134454546,ExpressionUUID->"e8428e3b-6bc0-4ad6-bbf7-ffd392da5a2f"],
+ CellID->134454546,ExpressionUUID->"479a734e-1e38-437f-9f5f-5863d8650680"],
 
 Cell[CellGroupData[{
 
@@ -66,98 +65,94 @@ Cell[TextData[Cell[BoxData[
     NotebookDirectory[], "Articles"}],
   BoxID -> "FileTreePath",
   BaseStyle->{
-   "Text"}]],ExpressionUUID->"b05e925d-bfa2-479f-bd6f-3a2f2833d77e"]], \
+   "Text"}]],ExpressionUUID->"76cf249c-2d86-4cf1-b9b9-874ffe35c45b"]], \
 "FileManagerDirectory",
  CellMargins->{{Inherited, Inherited}, {Inherited, Inherited}},
  CellGroupingRules->{"SectionGrouping", 100},
- TaggingRules->{},
  CellFrameLabels->{{
     Cell[
      BoxData[
       TemplateBox[{}, "FileManagerDirectoryIconTemplate"]], Background -> 
      None], Inherited}, {Inherited, Inherited}},
  CellTags->{"FileManagerCell", "FileManager-PacletFiles"},
- CellID->126211266,ExpressionUUID->"f5372282-1bfd-4827-bfd4-42f443a79946"],
+ CellID->126211266,ExpressionUUID->"c2f60183-1b01-48dd-9b6d-a0c8829d4128"],
 
 Cell[BoxData[
  InterpretationBox[
   TagBox[
-   TemplateBox[{"\"ExchangeLink Geting Started with Binance.nb\"", 
+   TemplateBox[{"\"ExchangeLink Getting Started with Binance.nb\"", 
      FileNameJoin[{
        NotebookDirectory[], "Articles", 
-       "ExchangeLink Geting Started with Binance.nb"}]},
+       "ExchangeLink Getting Started with Binance.nb"}]},
     "FileManagerFileOpenerTemplate"],
    Annotation[#, 
     DefinitionNotebookClient`TemplateCells`PackagePrivate`fileDepth[1]]& ],
   FileNameJoin[{
     NotebookDirectory[], "Articles", 
-    "ExchangeLink Geting Started with Binance.nb"}],
+    "ExchangeLink Getting Started with Binance.nb"}],
   BoxID -> "FileTreePath",
   BaseStyle->{"Text"}]], "FileManagerFile",
  CellMargins->{{23 + Inherited, Inherited}, {Inherited, Inherited}},
  CellGroupingRules->{"SectionGrouping", 110},
- TaggingRules->{},
  CellFrameLabels->{{
     Cell[
      BoxData[
       TemplateBox[{}, "FileManagerNBIconTemplate"]], Background -> None], 
     Inherited}, {Inherited, Inherited}},
  CellTags->{"FileManagerCell", "FileManager-PacletFiles"},
- CellID->431035263,ExpressionUUID->"0c238888-d1c4-4f8e-8ef2-803c4ade0f53"],
+ CellID->53696187,ExpressionUUID->"4af5955e-509b-4047-b014-eada41af9dd6"],
 
 Cell[BoxData[
  InterpretationBox[
   TagBox[
    TemplateBox[{
-    "\"ExchangeLink Geting Started with Binance Presentation.nb\"", 
+    "\"ExchangeLink Getting Started with Binance Presentation.nb\"", 
      FileNameJoin[{
        NotebookDirectory[], "Articles", 
-       "ExchangeLink Geting Started with Binance Presentation.nb"}]},
+       "ExchangeLink Getting Started with Binance Presentation.nb"}]},
     "FileManagerFileOpenerTemplate"],
    Annotation[#, 
     DefinitionNotebookClient`TemplateCells`PackagePrivate`fileDepth[1]]& ],
   FileNameJoin[{
     NotebookDirectory[], "Articles", 
-    "ExchangeLink Geting Started with Binance Presentation.nb"}],
+    "ExchangeLink Getting Started with Binance Presentation.nb"}],
   BoxID -> "FileTreePath",
   BaseStyle->{"Text"}]], "FileManagerFile",
  CellMargins->{{23 + Inherited, Inherited}, {Inherited, Inherited}},
  CellGroupingRules->{"SectionGrouping", 110},
- TaggingRules->{},
  CellFrameLabels->{{
     Cell[
      BoxData[
       TemplateBox[{}, "FileManagerNBIconTemplate"]], Background -> None], 
     Inherited}, {Inherited, Inherited}},
  CellTags->{"FileManagerCell", "FileManager-PacletFiles"},
- CellID->115091091,ExpressionUUID->"4ed89963-c3de-4569-8b10-093860bffdca"],
+ CellID->23645355,ExpressionUUID->"0d19319b-21f2-4f84-8c5c-85e0c7c2ba0e"],
 
 Cell[BoxData[
  InterpretationBox[
   TagBox[
    TemplateBox[{
-    "\"ExchangeLink Geting Started with Binance Presentation.pdf\"", 
+    "\"ExchangeLink Getting Started with Binance Presentation.pdf\"", 
      FileNameJoin[{
        NotebookDirectory[], "Articles", 
-       "ExchangeLink Geting Started with Binance Presentation.pdf"}]},
+       "ExchangeLink Getting Started with Binance Presentation.pdf"}]},
     "FileManagerFileOpenerTemplate"],
    Annotation[#, 
     DefinitionNotebookClient`TemplateCells`PackagePrivate`fileDepth[1]]& ],
   FileNameJoin[{
     NotebookDirectory[], "Articles", 
-    "ExchangeLink Geting Started with Binance Presentation.pdf"}],
+    "ExchangeLink Getting Started with Binance Presentation.pdf"}],
   BoxID -> "FileTreePath",
   BaseStyle->{"Text"}]], "FileManagerFile",
  CellMargins->{{23 + Inherited, Inherited}, {Inherited, Inherited}},
  CellGroupingRules->{"SectionGrouping", 110},
- TaggingRules->{},
  CellFrameLabels->{{
     Cell[
      BoxData[
       TemplateBox[{}, "FileManagerUnknownIconTemplate"]], Background -> None],
      Inherited}, {Inherited, Inherited}},
  CellTags->{"FileManagerCell", "FileManager-PacletFiles"},
- CellID->1671858,ExpressionUUID->"c318d727-f6a9-450f-927c-9e382c204230"]
+ CellID->121100174,ExpressionUUID->"9d34562c-8711-4aa1-826c-484f48e0c956"]
 }, Open  ]],
 
 Cell[TextData[Cell[BoxData[
@@ -185,18 +180,17 @@ Cell[TextData[Cell[BoxData[
     NotebookDirectory[], "Documentation"}],
   BoxID -> "FileTreePath",
   BaseStyle->{
-   "Text"}]],ExpressionUUID->"78a49879-b993-4984-9510-8e052130370d"]], \
+   "Text"}]],ExpressionUUID->"1050d28f-2fd8-409c-afb4-1bc6622dd772"]], \
 "FileManagerDirectory",
  CellMargins->{{Inherited, Inherited}, {Inherited, Inherited}},
  CellGroupingRules->{"SectionGrouping", 100},
- TaggingRules->{},
  CellFrameLabels->{{
     Cell[
      BoxData[
       TemplateBox[{}, "FileManagerDocumentationIconTemplate"]], Background -> 
      None], Inherited}, {Inherited, Inherited}},
  CellTags->{"FileManagerCell", "FileManager-PacletFiles"},
- CellID->216517954,ExpressionUUID->"b1d9c5b8-68f3-4f90-bd16-1150d96d4163"],
+ CellID->216517954,ExpressionUUID->"50e40921-72af-4a1d-80c8-4fac13cef6c1"],
 
 Cell[CellGroupData[{
 
@@ -224,18 +218,17 @@ Cell[TextData[Cell[BoxData[
     NotebookDirectory[], "Kernel"}],
   BoxID -> "FileTreePath",
   BaseStyle->{
-   "Text"}]],ExpressionUUID->"4ef3614c-70a3-4005-b260-d1c84d00fdf6"]], \
+   "Text"}]],ExpressionUUID->"bd5b7d9d-fb05-4cab-bd88-98b732a53259"]], \
 "FileManagerDirectory",
  CellMargins->{{Inherited, Inherited}, {Inherited, Inherited}},
  CellGroupingRules->{"SectionGrouping", 100},
- TaggingRules->{},
  CellFrameLabels->{{
     Cell[
      BoxData[
       TemplateBox[{}, "FileManagerKernelIconTemplate"]], Background -> None], 
     Inherited}, {Inherited, Inherited}},
  CellTags->{"FileManagerCell", "FileManager-PacletFiles"},
- CellID->305607107,ExpressionUUID->"da05de52-a7e0-46c3-977e-a089288ee402"],
+ CellID->305607107,ExpressionUUID->"ffa7ef93-e4dc-479a-9ca2-4e9535c1615e"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -252,14 +245,13 @@ Cell[BoxData[
   BaseStyle->{"Text"}]], "FileManagerFile",
  CellMargins->{{23 + Inherited, Inherited}, {Inherited, Inherited}},
  CellGroupingRules->{"SectionGrouping", 110},
- TaggingRules->{},
  CellFrameLabels->{{
     Cell[
      BoxData[
       TemplateBox[{}, "FileManagerWLIconTemplate"]], Background -> None], 
     Inherited}, {Inherited, Inherited}},
  CellTags->{"FileManagerCell", "FileManager-PacletFiles"},
- CellID->17393109,ExpressionUUID->"eb621909-363b-4305-bae4-f74bde8306ca"],
+ CellID->17393109,ExpressionUUID->"d1eb5028-a581-4794-976e-9c9e1cabc402"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -276,14 +268,13 @@ Cell[BoxData[
   BaseStyle->{"Text"}]], "FileManagerFile",
  CellMargins->{{23 + Inherited, Inherited}, {Inherited, Inherited}},
  CellGroupingRules->{"SectionGrouping", 110},
- TaggingRules->{},
  CellFrameLabels->{{
     Cell[
      BoxData[
       TemplateBox[{}, "FileManagerWLIconTemplate"]], Background -> None], 
     Inherited}, {Inherited, Inherited}},
  CellTags->{"FileManagerCell", "FileManager-PacletFiles"},
- CellID->14667336,ExpressionUUID->"97e5eadf-cae5-465a-907c-2af389b0e028"],
+ CellID->14667336,ExpressionUUID->"ad130ddb-07c6-4e47-8627-d36c4ccd0089"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -300,14 +291,13 @@ Cell[BoxData[
   BaseStyle->{"Text"}]], "FileManagerFile",
  CellMargins->{{23 + Inherited, Inherited}, {Inherited, Inherited}},
  CellGroupingRules->{"SectionGrouping", 110},
- TaggingRules->{},
  CellFrameLabels->{{
     Cell[
      BoxData[
       TemplateBox[{}, "FileManagerWLIconTemplate"]], Background -> None], 
     Inherited}, {Inherited, Inherited}},
  CellTags->{"FileManagerCell", "FileManager-PacletFiles"},
- CellID->96608020,ExpressionUUID->"3f6eab54-3edd-4cdd-832b-502ee72de33f"],
+ CellID->96608020,ExpressionUUID->"53a49fb1-216c-4d85-ba21-8895fc447357"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -324,14 +314,13 @@ Cell[BoxData[
   BaseStyle->{"Text"}]], "FileManagerFile",
  CellMargins->{{23 + Inherited, Inherited}, {Inherited, Inherited}},
  CellGroupingRules->{"SectionGrouping", 110},
- TaggingRules->{},
  CellFrameLabels->{{
     Cell[
      BoxData[
       TemplateBox[{}, "FileManagerWLIconTemplate"]], Background -> None], 
     Inherited}, {Inherited, Inherited}},
  CellTags->{"FileManagerCell", "FileManager-PacletFiles"},
- CellID->2532185,ExpressionUUID->"42868932-116d-4440-bc6b-27d053cc5b48"],
+ CellID->2532185,ExpressionUUID->"ba9d4205-23dc-4bba-8c29-9590368efe51"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -348,14 +337,13 @@ Cell[BoxData[
   BaseStyle->{"Text"}]], "FileManagerFile",
  CellMargins->{{23 + Inherited, Inherited}, {Inherited, Inherited}},
  CellGroupingRules->{"SectionGrouping", 110},
- TaggingRules->{},
  CellFrameLabels->{{
     Cell[
      BoxData[
       TemplateBox[{}, "FileManagerWLIconTemplate"]], Background -> None], 
     Inherited}, {Inherited, Inherited}},
  CellTags->{"FileManagerCell", "FileManager-PacletFiles"},
- CellID->146720489,ExpressionUUID->"cde298fa-460b-437f-a542-89b7ed758e09"],
+ CellID->146720489,ExpressionUUID->"6ea1680d-c355-428a-9dd5-61dc9fd47ba0"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -372,14 +360,13 @@ Cell[BoxData[
   BaseStyle->{"Text"}]], "FileManagerFile",
  CellMargins->{{23 + Inherited, Inherited}, {Inherited, Inherited}},
  CellGroupingRules->{"SectionGrouping", 110},
- TaggingRules->{},
  CellFrameLabels->{{
     Cell[
      BoxData[
       TemplateBox[{}, "FileManagerWLIconTemplate"]], Background -> None], 
     Inherited}, {Inherited, Inherited}},
  CellTags->{"FileManagerCell", "FileManager-PacletFiles"},
- CellID->28033914,ExpressionUUID->"2656f1fb-9452-4a6d-8a87-0f47655f792b"],
+ CellID->28033914,ExpressionUUID->"5f2f6473-b9e9-4e97-b03f-c16b6a919537"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -396,14 +383,13 @@ Cell[BoxData[
   BaseStyle->{"Text"}]], "FileManagerFile",
  CellMargins->{{23 + Inherited, Inherited}, {Inherited, Inherited}},
  CellGroupingRules->{"SectionGrouping", 110},
- TaggingRules->{},
  CellFrameLabels->{{
     Cell[
      BoxData[
       TemplateBox[{}, "FileManagerWLIconTemplate"]], Background -> None], 
     Inherited}, {Inherited, Inherited}},
  CellTags->{"FileManagerCell", "FileManager-PacletFiles"},
- CellID->97070733,ExpressionUUID->"149ebcc0-24b0-4082-a6e5-7e2bc89bfabb"],
+ CellID->97070733,ExpressionUUID->"5a89dc2f-bf06-4bc2-bd65-f4efa4b5e91a"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -420,14 +406,13 @@ Cell[BoxData[
   BaseStyle->{"Text"}]], "FileManagerFile",
  CellMargins->{{23 + Inherited, Inherited}, {Inherited, Inherited}},
  CellGroupingRules->{"SectionGrouping", 110},
- TaggingRules->{},
  CellFrameLabels->{{
     Cell[
      BoxData[
       TemplateBox[{}, "FileManagerWLIconTemplate"]], Background -> None], 
     Inherited}, {Inherited, Inherited}},
  CellTags->{"FileManagerCell", "FileManager-PacletFiles"},
- CellID->218647663,ExpressionUUID->"119974dc-db48-4f27-b97c-99596738fe7a"],
+ CellID->218647663,ExpressionUUID->"8a44b0d9-695c-4a94-bd51-b03af34dd536"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -444,14 +429,13 @@ Cell[BoxData[
   BaseStyle->{"Text"}]], "FileManagerFile",
  CellMargins->{{23 + Inherited, Inherited}, {Inherited, Inherited}},
  CellGroupingRules->{"SectionGrouping", 110},
- TaggingRules->{},
  CellFrameLabels->{{
     Cell[
      BoxData[
       TemplateBox[{}, "FileManagerWLIconTemplate"]], Background -> None], 
     Inherited}, {Inherited, Inherited}},
  CellTags->{"FileManagerCell", "FileManager-PacletFiles"},
- CellID->44666458,ExpressionUUID->"d23e45b6-ded9-4761-aa91-c7509d446321"],
+ CellID->44666458,ExpressionUUID->"f9f2821a-8482-4b73-97b7-7e61363bef26"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -468,14 +452,13 @@ Cell[BoxData[
   BaseStyle->{"Text"}]], "FileManagerFile",
  CellMargins->{{23 + Inherited, Inherited}, {Inherited, Inherited}},
  CellGroupingRules->{"SectionGrouping", 110},
- TaggingRules->{},
  CellFrameLabels->{{
     Cell[
      BoxData[
       TemplateBox[{}, "FileManagerWLIconTemplate"]], Background -> None], 
     Inherited}, {Inherited, Inherited}},
  CellTags->{"FileManagerCell", "FileManager-PacletFiles"},
- CellID->65490521,ExpressionUUID->"f0e8ef77-204d-4aa2-b1e5-c46b308b1fb7"],
+ CellID->65490521,ExpressionUUID->"f8cfca23-c580-4202-852d-f71b0874ccef"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -492,14 +475,13 @@ Cell[BoxData[
   BaseStyle->{"Text"}]], "FileManagerFile",
  CellMargins->{{23 + Inherited, Inherited}, {Inherited, Inherited}},
  CellGroupingRules->{"SectionGrouping", 110},
- TaggingRules->{},
  CellFrameLabels->{{
     Cell[
      BoxData[
       TemplateBox[{}, "FileManagerWLIconTemplate"]], Background -> None], 
     Inherited}, {Inherited, Inherited}},
  CellTags->{"FileManagerCell", "FileManager-PacletFiles"},
- CellID->15220348,ExpressionUUID->"ccdf1e7b-8c6d-4b7e-ad0c-33fe7f71cfce"],
+ CellID->15220348,ExpressionUUID->"93543000-801f-436d-be4e-6e64020958c6"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -516,14 +498,13 @@ Cell[BoxData[
   BaseStyle->{"Text"}]], "FileManagerFile",
  CellMargins->{{23 + Inherited, Inherited}, {Inherited, Inherited}},
  CellGroupingRules->{"SectionGrouping", 110},
- TaggingRules->{},
  CellFrameLabels->{{
     Cell[
      BoxData[
       TemplateBox[{}, "FileManagerWLIconTemplate"]], Background -> None], 
     Inherited}, {Inherited, Inherited}},
  CellTags->{"FileManagerCell", "FileManager-PacletFiles"},
- CellID->6270881,ExpressionUUID->"8ff9f19e-6377-4b1b-addd-037f9c9a97f8"],
+ CellID->6270881,ExpressionUUID->"9654b069-d2c9-4a94-8f70-4f0530ca6938"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -540,14 +521,13 @@ Cell[BoxData[
   BaseStyle->{"Text"}]], "FileManagerFile",
  CellMargins->{{23 + Inherited, Inherited}, {Inherited, Inherited}},
  CellGroupingRules->{"SectionGrouping", 110},
- TaggingRules->{},
  CellFrameLabels->{{
     Cell[
      BoxData[
       TemplateBox[{}, "FileManagerWLIconTemplate"]], Background -> None], 
     Inherited}, {Inherited, Inherited}},
  CellTags->{"FileManagerCell", "FileManager-PacletFiles"},
- CellID->705108507,ExpressionUUID->"04564370-3e2d-4786-a644-853ea247b7a0"],
+ CellID->705108507,ExpressionUUID->"70634603-1f86-43b2-8b91-6243eee90167"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -564,14 +544,13 @@ Cell[BoxData[
   BaseStyle->{"Text"}]], "FileManagerFile",
  CellMargins->{{23 + Inherited, Inherited}, {Inherited, Inherited}},
  CellGroupingRules->{"SectionGrouping", 110},
- TaggingRules->{},
  CellFrameLabels->{{
     Cell[
      BoxData[
       TemplateBox[{}, "FileManagerWLIconTemplate"]], Background -> None], 
     Inherited}, {Inherited, Inherited}},
  CellTags->{"FileManagerCell", "FileManager-PacletFiles"},
- CellID->797056770,ExpressionUUID->"52792b11-ad17-4b8a-8f0d-031d58d51f8e"],
+ CellID->797056770,ExpressionUUID->"c0c8c2f8-30f0-4322-bcb8-139ccbde71a1"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -588,14 +567,13 @@ Cell[BoxData[
   BaseStyle->{"Text"}]], "FileManagerFile",
  CellMargins->{{23 + Inherited, Inherited}, {Inherited, Inherited}},
  CellGroupingRules->{"SectionGrouping", 110},
- TaggingRules->{},
  CellFrameLabels->{{
     Cell[
      BoxData[
       TemplateBox[{}, "FileManagerWLIconTemplate"]], Background -> None], 
     Inherited}, {Inherited, Inherited}},
  CellTags->{"FileManagerCell", "FileManager-PacletFiles"},
- CellID->766364611,ExpressionUUID->"577ce8a1-d3df-4222-afd9-7c7b776f818e"],
+ CellID->766364611,ExpressionUUID->"090945a5-c78c-4a02-a06b-1737c47e4fdd"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -612,14 +590,13 @@ Cell[BoxData[
   BaseStyle->{"Text"}]], "FileManagerFile",
  CellMargins->{{23 + Inherited, Inherited}, {Inherited, Inherited}},
  CellGroupingRules->{"SectionGrouping", 110},
- TaggingRules->{},
  CellFrameLabels->{{
     Cell[
      BoxData[
       TemplateBox[{}, "FileManagerWLIconTemplate"]], Background -> None], 
     Inherited}, {Inherited, Inherited}},
  CellTags->{"FileManagerCell", "FileManager-PacletFiles"},
- CellID->62619696,ExpressionUUID->"77f608b2-4c83-4e8d-b51b-4290760656b0"],
+ CellID->62619696,ExpressionUUID->"6028d8e9-59a6-4af5-b5fe-b2a0ccf86b02"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -636,14 +613,13 @@ Cell[BoxData[
   BaseStyle->{"Text"}]], "FileManagerFile",
  CellMargins->{{23 + Inherited, Inherited}, {Inherited, Inherited}},
  CellGroupingRules->{"SectionGrouping", 110},
- TaggingRules->{},
  CellFrameLabels->{{
     Cell[
      BoxData[
       TemplateBox[{}, "FileManagerWLIconTemplate"]], Background -> None], 
     Inherited}, {Inherited, Inherited}},
  CellTags->{"FileManagerCell", "FileManager-PacletFiles"},
- CellID->580160449,ExpressionUUID->"76536315-6251-451c-b0f6-4b2f9b98418f"]
+ CellID->580160449,ExpressionUUID->"f06de0bf-9ab8-4332-86a3-894e9d302929"]
 }, Open  ]],
 
 Cell[BoxData[
@@ -661,14 +637,13 @@ Cell[BoxData[
   BaseStyle->{"Text"}]], "FileManagerFile",
  CellMargins->{{Inherited, Inherited}, {Inherited, Inherited}},
  CellGroupingRules->{"SectionGrouping", 100},
- TaggingRules->{},
  CellFrameLabels->{{
     Cell[
      BoxData[
       TemplateBox[{}, "FileManagerUnknownIconTemplate"]], Background -> None],
      Inherited}, {Inherited, Inherited}},
  CellTags->{"FileManagerCell", "FileManager-PacletFiles"},
- CellID->23924126,ExpressionUUID->"23985e0c-007c-4395-9470-51c4c2330a3f"],
+ CellID->23924126,ExpressionUUID->"0076b207-dc21-4b52-937a-3de6a26d6a90"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -685,14 +660,13 @@ Cell[BoxData[
   BaseStyle->{"Text"}]], "FileManagerFile",
  CellMargins->{{Inherited, Inherited}, {Inherited, Inherited}},
  CellGroupingRules->{"SectionGrouping", 100},
- TaggingRules->{},
  CellFrameLabels->{{
     Cell[
      BoxData[
       TemplateBox[{}, "FileManagerPacletInfoIconTemplate"]], Background -> 
      None], Inherited}, {Inherited, Inherited}},
  CellTags->{"FileManagerCell", "FileManager-PacletFiles"},
- CellID->575506656,ExpressionUUID->"80dd9e71-b158-4162-b0ea-c494b9f4dfc0"],
+ CellID->575506656,ExpressionUUID->"b48ade86-4ed1-4fb0-87fb-a585ba50bdd2"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -709,14 +683,13 @@ Cell[BoxData[
   BaseStyle->{"Text"}]], "FileManagerFile",
  CellMargins->{{Inherited, Inherited}, {Inherited, Inherited}},
  CellGroupingRules->{"SectionGrouping", 100},
- TaggingRules->{},
  CellFrameLabels->{{
     Cell[
      BoxData[
       TemplateBox[{}, "FileManagerTXTIconTemplate"]], Background -> None], 
     Inherited}, {Inherited, Inherited}},
  CellTags->{"FileManagerCell", "FileManager-PacletFiles"},
- CellID->56438473,ExpressionUUID->"aad31879-c9c5-411f-a3d9-6605824d7c77"],
+ CellID->56438473,ExpressionUUID->"fee6808d-e751-4eae-98d7-ccb20f0bf300"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -733,14 +706,13 @@ Cell[BoxData[
   BaseStyle->{"Text"}]], "FileManagerFile",
  CellMargins->{{Inherited, Inherited}, {Inherited, Inherited}},
  CellGroupingRules->{"SectionGrouping", 100},
- TaggingRules->{},
  CellFrameLabels->{{
     Cell[
      BoxData[
       TemplateBox[{}, "FileManagerNBIconTemplate"]], Background -> None], 
     Inherited}, {Inherited, Inherited}},
  CellTags->{"FileManagerCell", "FileManager-PacletFiles"},
- CellID->194532381,ExpressionUUID->"3f881488-4e65-4f2a-a694-28d8ddf34ad8"],
+ CellID->194532381,ExpressionUUID->"303aa4f3-c1dd-4fb0-81ef-119974f56059"],
 
 Cell[TextData[Cell[BoxData[
  InterpretationBox[
@@ -766,24 +738,22 @@ Cell[TextData[Cell[BoxData[
     NotebookDirectory[], "Tests"}],
   BoxID -> "FileTreePath",
   BaseStyle->{
-   "Text"}]],ExpressionUUID->"2e8bf61a-52a4-4810-ae8f-9b13286bd678"]], \
+   "Text"}]],ExpressionUUID->"30e5edf8-4a0f-4de8-a1ea-7aeb018e5da6"]], \
 "FileManagerDirectory",
  CellMargins->{{Inherited, Inherited}, {Inherited, Inherited}},
  CellGroupingRules->{"SectionGrouping", 100},
- TaggingRules->{},
  CellFrameLabels->{{
     Cell[
      BoxData[
       TemplateBox[{}, "FileManagerEmptyDirectoryIconTemplate"]], Background -> 
      None], Inherited}, {Inherited, Inherited}},
  CellTags->{"FileManagerCell", "FileManager-PacletFiles"},
- CellID->246966552,ExpressionUUID->"e5c53b6d-389e-488e-9af8-001bb4d954e9"],
+ CellID->246966552,ExpressionUUID->"53adc6a4-acc9-4171-a326-158790a82a9d"],
 
 Cell["", "FileManagerBottomSpacer",
  CellGroupingRules->{"SectionGrouping", 100},
- TaggingRules->{},
  CellTags->{"FileManagerCell", "FileManager-PacletFiles"},
- CellID->17228528,ExpressionUUID->"fb2863ac-4ac9-4d99-9e40-d85b5b7b0326"]
+ CellID->17228528,ExpressionUUID->"ded104d1-20b7-4c17-a945-a12de8cdf732"]
 }, Open  ]]
 }, Open  ]],
 
@@ -3184,7 +3154,7 @@ Cell[BoxData[
  InitializationCell->True,
  CellChangeTimes->{{3.8769955152635355`*^9, 3.8769955154519196`*^9}, {
   3.877194126001212*^9, 3.8771941320759115`*^9}},
- CellLabel->"In[1]:=",
+ CellLabel->"In[199]:=",
  CellID->62728902,ExpressionUUID->"e15d08f5-16e0-408d-b2c5-04c42d160d12"],
 
 Cell[BoxData[
@@ -3196,7 +3166,7 @@ Cell[BoxData[
  TaggingRules->{},
  InitializationCell->True,
  CellChangeTimes->{{3.8769955152635355`*^9, 3.8769955154519196`*^9}},
- CellLabel->"In[2]:=",
+ CellLabel->"In[200]:=",
  CellID->172764492,ExpressionUUID->"e9cc892d-938f-4ca6-bec9-72ab7d698e44"]
 }, Open  ]],
 
@@ -3221,7 +3191,7 @@ Cell[BoxData[
  CellChangeTimes->{{3.8787967191827345`*^9, 3.878796731262266*^9}, {
   3.8788082172764835`*^9, 3.878808218968258*^9}, {3.879230764841792*^9, 
   3.879230768518586*^9}, {3.879230862098076*^9, 3.879230863562274*^9}},
- CellLabel->"In[3]:=",
+ CellLabel->"In[205]:=",
  CellID->543624700,ExpressionUUID->"7584c4ad-1bfc-4aae-af15-78a398e9b00d"],
 
 Cell["Setup your settings:", "Text",
@@ -4368,6 +4338,7 @@ Cell[BoxData[
          StyleBox[
           TemplateBox[{
             CheckboxBox["WebEvaluation", {False, "WebEvaluation"}], "\" \"", 
+            
             TemplateBox[{
              "\"WebEvaluation\"", 
               "\"Cloud evaluation initiated by an HTTP request\""}, 
