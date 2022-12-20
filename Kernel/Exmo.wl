@@ -7,10 +7,6 @@
 BeginPackage["KirillBelov`ExchangeLink`Exmo`"]; 
 
 
-Get["CryptoWatcher`Project`", Path -> ParentDirectory[DirectoryName[$InputFileName]]]; 
-Get["Tools`", Path -> DirectoryName[$InputFileName]]; 
-
-
 (* ::Section:: *)
 (*public names declaration*)
 

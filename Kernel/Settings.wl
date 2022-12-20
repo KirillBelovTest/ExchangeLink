@@ -102,7 +102,7 @@ $cacheTime = 60 * 60
 
 
 $settingsFile = 
-FileNameJoin[{$HomeDirectory, ".ExchangeLinkSettings.wl"}]
+FileNameJoin[{$HomeDirectory, ".ExchangeLinkSettings"}]
 
 
 (* ::Section:: *)
